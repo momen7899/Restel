@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/restellogo"
+        android:icon="@mipmap/restelicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/restellogo"
+        android:roundIcon="@mipmap/restelicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Restel">
         <activity android:name=".MainActivity">
