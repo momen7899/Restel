@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Restel</string>
+    <string name="welcome">خوش آمدید</string>
+    <string name="hintUserName">نام کاربری</string>
+    <string name="hintPassword">رمز عبور</string>
+    <string name="loginText">ورود</string>
+    <string name="recoveryPassword">بازیابی رمز عبور</string>
+    <string name="errorLoginUsername">"نام کاربری نباید خالی باشد"</string>
+    <string name="errorLoginPassword">رمز عبور نباید خالی باشد</string>
+    <string name="successLogin">خوش آمدید</string>
+    <string name="unsuccessLogin">از درست بودن رمز و نام کاربری اطمینان حاصل فرمایید.</string>
+    <string name="DatabaseError">خطایی در پایگاه داده روی داده است</string>
 </resources>

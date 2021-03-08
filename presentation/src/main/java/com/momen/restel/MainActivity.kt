@@ -2,19 +2,21 @@ package com.momen.restel
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.momen.restel.login.view.LoginFragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        loadLoginFragment()
     }
 
-    private fun loadLoginFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frag, LoginFragment())
-            .commitNow()
-    }
+    override fun onSupportNavigateUp(): Boolean =
+        findNavController(R.id.navHostFragment).navigateUp(appBarConfiguration) ||
+                super.onSupportNavigateUp()
 
 }

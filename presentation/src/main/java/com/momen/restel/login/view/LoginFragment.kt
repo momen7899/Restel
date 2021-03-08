@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.momen.data.entity.UserEntity
+import androidx.navigation.findNavController
 import com.momen.data.executor.JobExecutor
 import com.momen.data.mapper.UserEntityDataMapper
 import com.momen.data.repository.UserRepositoryImpl
@@ -17,7 +18,10 @@ import com.momen.domain.interactor.ValidUserUseCase
 import com.momen.restel.R
 import com.momen.restel.UiThread
 import com.momen.restel.login.viewmodel.LoginViewModel
+import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.fragment_login.*
 
+@Suppress("DEPRECATION")
 class LoginFragment : Fragment() {
 
 //    @Inject
@@ -34,18 +38,58 @@ class LoginFragment : Fragment() {
     ): View? = inflater.inflate(R.layout.fragment_login, container, false)
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
         injectViewModel()
 
-        super.onCreate(savedInstanceState)
-
+        super.onActivityCreated(savedInstanceState)
 
         setUpViewModel()
 
+        loginBtn.setOnClickListener {
+            val userName = loginUserName.text.toString().trim()
+            val password = loginPassword.text.toString().trim()
+
+            if (userName.isEmpty()) {
+                showErrorToasty(getString(R.string.errorLoginUsername))
+                loginUserName.requestFocus()
+                return@setOnClickListener
+            } else if (password.isEmpty()) {
+                showErrorToasty(getString(R.string.errorLoginPassword))
+                loginPassword.requestFocus()
+                return@setOnClickListener
+            }
+            loginViewModel.isValidUser(userName, password)
+            loginObserver(it)
+        }
     }
 
+    private fun loginObserver(view: View) {
+        loginViewModel.loginLiveData.observe(
+            viewLifecycleOwner, { result ->
+                when (result.state) {
+                    LoginViewModel.State.DATA_LOADED -> {
+                        if (result.boolean!!) {
+                            val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
+                            view.findNavController().navigate(action)
+                            showSuccessToasty(getString(R.string.successLogin))
+                        } else {
+                            showErrorToasty(getString(R.string.unsuccessLogin))
+                        }
+                    }
+                    LoginViewModel.State.LOADING_DATA -> {
+                    }
+                    LoginViewModel.State.LOAD_ERROR -> {
+                        showErrorToasty(getString(R.string.DatabaseError))
+                        println(result.error)
+                    }
+                }
+            }
+        )
+    }
+
+
     private fun setUpViewModel() {
-        val roomInstance = RoomInstance(context!!)
+        val roomInstance = RoomInstance(requireContext())
         val roomUserDatabase = RoomUserDatabase(roomInstance)
         val userDataSourceFactory = UserDataSourceFactory(roomUserDatabase)
         val userEntityDataMapper = UserEntityDataMapper()
@@ -55,22 +99,7 @@ class LoginFragment : Fragment() {
 
 
         val fakeData = FakeData(roomInstance)
-
-        fakeData.addUser(
-            UserEntity(
-                null,
-                "Momen",
-                "Hamaveisi",
-                "1234567890",
-                "989184394657",
-                "admin1",
-                "admin1",
-                "admin1",
-                "admin"
-            )
-        )
-        fakeData.getUsers()
-        loginViewModel.isValidUser("admin", "admin")
+        fakeData.addUser()
     }
 
     private fun injectViewModel() {
@@ -79,4 +108,17 @@ class LoginFragment : Fragment() {
 //            .build()
 //            .inject(this)
     }
+
+    private fun showErrorToasty(msg: String) {
+        Toasty.error(requireContext(), msg, Toast.LENGTH_SHORT, false).show()
+    }
+
+    private fun showSuccessToasty(msg: String) {
+        Toasty.success(requireContext(), msg, Toast.LENGTH_SHORT, false).show()
+    }
+
+    private fun showWarningToasty(msg: String) {
+        Toasty.warning(requireContext(), msg, Toast.LENGTH_SHORT, false).show()
+    }
+
 }

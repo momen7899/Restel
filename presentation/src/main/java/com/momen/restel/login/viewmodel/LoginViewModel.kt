@@ -3,6 +3,7 @@ package com.momen.restel.login.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.momen.domain.interactor.ValidUserUseCase
+import com.momen.restel.PasswordGenerator
 import io.reactivex.disposables.Disposable
 
 class LoginViewModel(
@@ -16,7 +17,11 @@ class LoginViewModel(
     fun isValidUser(userName: String, password: String) {
         result = Result(null, State.LOADING_DATA, null)
         loginLiveData.value = result
-        val params = ValidUserUseCase.Params.forIsValidUser(userName, password, password)
+        val params = ValidUserUseCase.Params.forIsValidUser(
+            userName,
+            password,
+            PasswordGenerator.md5(password)
+        )
 
         val d: Disposable = validUserUseCase.execute(params).subscribe({ id ->
             println("id:\t$id")

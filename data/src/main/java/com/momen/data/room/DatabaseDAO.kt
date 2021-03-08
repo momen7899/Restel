@@ -8,6 +8,7 @@ import io.reactivex.Single
 
 @Dao
 interface DatabaseDAO {
+
     @Insert
     fun addContact(user: UserEntity): Single<Long>
 
