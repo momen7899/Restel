@@ -8,21 +8,19 @@ import com.momen.domain.repository.SplashRepository
 import io.reactivex.Single
 import javax.inject.Inject
 
-class AddUserUseCase @Inject constructor(
+class GetUsersUseCase @Inject constructor(
     private val splashRepository: SplashRepository,
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
-) : UseCase<Long, AddUserUseCase.Params>(threadExecutor, postExecutionThread) {
+) : UseCase<ArrayList<User>, GetUsersUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<Long> =
-        splashRepository.addUser(inputs.user)
+    override fun buildUseCaseObservable(inputs: Params): Single<ArrayList<User>> =
+        splashRepository.getUsers()
 
-    class Params(val user: User) {
+    class Params {
         companion object {
-            fun forAddUser(user: User) =
-                Params(user)
+            fun forGetUsers() = Params()
         }
     }
-
 
 }

@@ -3,6 +3,7 @@
     <color name="primaryLight">#84A9FF</color>
     <color name="primaryOpacityLight">#8084A9FF</color>
     <color name="primaryDark">#004F9C</color>
+    <color name="primaryStatusColor">#00286d</color>
     <color name="primary">#4E7ACE</color>
     <color name="primaryOpacity">#BF4E7ACE</color>
     <color name="black">#FF000000</color>

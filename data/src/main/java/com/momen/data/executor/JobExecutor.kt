@@ -8,8 +8,7 @@ import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class JobExecutor
-constructor() : ThreadExecutor {
+class JobExecutor @Inject constructor() : ThreadExecutor {
 
     private val threadPoolExecutor: ThreadPoolExecutor
 

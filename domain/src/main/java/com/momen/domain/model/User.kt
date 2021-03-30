@@ -9,5 +9,6 @@ data class User(
     val userName: String,
     val password: String,
     val md5: String,
-    val address: String
+    val address: String,
+    val admin: Int
 )

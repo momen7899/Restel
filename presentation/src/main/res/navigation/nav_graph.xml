@@ -2,7 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.momen.restel.splash.view.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
 
     <fragment
@@ -30,4 +43,5 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
     </fragment>
+
 </navigation>

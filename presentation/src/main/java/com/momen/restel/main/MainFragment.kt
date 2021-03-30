@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.momen.restel.R
-import kotlinx.android.synthetic.main.fragment_main.*
 
 @Suppress("DEPRECATION")
 class MainFragment : Fragment() {
@@ -21,9 +21,18 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        imageView.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToLoginFragment()
-            it.findNavController().navigate(action)
-        }
+        setUpComponents()
+    }
+
+    private fun setUpComponents() {
+        setUpToolbar()
+    }
+
+    private fun setUpToolbar() {
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+        toolbar.visibility = View.VISIBLE
+        toolbar.title = ""
+        val title: TextView = requireActivity().findViewById(R.id.toolbarTitle)
+        title.text = "رزرو"
     }
 }

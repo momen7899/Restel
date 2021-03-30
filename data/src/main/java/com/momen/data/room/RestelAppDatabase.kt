@@ -6,7 +6,7 @@ import com.momen.data.entity.UserEntity
 
 
 @Database(entities = [UserEntity::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
+public abstract class RestelAppDatabase : RoomDatabase() {
 
     abstract fun getDatabaseDAO(): DatabaseDAO?
 

@@ -1,20 +1,23 @@
-package com.momen.restel.login.viewmodel
+package com.momen.restel.splash.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.momen.domain.interactor.ValidUserUseCase
+import com.momen.domain.interactor.AddUserUseCase
+import com.momen.domain.interactor.GetUsersUseCase
 import com.momen.restel.login.model.UserModelDataMapper
 import javax.inject.Inject
 
-class LoginViewModelFactory @Inject constructor(
-    private val validUserUseCase: ValidUserUseCase,
+class SplashViewModelFactory @Inject constructor(
+    private val addUserUseCase: AddUserUseCase,
+    private val usersUseCase: GetUsersUseCase,
     private val userModelDataMapper: UserModelDataMapper
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(SplashViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return LoginViewModel(
-                validUserUseCase,
+            return SplashViewModel(
+                addUserUseCase,
+                usersUseCase,
                 userModelDataMapper
             ) as T
         } else {
