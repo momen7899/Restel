@@ -6,6 +6,7 @@ import com.momen.domain.interactor.ValidUserUseCase
 import com.momen.restel.PasswordGenerator
 import com.momen.restel.login.model.UserModel
 import com.momen.restel.login.model.UserModelDataMapper
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 class LoginViewModel(
@@ -16,13 +17,11 @@ class LoginViewModel(
     val loginLiveData = MutableLiveData<Result>()
     private var isValidUser: UserModel? = null
     private var result: Result? = null
+    private val disposables = CompositeDisposable()
 
     fun isValidUser(userName: String, password: String) {
         result = Result(null, State.LOADING_DATA, null)
         loginLiveData.value = result
-        println(userName)
-        println(password)
-        println(PasswordGenerator.md5(password))
 
         val params = ValidUserUseCase.Params.forIsValidUser(
             userName,
@@ -42,7 +41,7 @@ class LoginViewModel(
                 loginLiveData.value = result
             }
         )
-
+        disposables.add(d)
     }
 
     class Result(

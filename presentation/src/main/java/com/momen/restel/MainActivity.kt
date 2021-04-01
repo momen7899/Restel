@@ -1,7 +1,6 @@
 package com.momen.restel
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar as Toolbar)
-
+        act = this
         setupActionbarWithNavController()
     }
 
@@ -31,7 +30,10 @@ class MainActivity : AppCompatActivity() {
         findNavController(R.id.navHostFragment).navigateUp(appBarConfiguration) ||
                 super.onSupportNavigateUp()
 
-    fun hideToolBar() {
-        toolbar.visibility = View.GONE
+
+    companion object {
+        private lateinit var act: MainActivity
+        fun instance(): MainActivity = act
+
     }
 }

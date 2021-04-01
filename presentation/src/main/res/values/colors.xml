@@ -13,5 +13,6 @@
     <color name="editTextHintColor">#808080</color>
     <color name="editTextColor">#1D1D1D</color>
     <color name="textViewColor">#B31D1D1D</color>
+    <color name="darkBlue">#353A45</color>
 
 </resources>

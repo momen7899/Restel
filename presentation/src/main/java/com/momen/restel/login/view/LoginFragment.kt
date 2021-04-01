@@ -1,20 +1,24 @@
 package com.momen.restel.login.view
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.google.android.material.navigation.NavigationView
 import com.momen.restel.R
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomModule
+import com.momen.restel.comm.Toasty
 import com.momen.restel.login.di.DaggerLoginComponent
 import com.momen.restel.login.viewmodel.LoginViewModel
 import com.momen.restel.login.viewmodel.LoginViewModelFactory
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
@@ -45,17 +49,51 @@ class LoginFragment : Fragment() {
 
     }
 
+    private fun hideActivityComponent() {
+        hideNavMenu()
+        hideToolbar()
+    }
+
+    private fun hideNavMenu() {
+        requireActivity().findViewById<DrawerLayout>(R.id.mainDrawer)
+            .setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        requireActivity().findViewById<NavigationView>(R.id.navView).visibility = View.GONE
+    }
+
+    private fun hideToolbar() {
+        requireActivity().findViewById<Toolbar>(R.id.toolbar).visibility = View.GONE
+    }
+
+
     private fun setUpComponents() {
+        setUpHideKeyboard()
+        hideActivityComponent()
+        setUpLoginBtn()
+    }
+
+    private fun setUpHideKeyboard() {
+        loginFragment.setOnClickListener { hideKeyboardFrom() }
+        loginConstraint.setOnClickListener { hideKeyboardFrom() }
+    }
+
+    private fun setUpLoginBtn() {
+
+        loginBtn.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) hideKeyboardFrom()
+        }
+
         loginBtn.setOnClickListener {
+            hideKeyboardFrom()
             val userName = loginUserName.text.toString().trim()
             val password = loginPassword.text.toString().trim()
 
             if (userName.isEmpty()) {
-                showErrorToasty(getString(R.string.errorLoginUsername))
+                Toasty.showErrorToasty(requireContext(), getString(R.string.errorLoginUsername))
                 loginUserName.requestFocus()
                 return@setOnClickListener
             } else if (password.isEmpty()) {
-                showErrorToasty(getString(R.string.errorLoginPassword))
+                Toasty.showErrorToasty(requireContext(), getString(R.string.errorLoginPassword))
                 loginPassword.requestFocus()
                 return@setOnClickListener
             }
@@ -65,6 +103,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginObserver(view: View) {
+
         loginViewModel.loginLiveData.observe(
             viewLifecycleOwner, { result ->
                 when (result.state) {
@@ -72,15 +111,21 @@ class LoginFragment : Fragment() {
                         if (result.user?.id!! > 0) {
                             val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
                             view.findNavController().navigate(action)
-                            showSuccessToasty(getString(R.string.successLogin))
+                            Toasty.showSuccessToasty(
+                                requireContext(),
+                                getString(R.string.successLogin)
+                            )
                         } else {
-                            showErrorToasty(getString(R.string.unsuccessLogin))
+                            Toasty.showErrorToasty(
+                                requireContext(),
+                                getString(R.string.unsuccessLogin)
+                            )
                         }
                     }
                     LoginViewModel.State.LOADING_DATA -> {
                     }
                     LoginViewModel.State.LOAD_ERROR -> {
-                        showErrorToasty(getString(R.string.DatabaseError))
+                        Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                         println(result.error)
                     }
                 }
@@ -102,16 +147,11 @@ class LoginFragment : Fragment() {
             .inject(this)
     }
 
-    private fun showErrorToasty(msg: String) {
-        Toasty.error(requireContext(), msg, Toast.LENGTH_SHORT, false).show()
+    private fun hideKeyboardFrom() {
+        val imm: InputMethodManager =
+            requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
 
-    private fun showSuccessToasty(msg: String) {
-        Toasty.success(requireContext(), msg, Toast.LENGTH_SHORT, false).show()
-    }
-
-    private fun showWarningToasty(msg: String) {
-        Toasty.warning(requireContext(), msg, Toast.LENGTH_SHORT, false).show()
-    }
 
 }

@@ -1,11 +1,11 @@
 package com.momen.restel.splash.viewmodel
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import com.momen.domain.interactor.AddUserUseCase
 import com.momen.domain.interactor.GetUsersUseCase
 import com.momen.restel.login.model.UserModel
 import com.momen.restel.login.model.UserModelDataMapper
-import io.reactivex.disposables.Disposable
 
 class SplashViewModel constructor(
     private val addUserUseCase: AddUserUseCase,
@@ -13,30 +13,27 @@ class SplashViewModel constructor(
     private val userModelDataMapper: UserModelDataMapper
 ) : ViewModel() {
 
+    @SuppressLint("CheckResult")
     fun createUser() {
-        println("Create User")
         val usersParam = GetUsersUseCase.Params.forGetUsers()
-        val d: Disposable =
-            usersUseCase.execute(usersParam).subscribe({ users ->
-                println(users)
-                if (users.isEmpty()) addUser()
-
-            }, { throwable ->
-                println(throwable.message)
-            }
-            )
+        usersUseCase.execute(usersParam).subscribe({ users ->
+            if (users.isEmpty()) addUser()
+        }, { throwable ->
+            println(throwable.message)
+        }
+        )
     }
 
+    @SuppressLint("CheckResult")
     private fun addUser() {
         val addUserParam =
             AddUserUseCase.Params.forAddUser(userModelDataMapper.transformUserModelToUser(admin))
-        val d: Disposable =
-            addUserUseCase.execute(addUserParam).subscribe({ users ->
-                println(users)
-            }, { throwable ->
-                println(throwable.message)
-            }
-            )
+        addUserUseCase.execute(addUserParam).subscribe({ users ->
+            println(users)
+        }, { throwable ->
+            println(throwable.message)
+        }
+        )
 
     }
 

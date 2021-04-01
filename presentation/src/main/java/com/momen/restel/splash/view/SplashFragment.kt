@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.google.android.material.navigation.NavigationView
 import com.momen.restel.R
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomModule
@@ -35,18 +37,26 @@ class SplashFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
-        hideToolbar()
+        hideActivityComponent()
         injectViewModel()
         setupViewModel()
         splashViewModel.createUser()
-
 
         Handler().postDelayed({
             val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
             requireView().findNavController().navigate(action)
         }, 2000)
 
+    }
+
+    private fun hideActivityComponent() {
+        hideNavMenu()
+        hideToolbar()
+    }
+
+    private fun hideNavMenu() {
+        requireActivity().findViewById<DrawerLayout>(R.id.mainDrawer)
+            .setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     private fun hideToolbar() {

@@ -33,15 +33,20 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.momen.restel.main.MainFragment"
+        android:name="com.momen.restel.main.view.MainFragment"
         android:label="MainFragment">
         <action
-            android:id="@+id/action_mainFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left" />
+            android:id="@+id/action_mainFragment_to_reserveFragment"
+            app:destination="@id/reserveFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
+    <fragment
+        android:id="@+id/reserveFragment"
+        android:name="com.momen.restel.reserve.view.ReserveFragment"
+        android:label="ReserveFragment" />
 
 </navigation>
