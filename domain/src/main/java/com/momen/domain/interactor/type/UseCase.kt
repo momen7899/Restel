@@ -16,5 +16,4 @@ abstract class UseCase<Outputs, Inputs>(
             .subscribeOn(Schedulers.from(threadExecutor))
             .observeOn(postExecutionThread.getScheduler())
     }
-
 }

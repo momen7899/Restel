@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">Restel</string>
+    <string name="welcome">خوش آمدید</string>
+    <string name="hintUserName">نام کاربری</string>
+    <string name="hintPassword">رمز عبور</string>
+    <string name="loginText">ورود</string>
+    <string name="recoveryPassword">بازیابی رمز عبور</string>
+    <string name="errorLoginUsername">"نام کاربری نباید خالی باشد"</string>
+    <string name="errorLoginPassword">رمز عبور نباید خالی باشد</string>
+    <string name="successLogin">خوش آمدید</string>
+    <string name="unsuccessLogin">از درست بودن رمز و نام کاربری اطمینان حاصل فرمایید.</string>
+    <string name="DatabaseError">خطایی در پایگاه داده روی داده است</string>
+    <string name="clients">کارمندان</string>
+    <string name="room">اتاق</string>
+    <string name="passenger">مسافران</string>
+    <string name="settings">تنظیمات</string>
+    <string name="profile">پروفایل</string>
+    <string name="contactUs">تماس با ما</string>
+    <string name="logOut">خروج از حساب کاربری</string>
+    <string name="price">قیمت اتاق:</string>
+    <string name="roomNumber">شماره ی اتاق:</string>
+    <string name="client">نام کارمند:</string>
+    <string name="customer">نام مشتری:</string>
+    <string name="underConstruction">در حال ساخت</string>
+    <string name="newReserve">رزرو جدید</string>
+    <string name="roomHint">شماره ی اتاق</string>
+    <string name="clientHint">نام مشتری</string>
+    <string name="firstDateHint">تاریخ شروع</string>
+    <string name="lastDateHint">تاریخ پایان</string>
+    <string name="priceHint">قیمت اتاق</string>
+    <string name="submit">ثبت</string>
+    <string name="roomNumberError">شماره ی اتاق نبایدخالی باشد</string>
+    <string name="successTransaction">با موفقیت اضافه شد</string>
+    <string name="unsuccessTransaction">اضافه نشد دوباره تلاش کنید</string>
 </resources>

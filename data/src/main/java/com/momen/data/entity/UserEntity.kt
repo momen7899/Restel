@@ -23,5 +23,7 @@ data class UserEntity(
     @ColumnInfo(name = "md5")
     val md5: String?,
     @ColumnInfo(name = "address")
-    val address: String?
+    val address: String?,
+    @ColumnInfo(name = "admin")
+    val admin: Int?
 )

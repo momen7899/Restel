@@ -14,7 +14,8 @@ class UserModelDataMapper @Inject constructor() {
             userName,
             password,
             md5,
-            address
+            address,
+            admin
         )
     }
 
@@ -28,7 +29,8 @@ class UserModelDataMapper @Inject constructor() {
             userName,
             password,
             md5,
-            address
+            address,
+            admin
         )
     }
 
