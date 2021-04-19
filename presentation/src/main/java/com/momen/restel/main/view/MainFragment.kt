@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -56,7 +58,9 @@ class MainFragment : Fragment() {
 
         setUpViewModel()
 
+
         setUpComponents()
+        subscribeViewModel()
     }
 
     private fun injectViewModel() {
@@ -75,11 +79,14 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setUpActivityComponent()
-        subscribeViewModel()
+        getReserves()
+    }
+
+    private fun getReserves() {
+        reserveViewModel.getReserves()
     }
 
     private fun subscribeViewModel() {
-        reserveViewModel.getReserves()
         reserveViewModel.reserveLiveData.observe(
             viewLifecycleOwner, { result ->
                 when (result.state) {
@@ -98,7 +105,6 @@ class MainFragment : Fragment() {
                 }
             }
         )
-//        reserveAdapter.setItems(list)
     }
 
     private fun setUpComponents() {
@@ -154,9 +160,27 @@ class MainFragment : Fragment() {
     }
 
     private fun setUpToolbar() {
-        toolbar.visibility = View.VISIBLE
+        setToolbarAnim()
         toolbar.title = ""
         val title: TextView = requireActivity().findViewById(R.id.toolbarTitle)
         title.text = "رزرو"
+    }
+
+    private fun setToolbarAnim() {
+        val anim = TranslateAnimation(0.0F, 0.0F, -toolbar.height.toFloat(), 0.0F)
+        anim.duration = 1000
+        toolbar.animation = anim
+        anim.start()
+        anim.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {
+                toolbar.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {
+            }
+        })
     }
 }
