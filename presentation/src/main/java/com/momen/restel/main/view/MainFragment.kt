@@ -87,7 +87,7 @@ class MainFragment : Fragment() {
 
     private fun subscribeViewModel() {
         reserveViewModel.reserveLiveData.observe(
-              viewLifecycleOwner, { result ->
+            viewLifecycleOwner, { result ->
                 when (result.state) {
                     MainReserveViewModel.State.DATA_LOADED -> {
                         println(result.reserves)
@@ -139,7 +139,29 @@ class MainFragment : Fragment() {
 
     private fun setUpNavView() {
         navigationView.setNavigationItemSelectedListener {
-            Toasty.showInfoToasty(requireContext(), getString(R.string.underConstruction))
+            when (it.itemId) {
+                R.id.navClients -> {
+
+                }
+                R.id.navRoom -> {
+
+                }
+                R.id.navPassenger -> {
+
+                }
+                R.id.navSetting -> {
+
+                }
+                R.id.navProfile -> {
+
+                }
+                R.id.navContactUs -> {
+
+                }
+                R.id.navLogOut -> {
+
+                }
+            }
             return@setNavigationItemSelectedListener true
         }
     }
