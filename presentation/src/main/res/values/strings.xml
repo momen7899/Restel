@@ -35,4 +35,5 @@
     <string name="firstName">نام:</string>
     <string name="lastName">نام خانوادگی:</string>
     <string name="phoneNumber">شماره تلفن</string>
+    <string name="capacity">ظرفیت:</string>
 </resources>
