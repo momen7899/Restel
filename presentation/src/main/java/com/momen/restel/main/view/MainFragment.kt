@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -141,27 +143,34 @@ class MainFragment : Fragment() {
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navClients -> {
-
+                    val action = MainFragmentDirections.actionMainFragmentToClientsFragment()
+                    requireView().findNavController().navigate(action)
                 }
                 R.id.navRoom -> {
-
+                    val action = MainFragmentDirections.actionMainFragmentToRoomFragment()
+                    requireView().findNavController().navigate(action)
                 }
                 R.id.navPassenger -> {
-
+                    val action = MainFragmentDirections.actionMainFragmentToPassengerFragment()
+                    requireView().findNavController().navigate(action)
                 }
                 R.id.navSetting -> {
-
+                    val action = MainFragmentDirections.actionMainFragmentToSettingFragment()
+                    requireView().findNavController().navigate(action)
                 }
                 R.id.navProfile -> {
-
+                    val action = MainFragmentDirections.actionMainFragmentToProfileFragment()
+                    requireView().findNavController().navigate(action)
                 }
                 R.id.navContactUs -> {
-
+                    val action = MainFragmentDirections.actionMainFragmentToContactFragment()
+                    requireView().findNavController().navigate(action)
                 }
                 R.id.navLogOut -> {
-
+                    requireActivity().onBackPressed()
                 }
             }
+            drawer.closeDrawer(GravityCompat.START, false)
             return@setNavigationItemSelectedListener true
         }
     }
@@ -203,5 +212,16 @@ class MainFragment : Fragment() {
             override fun onAnimationRepeat(animation: Animation?) {
             }
         })
+    }
+
+    private fun setUpBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            }
+        )
     }
 }

@@ -42,11 +42,77 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_clientsFragment"
+            app:destination="@id/clientsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_contactFragment"
+            app:destination="@id/contactFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_passengerFragment"
+            app:destination="@id/passengerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_roomFragment"
+            app:destination="@id/roomFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingFragment"
+            app:destination="@id/settingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/reserveFragment"
         android:name="com.momen.restel.reserve.view.ReserveFragment"
         android:label="ReserveFragment" />
+    <fragment
+        android:id="@+id/clientsFragment"
+        android:name="com.momen.restel.client.view.ClientsFragment"
+        android:label="ClientsFragment" />
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.momen.restel.contact.view.ContactFragment"
+        android:label="ContactFragment" />
+    <fragment
+        android:id="@+id/passengerFragment"
+        android:name="com.momen.restel.passenger.view.PassengerFragment"
+        android:label="PassengerFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.momen.restel.profile.view.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/roomFragment"
+        android:name="com.momen.restel.room.view.RoomFragment"
+        android:label="RoomFragment" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.momen.restel.setting.view.SettingFragment"
+        android:label="SettingFragment" />
 
 </navigation>
