@@ -58,7 +58,6 @@ class MainFragment : Fragment() {
 
         setUpViewModel()
 
-
         setUpComponents()
         subscribeViewModel()
     }
@@ -88,7 +87,7 @@ class MainFragment : Fragment() {
 
     private fun subscribeViewModel() {
         reserveViewModel.reserveLiveData.observe(
-            viewLifecycleOwner, { result ->
+              viewLifecycleOwner, { result ->
                 when (result.state) {
                     MainReserveViewModel.State.DATA_LOADED -> {
                         println(result.reserves)

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.momen.restel.login.view
 
 import android.app.Activity
@@ -6,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -22,7 +25,6 @@ import com.momen.restel.login.viewmodel.LoginViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
-@Suppress("DEPRECATION")
 class LoginFragment : Fragment() {
 
     @Inject
@@ -56,7 +58,7 @@ class LoginFragment : Fragment() {
 
     private fun hideNavMenu() {
         requireActivity().findViewById<DrawerLayout>(R.id.mainDrawer)
-            .setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            .setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
         requireActivity().findViewById<NavigationView>(R.id.navView).visibility = View.GONE
     }
@@ -70,6 +72,7 @@ class LoginFragment : Fragment() {
         setUpHideKeyboard()
         hideActivityComponent()
         setUpLoginBtn()
+        setUpBackPressed()
     }
 
     private fun setUpHideKeyboard() {
@@ -153,5 +156,15 @@ class LoginFragment : Fragment() {
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
 
+    private fun setUpBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            }
+        )
+    }
 
 }
