@@ -39,8 +39,7 @@ class MainFragment : Fragment() {
 
     private lateinit var reserveViewModel: MainReserveViewModel
 
-    private
-    val reserveAdapter = ReserveAdapter()
+    private val reserveAdapter = ReserveAdapter()
 
     // activity component
     private lateinit var toolbar: Toolbar

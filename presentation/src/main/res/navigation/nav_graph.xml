@@ -90,29 +90,61 @@
         android:id="@+id/reserveFragment"
         android:name="com.momen.restel.reserve.view.ReserveFragment"
         android:label="ReserveFragment" />
+
     <fragment
         android:id="@+id/clientsFragment"
         android:name="com.momen.restel.client.view.ClientsFragment"
-        android:label="ClientsFragment" />
+        android:label="ClientsFragment">
+        <action
+            android:id="@+id/action_clientsFragment_to_clientDetailFragment"
+            app:destination="@id/clientDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
     <fragment
         android:id="@+id/contactFragment"
         android:name="com.momen.restel.contact.view.ContactFragment"
         android:label="ContactFragment" />
+
     <fragment
         android:id="@+id/passengerFragment"
         android:name="com.momen.restel.passenger.view.PassengerFragment"
-        android:label="PassengerFragment" />
+        android:label="PassengerFragment">
+        <action
+            android:id="@+id/action_passengerFragment_to_passengerDetailFragment"
+            app:destination="@id/passengerDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.momen.restel.profile.view.ProfileFragment"
         android:label="ProfileFragment" />
+
     <fragment
         android:id="@+id/roomFragment"
         android:name="com.momen.restel.room.view.RoomFragment"
         android:label="RoomFragment" />
+
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.momen.restel.setting.view.SettingFragment"
         android:label="SettingFragment" />
+
+    <fragment
+        android:id="@+id/clientDetailFragment"
+        android:name="com.momen.restel.clientdetail.view.ClientDetail"
+        android:label="ClientDetailFragment" />
+
+    <fragment
+        android:id="@+id/passengerDetailFragment"
+        android:name="com.momen.restel.passengerdetail.view.PassengerDetailFragment"
+        android:label="PassengerDetailFragment" />
 
 </navigation>
