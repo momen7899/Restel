@@ -10,7 +10,7 @@ interface CustomerDataSource {
 
     fun getCustomer(id: Int): Single<CustomerEntity>?
 
-    fun getCustomers(id: Int): Single<List<CustomerEntity>>?
+    fun getCustomers(): Single<List<CustomerEntity>>?
 
     fun removeCustomer(id: Int): Single<Int>?
 }

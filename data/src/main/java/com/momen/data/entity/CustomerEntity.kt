@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "customers")
 data class CustomerEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int
+    val id: Int?
 
 )
