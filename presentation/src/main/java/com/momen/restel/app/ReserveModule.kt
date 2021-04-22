@@ -1,8 +1,8 @@
 package com.momen.restel.app
 
 import com.momen.data.mapper.ReserveEntityDataMapper
-import com.momen.data.repository.ReserveRepositoryImpl
-import com.momen.data.repository.reserve.ReserveDataSourceFactory
+import com.momen.data.repository.impl.ReserveRepositoryImpl
+import com.momen.data.repository.datasource.reserve.ReserveDataSourceFactory
 import com.momen.domain.interactor.AddReserveUseCase
 import com.momen.domain.interactor.GetReservesUseCase
 import com.momen.domain.interactor.UpdateReserveUseCase

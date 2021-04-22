@@ -1,4 +1,4 @@
-package com.momen.data.repository.reserve
+package com.momen.data.repository.datasource.reserve
 
 import javax.inject.Inject
 

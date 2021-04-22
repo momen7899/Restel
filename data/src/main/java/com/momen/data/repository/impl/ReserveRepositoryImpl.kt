@@ -1,7 +1,7 @@
-package com.momen.data.repository
+package com.momen.data.repository.impl
 
 import com.momen.data.mapper.ReserveEntityDataMapper
-import com.momen.data.repository.reserve.ReserveDataSourceFactory
+import com.momen.data.repository.datasource.reserve.ReserveDataSourceFactory
 import com.momen.domain.model.Reserve
 import com.momen.domain.repository.ReserveRepository
 import io.reactivex.Single

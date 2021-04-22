@@ -1,4 +1,4 @@
-package com.momen.data.repository.user
+package com.momen.data.repository.datasource.user
 
 import com.momen.data.entity.UserEntity
 import com.momen.data.room.RestelAppDatabase

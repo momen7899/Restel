@@ -1,4 +1,4 @@
-package com.momen.data.repository.splash
+package com.momen.data.repository.datasource.splash
 
 import com.momen.data.entity.UserEntity
 import com.momen.data.room.RestelAppDatabase

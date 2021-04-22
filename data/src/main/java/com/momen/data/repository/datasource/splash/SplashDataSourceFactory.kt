@@ -1,4 +1,4 @@
-package com.momen.data.repository.splash
+package com.momen.data.repository.datasource.splash
 
 import javax.inject.Inject
 

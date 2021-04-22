@@ -1,4 +1,4 @@
-package com.momen.data.repository.user
+package com.momen.data.repository.datasource.user
 
 import javax.inject.Inject
 

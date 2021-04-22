@@ -1,7 +1,7 @@
-package com.momen.data.repository
+package com.momen.data.repository.impl
 
 import com.momen.data.mapper.UserEntityDataMapper
-import com.momen.data.repository.splash.SplashDataSourceFactory
+import com.momen.data.repository.datasource.splash.SplashDataSourceFactory
 import com.momen.domain.model.User
 import com.momen.domain.repository.SplashRepository
 import io.reactivex.Single
