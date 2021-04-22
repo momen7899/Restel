@@ -13,7 +13,7 @@ class UserRepositoryImpl(
 
     override fun isValidUser(userName: String, password: String, md5: String): Single<User> =
         userDataSourceFactory.create().isValidUser(userName, password, md5)
-            .map(userEntityDataMapper::transformUserEntityToUser)
+            ?.map(userEntityDataMapper::transformUserEntityToUser)!!
 
     override fun addUser(user: User): Single<User>? {
         TODO("Not yet implemented")

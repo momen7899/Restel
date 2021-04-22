@@ -10,4 +10,20 @@ class RemoteUserDatabase @Inject constructor(private val room: RestelAppDatabase
     override fun isValidUser(userName: String, password: String, md5: String): Single<UserEntity> =
         room.getDatabaseDAO()!!.isValidUser(userName, password, md5)
 
+    override fun addUser(userEntity: UserEntity): Single<Long>? =
+        room.getDatabaseDAO()?.addUser(userEntity)
+
+
+    override fun editUser(userEntity: UserEntity): Single<UserEntity>? =
+        room.getDatabaseDAO()?.editUser(userEntity)
+
+    override fun getUser(id: Int): Single<UserEntity>? =
+        room.getDatabaseDAO()?.getUser(id)
+
+    override fun getUsers(id: Int): Single<List<UserEntity>>? =
+        room.getDatabaseDAO()?.getUsers()
+
+    override fun removeUser(id: Int): Single<Int>? =
+        room.getDatabaseDAO()?.removeUser(id)
+
 }
