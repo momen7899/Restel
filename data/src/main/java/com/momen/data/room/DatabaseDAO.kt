@@ -50,7 +50,7 @@ interface DatabaseDAO {
     fun addRoom(customerEntity: RoomEntity): Single<Long>?
 
     @Update
-    fun editRoom(customerEntity: RoomEntity): Single<CustomerEntity>?
+    fun editRoom(customerEntity: RoomEntity): Single<RoomEntity>?
 
     @Query("SELECT * FROM rooms WHERE id==:id")
     fun getRoom(id: Int): Single<RoomEntity>
