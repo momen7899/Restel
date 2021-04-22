@@ -12,9 +12,9 @@ class AddUser1UseCase @Inject constructor(
     private val userRepository: UserRepository,
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
-) : UseCase<User, AddUser1UseCase.Params>(threadExecutor, postExecutionThread) {
+) : UseCase<Long, AddUser1UseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<User>? =
+    override fun buildUseCaseObservable(inputs: Params): Single<Long>? =
         userRepository.addUser(inputs.user)
 
 

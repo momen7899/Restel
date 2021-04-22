@@ -5,7 +5,7 @@ import io.reactivex.Single
 
 interface RoomRepository {
 
-    fun addRoom(room: Room): Single<Room>?
+    fun addRoom(room: Room): Single<Long>?
 
     fun editRoom(room: Room): Single<Room>?
 
@@ -13,5 +13,5 @@ interface RoomRepository {
 
     fun getRoom(id: Int): Single<Room>?
 
-    fun removeRoom(id: Int): Single<Room>?
+    fun removeRoom(id: Int): Single<Int>?
 }

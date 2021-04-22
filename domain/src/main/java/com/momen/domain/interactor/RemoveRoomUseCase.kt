@@ -12,9 +12,9 @@ class RemoveRoomUseCase @Inject constructor(
     private val roomRepository: RoomRepository,
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
-) : UseCase<Room, RemoveRoomUseCase.Params>(threadExecutor, postExecutionThread) {
+) : UseCase<Int, RemoveRoomUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<Room>? =
+    override fun buildUseCaseObservable(inputs: Params): Single<Int>? =
         roomRepository.removeRoom(inputs.id)
 
 

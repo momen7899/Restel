@@ -12,9 +12,9 @@ class RemoveCustomerUseCase @Inject constructor(
     private val customerRepository: CustomerRepository,
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
-) : UseCase<Customer, RemoveCustomerUseCase.Params>(threadExecutor, postExecutionThread) {
+) : UseCase<Int, RemoveCustomerUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<Customer>? =
+    override fun buildUseCaseObservable(inputs: Params): Single<Int>? =
         customerRepository.removeCustomer(inputs.id)
 
 

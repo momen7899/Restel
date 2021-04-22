@@ -5,7 +5,7 @@ import io.reactivex.Single
 
 interface CustomerRepository {
 
-    fun addCustomer(customer: Customer): Single<Customer>?
+    fun addCustomer(customer: Customer): Single<Long>?
 
     fun editCustomer(customer: Customer): Single<Customer>?
 
@@ -13,5 +13,5 @@ interface CustomerRepository {
 
     fun getCustomer(id: Int): Single<Customer>?
 
-    fun removeCustomer(id: Int): Single<Customer>?
+    fun removeCustomer(id: Int): Single<Int>?
 }

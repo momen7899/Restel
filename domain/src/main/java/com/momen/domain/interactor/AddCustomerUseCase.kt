@@ -12,9 +12,9 @@ class AddCustomerUseCase @Inject constructor(
     private val customerRepository: CustomerRepository,
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
-) : UseCase<Customer, AddCustomerUseCase.Params>(threadExecutor, postExecutionThread) {
+) : UseCase<Long, AddCustomerUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<Customer>? =
+    override fun buildUseCaseObservable(inputs: Params): Single<Long>? =
         customerRepository.addCustomer(inputs.customer)
 
 

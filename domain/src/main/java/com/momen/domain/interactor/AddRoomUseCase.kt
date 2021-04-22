@@ -12,9 +12,9 @@ class AddRoomUseCase @Inject constructor(
     private val roomRepository: RoomRepository,
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
-) : UseCase<Room, AddRoomUseCase.Params>(threadExecutor, postExecutionThread) {
+) : UseCase<Long, AddRoomUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<Room>? =
+    override fun buildUseCaseObservable(inputs: Params): Single<Long>? =
         roomRepository.addRoom(inputs.room)
 
 
