@@ -12,7 +12,7 @@ interface UserDataSource {
 
     fun getUser(id: Int): Single<UserEntity>?
 
-    fun getUsers(id: Int): Single<List<UserEntity>>?
+    fun getUsers(): Single<List<UserEntity>>?
 
     fun removeUser(id: Int): Single<Int>?
 }

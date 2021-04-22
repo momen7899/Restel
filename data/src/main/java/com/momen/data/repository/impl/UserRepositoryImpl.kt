@@ -15,24 +15,24 @@ class UserRepositoryImpl(
         userDataSourceFactory.create().isValidUser(userName, password, md5)
             ?.map(userEntityDataMapper::transformUserEntityToUser)!!
 
-    override fun addUser(user: User): Single<User>? {
-        TODO("Not yet implemented")
-    }
+    override fun addUser(user: User): Single<Long>? =
+        userDataSourceFactory.create().addUser(userEntityDataMapper.transformUserToUserEntity(user))
 
-    override fun editUser(user: User): Single<User>? {
-        TODO("Not yet implemented")
-    }
 
-    override fun getUsers(): Single<ArrayList<User>>? {
-        TODO("Not yet implemented")
-    }
+    override fun editUser(user: User): Single<User>? =
+        userDataSourceFactory.create()
+            .editUser(userEntityDataMapper.transformUserToUserEntity(user))
+            ?.map(userEntityDataMapper::transformUserEntityToUser)
 
-    override fun getUser(userId: Int): Single<User>? {
-        TODO("Not yet implemented")
-    }
+    override fun getUsers(): Single<ArrayList<User>>? =
+        userDataSourceFactory.create().getUsers()
+            ?.map(userEntityDataMapper::transformUserEntitiesToUsers)
 
-    override fun removeUser(userId: Int): Single<User>? {
-        TODO("Not yet implemented")
-    }
+    override fun getUser(userId: Int): Single<User>? =
+        userDataSourceFactory.create().getUser(userId)
+            ?.map(userEntityDataMapper::transformUserEntityToUser)
+
+    override fun removeUser(userId: Int): Single<Int>? =
+        userDataSourceFactory.create().removeUser(userId)
 
 }

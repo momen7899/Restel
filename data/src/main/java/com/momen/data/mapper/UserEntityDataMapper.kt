@@ -12,7 +12,7 @@ class UserEntityDataMapper @Inject constructor() {
 
         if (userEntities.isNotEmpty()) {
             for (userEntity in userEntities) {
-                users.add(transformUserEntityToUser(userEntity))
+                transformUserEntityToUser(userEntity)?.let { users.add(it) }
             }
         }
         return users
@@ -33,20 +33,20 @@ class UserEntityDataMapper @Inject constructor() {
         )
     }
 
-    fun transformUserEntityToUser(user: UserEntity): User = with(user) {
-        println(user)
-        User(
-            id!!,
-            firstName!!,
-            lastName!!,
-            nationalCode!!,
-            phoneNumber!!,
-            userName!!,
-            password!!,
-            md5!!,
-            address!!,
-            admin!!
-        )
-    }
+    fun transformUserEntityToUser(user: UserEntity?): User? =
+        user?.let {
+            User(
+                it.id,
+                it.firstName,
+                it.lastName,
+                it.nationalCode,
+                it.phoneNumber,
+                it.userName,
+                it.password,
+                it.md5,
+                it.address,
+                it.admin
+            )
+        }
 
 }
