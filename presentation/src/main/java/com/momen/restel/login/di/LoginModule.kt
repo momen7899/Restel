@@ -1,8 +1,8 @@
 package com.momen.restel.login.di
 
 import com.momen.data.mapper.UserEntityDataMapper
-import com.momen.data.repository.UserRepositoryImpl
-import com.momen.data.repository.user.UserDataSourceFactory
+import com.momen.data.repository.impl.UserRepositoryImpl
+import com.momen.data.repository.datasource.user.UserDataSourceFactory
 import com.momen.domain.interactor.ValidUserUseCase
 import com.momen.domain.repository.UserRepository
 import com.momen.restel.login.model.UserModelDataMapper

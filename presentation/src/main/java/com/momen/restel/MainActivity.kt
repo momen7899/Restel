@@ -34,6 +34,5 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private lateinit var act: MainActivity
         fun instance(): MainActivity = act
-
     }
 }

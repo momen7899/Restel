@@ -32,4 +32,10 @@
     <string name="roomNumberError">شماره ی اتاق نبایدخالی باشد</string>
     <string name="successTransaction">با موفقیت اضافه شد</string>
     <string name="unsuccessTransaction">اضافه نشد دوباره تلاش کنید</string>
+    <string name="firstName">نام:</string>
+    <string name="lastName">نام خانوادگی:</string>
+    <string name="phoneNumber">شماره تلفن:</string>
+    <string name="capacity">ظرفیت:</string>
+    <string name="gender">جنسیت:</string>
+    <string name="married">وضعیت تاهل:</string>
 </resources>

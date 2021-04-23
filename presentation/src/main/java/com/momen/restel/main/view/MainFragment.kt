@@ -6,9 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -35,8 +39,7 @@ class MainFragment : Fragment() {
 
     private lateinit var reserveViewModel: MainReserveViewModel
 
-    private
-    val reserveAdapter = ReserveAdapter()
+    private val reserveAdapter = ReserveAdapter()
 
     // activity component
     private lateinit var toolbar: Toolbar
@@ -57,6 +60,7 @@ class MainFragment : Fragment() {
         setUpViewModel()
 
         setUpComponents()
+        subscribeViewModel()
     }
 
     private fun injectViewModel() {
@@ -75,11 +79,14 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setUpActivityComponent()
-        subscribeViewModel()
+        getReserves()
+    }
+
+    private fun getReserves() {
+        reserveViewModel.getReserves()
     }
 
     private fun subscribeViewModel() {
-        reserveViewModel.getReserves()
         reserveViewModel.reserveLiveData.observe(
             viewLifecycleOwner, { result ->
                 when (result.state) {
@@ -98,7 +105,6 @@ class MainFragment : Fragment() {
                 }
             }
         )
-//        reserveAdapter.setItems(list)
     }
 
     private fun setUpComponents() {
@@ -134,7 +140,36 @@ class MainFragment : Fragment() {
 
     private fun setUpNavView() {
         navigationView.setNavigationItemSelectedListener {
-            Toasty.showInfoToasty(requireContext(), getString(R.string.underConstruction))
+            when (it.itemId) {
+                R.id.navClients -> {
+                    val action = MainFragmentDirections.actionMainFragmentToClientsFragment()
+                    requireView().findNavController().navigate(action)
+                }
+                R.id.navRoom -> {
+                    val action = MainFragmentDirections.actionMainFragmentToRoomFragment()
+                    requireView().findNavController().navigate(action)
+                }
+                R.id.navPassenger -> {
+                    val action = MainFragmentDirections.actionMainFragmentToPassengerFragment()
+                    requireView().findNavController().navigate(action)
+                }
+                R.id.navSetting -> {
+                    val action = MainFragmentDirections.actionMainFragmentToSettingFragment()
+                    requireView().findNavController().navigate(action)
+                }
+                R.id.navProfile -> {
+                    val action = MainFragmentDirections.actionMainFragmentToProfileFragment()
+                    requireView().findNavController().navigate(action)
+                }
+                R.id.navContactUs -> {
+                    val action = MainFragmentDirections.actionMainFragmentToContactFragment()
+                    requireView().findNavController().navigate(action)
+                }
+                R.id.navLogOut -> {
+                    requireActivity().onBackPressed()
+                }
+            }
+            drawer.closeDrawer(GravityCompat.START, false)
             return@setNavigationItemSelectedListener true
         }
     }
@@ -154,9 +189,38 @@ class MainFragment : Fragment() {
     }
 
     private fun setUpToolbar() {
-        toolbar.visibility = View.VISIBLE
+        setToolbarAnim()
         toolbar.title = ""
         val title: TextView = requireActivity().findViewById(R.id.toolbarTitle)
         title.text = "رزرو"
+    }
+
+    private fun setToolbarAnim() {
+        val anim = TranslateAnimation(0.0F, 0.0F, -toolbar.height.toFloat(), 0.0F)
+        anim.duration = 1000
+        toolbar.animation = anim
+        anim.start()
+        anim.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {
+                toolbar.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {
+            }
+        })
+    }
+
+    private fun setUpBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            }
+        )
     }
 }
