@@ -16,7 +16,7 @@ class RemoteCustomerDatabase @Inject constructor(private val room: RestelAppData
     override fun getCustomer(id: Int): Single<CustomerEntity>? =
         room.getDatabaseDAO()?.getCustomer(id)
 
-    override fun getCustomers(id: Int): Single<List<CustomerEntity>>? =
+    override fun getCustomers(): Single<List<CustomerEntity>>? =
         room.getDatabaseDAO()?.getCustomers()
 
     override fun removeCustomer(id: Int): Single<Int>? =
