@@ -14,13 +14,30 @@ class RoomEntityDataMapper @Inject constructor() {
         return rooms
     }
 
-    fun transformRoomEntityToRoom(room: RoomEntity?): Room? =
-        room?.let {
-            Room()
-        }
 
-    fun transformRoomToRoomEntity(room: Room): RoomEntity =
-        with(room) {
-            RoomEntity(0)
+
+
+    fun transformRoomToRoomEntity(room:Room): RoomEntity = with(room) {
+            RoomEntity(
+                    id,
+                    roomName,
+                    roomCode,
+                    customer,
+                    startDate,
+                    finishDate,
+                    price
+            )
         }
+fun transformRoomEntityToRoom(room: RoomEntity?): Room? =
+    room?.let{
+        Room(
+            it.id,
+            it.roomName,
+            it.roomCode,
+            it.customer,
+            it.startDate,
+            it.finishDate,
+            it.price
+        )
+    }
 }
