@@ -15,7 +15,7 @@ interface DatabaseDAO {
     fun addUser(user: UserEntity): Single<Long>
 
     @Update
-    fun editUser(userEntity: UserEntity): Single<UserEntity>?
+    fun editUser(userEntity: UserEntity): Single<Int>?
 
     @Query("SELECT * FROM users WHERE user_name==:userName AND password ==:password AND md5==:md5")
     fun isValidUser(userName: String, password: String, md5: String): Single<UserEntity>
@@ -27,14 +27,14 @@ interface DatabaseDAO {
     fun getUsers(): Single<List<UserEntity>>
 
     @Delete
-    fun removeUser(id: Int): Single<Int>?
+    fun removeUser(userEntity: UserEntity): Single<Int>?
 
     // customer
     @Insert
     fun addCustomer(customerEntity: CustomerEntity): Single<Long>?
 
     @Update
-    fun editCustomer(customerEntity: CustomerEntity): Single<CustomerEntity>?
+    fun editCustomer(customerEntity: CustomerEntity): Single<Int>?
 
     @Query("SELECT * FROM customers WHERE id==:id")
     fun getCustomer(id: Int): Single<CustomerEntity>
@@ -43,23 +43,23 @@ interface DatabaseDAO {
     fun getCustomers(): Single<List<CustomerEntity>>
 
     @Delete
-    fun removeCustomer(id: Int): Single<Int>?
+    fun removeCustomer(customerEntity: CustomerEntity): Single<Int>?
 
     // room
     @Insert
-    fun addRoom(customerEntity: RoomEntity): Single<Long>?
+    fun addRoom(roomEntity: RoomEntity): Single<Long>?
 
     @Update
-    fun editRoom(customerEntity: RoomEntity): Single<RoomEntity>?
+    fun editRoom(roomEntity: RoomEntity): Single<Int>?
 
     @Query("SELECT * FROM rooms WHERE id==:id")
     fun getRoom(id: Int): Single<RoomEntity>
 
-    @Query("SELECT * FROM users")
+    @Query("SELECT * FROM rooms")
     fun getRooms(): Single<List<RoomEntity>>
 
     @Delete
-    fun removeRoom(id: Int): Single<Int>?
+    fun removeRoom(roomEntity: RoomEntity): Single<Int>?
 
     // reserve
     @Insert

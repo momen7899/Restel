@@ -6,11 +6,11 @@ import io.reactivex.Single
 interface CustomerDataSource {
     fun addCustomer(customerEntity: CustomerEntity): Single<Long>?
 
-    fun editCustomer(customerEntity: CustomerEntity): Single<CustomerEntity>?
+    fun editCustomer(customerEntity: CustomerEntity): Single<Int>?
 
     fun getCustomer(id: Int): Single<CustomerEntity>?
 
     fun getCustomers(): Single<List<CustomerEntity>>?
 
-    fun removeCustomer(id: Int): Single<Int>?
+    fun removeCustomer(customerEntity: CustomerEntity): Single<Int>?
 }

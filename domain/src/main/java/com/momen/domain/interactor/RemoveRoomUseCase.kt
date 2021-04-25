@@ -15,12 +15,12 @@ class RemoveRoomUseCase @Inject constructor(
 ) : UseCase<Int, RemoveRoomUseCase.Params>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCaseObservable(inputs: Params): Single<Int>? =
-        roomRepository.removeRoom(inputs.id)
+        roomRepository.removeRoom(inputs.room)
 
 
-    class Params(val id: Int) {
+    class Params(val room: Room) {
         companion object {
-            fun forRemoveRoom(id: Int) = Params(id)
+            fun forRemoveRoom(room: Room) = Params(room)
         }
     }
 

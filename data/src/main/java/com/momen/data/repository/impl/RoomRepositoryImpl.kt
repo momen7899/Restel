@@ -14,9 +14,8 @@ class RoomRepositoryImpl(
     override fun addRoom(room: Room): Single<Long>? =
         roomDataSource.create().addRoom(roomEntityDataMapper.transformRoomToRoomEntity(room))
 
-    override fun editRoom(room: Room): Single<Room>? =
+    override fun editRoom(room: Room): Single<Int>? =
         roomDataSource.create().editRoom(roomEntityDataMapper.transformRoomToRoomEntity(room))
-            ?.map(roomEntityDataMapper::transformRoomEntityToRoom)
 
     override fun getRooms(): Single<ArrayList<Room>>? =
         roomDataSource.create().getRooms()
@@ -26,6 +25,6 @@ class RoomRepositoryImpl(
         roomDataSource.create().getRoom(id)
             ?.map(roomEntityDataMapper::transformRoomEntityToRoom)
 
-    override fun removeRoom(id: Int): Single<Int>? =
-        roomDataSource.create().removeRooms(id)
+    override fun removeRoom(room: Room): Single<Int>? =
+        roomDataSource.create().removeRooms(roomEntityDataMapper.transformRoomToRoomEntity(room))
 }

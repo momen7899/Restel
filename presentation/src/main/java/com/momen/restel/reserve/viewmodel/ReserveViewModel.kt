@@ -27,7 +27,7 @@ class ReserveViewModel(
         val params = AddReserveUseCase.Params.forAddReserve(
             reserveModelDataMapper.transformReserveModelToReserve(reserve)
         )
-        val d: Disposable = addReserveUseCase.execute(params).subscribe({ response ->
+        val d: Disposable? = addReserveUseCase.execute(params)?.subscribe({ response ->
             this.response = response
             result = Result(this.response, State.DATA_LOADED, null)
             reserveLiveData.value = result
@@ -38,7 +38,7 @@ class ReserveViewModel(
             reserveLiveData.value = result
         }
         )
-        disposables.add(d)
+        d?.let { disposables.add(it) }
     }
 
     class Result(

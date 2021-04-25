@@ -19,10 +19,9 @@ class UserRepositoryImpl(
         userDataSourceFactory.create().addUser(userEntityDataMapper.transformUserToUserEntity(user))
 
 
-    override fun editUser(user: User): Single<User>? =
+    override fun editUser(user: User): Single<Int>? =
         userDataSourceFactory.create()
             .editUser(userEntityDataMapper.transformUserToUserEntity(user))
-            ?.map(userEntityDataMapper::transformUserEntityToUser)
 
     override fun getUsers(): Single<ArrayList<User>>? =
         userDataSourceFactory.create().getUsers()
@@ -32,7 +31,8 @@ class UserRepositoryImpl(
         userDataSourceFactory.create().getUser(userId)
             ?.map(userEntityDataMapper::transformUserEntityToUser)
 
-    override fun removeUser(userId: Int): Single<Int>? =
-        userDataSourceFactory.create().removeUser(userId)
+    override fun removeUser(user: User): Single<Int>? =
+        userDataSourceFactory.create()
+            .removeUser(userEntityDataMapper.transformUserToUserEntity(user))
 
 }

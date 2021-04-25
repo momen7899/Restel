@@ -26,7 +26,4 @@ data class UserEntity(
     val address: String?,
     @ColumnInfo(name = "admin")
     val admin: Int?
-){
-    constructor( firstName: String?, lastName: String?, nationalCode: String?, phoneNumber: String?, userName: String?, password: String?, md5: String?, address: String?, admin: Int?) : this(0,firstName , lastName ,
-                                            nationalCode , phoneNumber , userName , password , md5 , address , admin )
-}
+)

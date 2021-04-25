@@ -16,7 +16,7 @@ class SplashViewModel constructor(
     @SuppressLint("CheckResult")
     fun createUser() {
         val usersParam = GetUsersUseCase.Params.forGetUsers()
-        usersUseCase.execute(usersParam).subscribe({ users ->
+        usersUseCase.execute(usersParam)?.subscribe({ users ->
             if (users.isEmpty()) addUser()
         }, { throwable ->
             println(throwable.message)
@@ -28,7 +28,7 @@ class SplashViewModel constructor(
     private fun addUser() {
         val addUserParam =
             AddUserUseCase.Params.forAddUser(userModelDataMapper.transformUserModelToUser(admin))
-        addUserUseCase.execute(addUserParam).subscribe({ users ->
+        addUserUseCase.execute(addUserParam)?.subscribe({ users ->
             println(users)
         }, { throwable ->
             println(throwable.message)

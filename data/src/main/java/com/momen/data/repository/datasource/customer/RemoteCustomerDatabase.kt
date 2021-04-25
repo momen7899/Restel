@@ -10,7 +10,7 @@ class RemoteCustomerDatabase @Inject constructor(private val room: RestelAppData
     override fun addCustomer(customerEntity: CustomerEntity): Single<Long>? =
         room.getDatabaseDAO()?.addCustomer(customerEntity)
 
-    override fun editCustomer(customerEntity: CustomerEntity): Single<CustomerEntity>? =
+    override fun editCustomer(customerEntity: CustomerEntity): Single<Int>? =
         room.getDatabaseDAO()?.editCustomer(customerEntity)
 
     override fun getCustomer(id: Int): Single<CustomerEntity>? =
@@ -19,8 +19,8 @@ class RemoteCustomerDatabase @Inject constructor(private val room: RestelAppData
     override fun getCustomers(): Single<List<CustomerEntity>>? =
         room.getDatabaseDAO()?.getCustomers()
 
-    override fun removeCustomer(id: Int): Single<Int>? =
-        room.getDatabaseDAO()?.removeCustomer(id)
+    override fun removeCustomer(customerEntity: CustomerEntity): Single<Int>? =
+        room.getDatabaseDAO()?.removeCustomer(customerEntity)
 
 
 }

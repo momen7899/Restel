@@ -14,10 +14,9 @@ class CustomerRepositoryImpl(
         customerDataSourceFactory.create()
             .addCustomer(customerEntityDataMapper.transformCustomerToCustomerEntity(customer))
 
-    override fun editCustomer(customer: Customer): Single<Customer>? =
+    override fun editCustomer(customer: Customer): Single<Int>? =
         customerDataSourceFactory.create()
             .editCustomer(customerEntityDataMapper.transformCustomerToCustomerEntity(customer))
-            ?.map(customerEntityDataMapper::transformCustomerEntityToCustomer)
 
 
     override fun getCustomers(): Single<ArrayList<Customer>>? =
@@ -29,7 +28,7 @@ class CustomerRepositoryImpl(
         customerDataSourceFactory.create()
             .getCustomer(id)?.map(customerEntityDataMapper::transformCustomerEntityToCustomer)
 
-    override fun removeCustomer(id: Int): Single<Int>? =
+    override fun removeCustomer(customer: Customer): Single<Int>? =
         customerDataSourceFactory.create()
-            .removeCustomer(id)
+            .removeCustomer(customerEntityDataMapper.transformCustomerToCustomerEntity(customer))
 }

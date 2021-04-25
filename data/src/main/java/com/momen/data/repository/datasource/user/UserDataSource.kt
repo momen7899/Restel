@@ -8,11 +8,11 @@ interface UserDataSource {
 
     fun addUser(userEntity: UserEntity): Single<Long>?
 
-    fun editUser(userEntity: UserEntity): Single<UserEntity>?
+    fun editUser(userEntity: UserEntity): Single<Int>?
 
     fun getUser(id: Int): Single<UserEntity>?
 
     fun getUsers(): Single<List<UserEntity>>?
 
-    fun removeUser(id: Int): Single<Int>?
+    fun removeUser(userEntity: UserEntity): Single<Int>?
 }

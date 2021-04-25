@@ -8,11 +8,11 @@ interface UserRepository {
 
     fun addUser(user: User): Single<Long>?
 
-    fun editUser(user: User): Single<User>?
+    fun editUser(user: User): Single<Int>?
 
     fun getUsers(): Single<ArrayList<User>>?
 
     fun getUser(userId: Int): Single<User>?
 
-    fun removeUser(userId: Int): Single<Int>?
+    fun removeUser(room: User): Single<Int>?
 }

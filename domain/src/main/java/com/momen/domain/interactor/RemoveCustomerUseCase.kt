@@ -15,12 +15,12 @@ class RemoveCustomerUseCase @Inject constructor(
 ) : UseCase<Int, RemoveCustomerUseCase.Params>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCaseObservable(inputs: Params): Single<Int>? =
-        customerRepository.removeCustomer(inputs.id)
+        customerRepository.removeCustomer(inputs.customer)
 
 
-    class Params(val id: Int) {
+    class Params(val customer: Customer) {
         companion object {
-            fun forRemoveCustomer(id: Int) = Params(id)
+            fun forRemoveCustomer(customer: Customer) = Params(customer)
         }
     }
 

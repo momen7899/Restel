@@ -20,11 +20,4 @@ data class ReserveEntity(
     val finishData: String,
     @ColumnInfo(name = "price")
     val price: Int
-){
-    constructor(room: String,
-                client: String,
-                customer: String,
-                startDate: String,
-                finishData: String,
-                price: Int):this(0,room,client,customer,startDate,finishData,price)
-}
+)

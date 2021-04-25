@@ -28,7 +28,7 @@ class LoginViewModel(
             password,
             PasswordGenerator.md5(password)
         )
-        val d: Disposable = validUserUseCase.execute(params).subscribe({ user ->
+        val d: Disposable? = validUserUseCase.execute(params)?.subscribe({ user ->
             println("id:\t$user")
             isValidUser = userModelDataMapper.transformUserToUserModel(user)
             result = Result(isValidUser, State.DATA_LOADED, null)
@@ -41,7 +41,7 @@ class LoginViewModel(
                 loginLiveData.value = result
             }
         )
-        disposables.add(d)
+        d?.let { disposables.add(it) }
     }
 
     class Result(

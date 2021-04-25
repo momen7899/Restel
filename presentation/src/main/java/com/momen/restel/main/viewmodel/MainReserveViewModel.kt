@@ -22,7 +22,7 @@ class MainReserveViewModel(
         reserveLiveData.value = result
 
         val params = GetReservesUseCase.Params.forGetReserve()
-        val d: Disposable = reservesUseCase.execute(params).subscribe({ reservesList ->
+        val d: Disposable? = reservesUseCase.execute(params)?.subscribe({ reservesList ->
             reserves = reserveModelDataMapper.transformReserveToReserveModels(reservesList)
             result = Result(reserves, State.DATA_LOADED, null)
             reserveLiveData.value = result
@@ -33,7 +33,7 @@ class MainReserveViewModel(
             reserveLiveData.value = result
         }
         )
-        disposables.add(d)
+        d?.let { disposables.add(it) }
     }
 
     class Result(

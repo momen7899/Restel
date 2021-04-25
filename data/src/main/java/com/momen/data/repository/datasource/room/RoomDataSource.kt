@@ -7,12 +7,12 @@ interface RoomDataSource {
 
     fun addRoom(roomEntity: RoomEntity): Single<Long>?
 
-    fun editRoom(roomEntity: RoomEntity): Single<RoomEntity>?
+    fun editRoom(roomEntity: RoomEntity): Single<Int>?
 
     fun getRooms(): Single<List<RoomEntity>>?
 
     fun getRoom(id: Int): Single<RoomEntity>?
 
-    fun removeRooms(id: Int): Single<Int>?
+    fun removeRooms(roomEntity: RoomEntity): Single<Int>?
 
 }

@@ -7,11 +7,11 @@ interface RoomRepository {
 
     fun addRoom(room: Room): Single<Long>?
 
-    fun editRoom(room: Room): Single<Room>?
+    fun editRoom(room: Room): Single<Int>?
 
     fun getRooms(): Single<ArrayList<Room>>?
 
     fun getRoom(id: Int): Single<Room>?
 
-    fun removeRoom(id: Int): Single<Int>?
+    fun removeRoom(room: Room): Single<Int>?
 }
