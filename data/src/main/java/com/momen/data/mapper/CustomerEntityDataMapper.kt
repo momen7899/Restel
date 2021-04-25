@@ -13,22 +13,15 @@ class CustomerEntityDataMapper @Inject constructor() {
         }
         return customers
     }
-    fun transformCustomerToCustomerEntity(customer: Customer): CustomerEntity = with(customer) {
-            CustomerEntity(
-            id,
-            firstName,
-            lastName,
-            phoneNumber,
-            address
-            )
-    }
+
+    fun transformCustomerToCustomerEntity(customer: Customer): CustomerEntity =
+        with(customer) {
+            CustomerEntity(id, name, phoneNumber, nationalCode, gender, single)
+        }
+
     fun transformCustomerEntityToCustomer(customer: CustomerEntity?): Customer? =
         customer?.let {
-            Customer(it.id,
-            it.firstName,
-            it.lastName,
-            it.phoneNumber,
-            it.address)
+            Customer(it.id, it.name, it.phoneNumber, it.nationalCode, it.gender, it.single)
         }
 
 }

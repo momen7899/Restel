@@ -8,17 +8,14 @@ import androidx.room.PrimaryKey
 data class CustomerEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int?,
-    @ColumnInfo(name = "first_name")
-    val firstName: String?,
-    @ColumnInfo(name = "last_name")
-    val lastName: String?,
+    @ColumnInfo(name = "name")
+    val name: String?,
     @ColumnInfo(name = "phone_number")
     val phoneNumber: String?,
-    @ColumnInfo(name = "address")
-    val address: String?,
-){
-    constructor(firstName: String?,
-                lastName: String?,
-                phoneNumber: String?,
-                address: String?):this(0 , firstName , lastName , phoneNumber , address)
-}
+    @ColumnInfo(name = "national_code")
+    val nationalCode: String?,
+    @ColumnInfo(name = "gender")
+    val gender: Boolean?,
+    @ColumnInfo(name = "single")
+    val single: Boolean?
+)
