@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="passenger"
-            type="com.momen.restel.passenger.model.PassengerModel" />
+            name="customer"
+            type="com.momen.restel.customer.model.CustomerModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -37,7 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:text="@{passenger.name}"
+                android:text="@{customer.name}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:text="@{passenger.phoneNumber}"
+                android:text="@{customer.phoneNumber}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
                 app:layout_constraintTop_toBottomOf="@id/reservationItemCustomer" />
@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:text="@{passenger.gender}"
+                android:text="@{customer.gender}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
                 app:layout_constraintTop_toBottomOf="@id/reservationItemClient" />
@@ -70,7 +70,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:text="@{passenger.gender}"
+                android:text="@{customer.gender}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
                 app:layout_constraintTop_toBottomOf="@id/reservationItemRoomName" />

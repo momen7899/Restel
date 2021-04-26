@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.momen.restel.R
 import kotlinx.android.synthetic.main.fragment_room.*
 
-class RoomFragment : Fragment() {
+class
+RoomFragment : Fragment() {
 
     private val roomAdapter = RoomAdapter()
     override fun onCreateView(

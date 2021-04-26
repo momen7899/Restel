@@ -111,7 +111,7 @@
 
     <fragment
         android:id="@+id/passengerFragment"
-        android:name="com.momen.restel.passenger.view.PassengerFragment"
+        android:name="com.momen.restel.customer.view.CustomerFragment"
         android:label="PassengerFragment">
         <action
             android:id="@+id/action_passengerFragment_to_passengerDetailFragment"

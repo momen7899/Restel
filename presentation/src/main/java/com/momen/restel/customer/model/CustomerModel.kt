@@ -1,6 +1,6 @@
-package com.momen.restel.passenger.model
+package com.momen.restel.customer.model
 
-data class PassengerModel(
+data class CustomerModel(
     val id: Int,
     val name: String,
     val phoneNumber: String,

@@ -1,35 +1,35 @@
-package com.momen.restel.passenger.view
+package com.momen.restel.customer.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.momen.restel.R
-import com.momen.restel.databinding.PassengerItemBinding
-import com.momen.restel.passenger.model.PassengerModel
+import com.momen.restel.customer.model.CustomerModel
+import com.momen.restel.databinding.CustomerItemBinding
 
-class PassengerAdapter : RecyclerView.Adapter<PassengerAdapter.PassengerViewHolder>() {
+class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.PassengerViewHolder>() {
 
-    private val items = ArrayList<PassengerModel>()
+    private val items = ArrayList<CustomerModel>()
 
-    class PassengerViewHolder(val passenger: PassengerItemBinding) :
+    class PassengerViewHolder(val passenger: CustomerItemBinding) :
         RecyclerView.ViewHolder(passenger.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PassengerViewHolder =
         PassengerViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.passenger_item, parent, false
-            ) as PassengerItemBinding
+                R.layout.customer_item, parent, false
+            ) as CustomerItemBinding
         )
 
     override fun onBindViewHolder(holder: PassengerViewHolder, position: Int) {
-        holder.passenger.passenger = items[position]
+        holder.passenger.customer = items[position]
     }
 
     override fun getItemCount(): Int = items.size
 
-    fun setItems(items: ArrayList<PassengerModel>) {
+    fun setItems(items: ArrayList<CustomerModel>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()

@@ -8,7 +8,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class RoomModule(private val context: Context) {
+class RoomDbModule(private val context: Context) {
 
     @Provides
     fun provideAppDatabase(): RestelAppDatabase {

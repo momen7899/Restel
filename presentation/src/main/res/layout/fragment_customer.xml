@@ -10,13 +10,13 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/passengerRecycle"
+        android:id="@+id/customerRecycle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/passenger_item" />
+        tools:listitem="@layout/customer_item" />
 
     <include
         android:id="@+id/passengerFab"

@@ -12,10 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import com.google.android.material.navigation.NavigationView
 import com.momen.restel.R
 import com.momen.restel.app.App
-import com.momen.restel.app.RoomModule
+import com.momen.restel.app.RoomDbModule
 import com.momen.restel.splash.di.DaggerSplashComponent
 import com.momen.restel.splash.viewmodel.SplashViewModel
 import com.momen.restel.splash.viewmodel.SplashViewModelFactory
@@ -66,7 +65,7 @@ class SplashFragment : Fragment() {
     private fun injectViewModel() {
         DaggerSplashComponent.builder()
             .appComponent((App()).appComponent)
-            .roomModule(RoomModule(requireContext()))
+            .roomModule(RoomDbModule(requireContext()))
             .build()
             .inject(this)
     }

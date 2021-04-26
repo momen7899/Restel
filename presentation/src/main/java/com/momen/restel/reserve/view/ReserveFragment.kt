@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.R
 import com.momen.restel.app.App
-import com.momen.restel.app.RoomModule
+import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
 import com.momen.restel.reserve.di.DaggerReserveComponent
 import com.momen.restel.reserve.model.ReserveModel
@@ -73,7 +73,7 @@ class ReserveFragment : Fragment() {
     private fun injectViewModel() {
         DaggerReserveComponent.builder()
             .appComponent(App().appComponent)
-            .roomModule(RoomModule(requireContext()))
+            .roomModule(RoomDbModule(requireContext()))
             .build()
             .inject(this)
     }

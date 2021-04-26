@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.momen.restel.login.view
 
 import android.app.Activity
@@ -12,12 +10,12 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.R
 import com.momen.restel.app.App
-import com.momen.restel.app.RoomModule
+import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
 import com.momen.restel.login.di.DaggerLoginComponent
 import com.momen.restel.login.viewmodel.LoginViewModel
@@ -138,14 +136,14 @@ class LoginFragment : Fragment() {
 
 
     private fun setUpViewModel() {
-        loginViewModel = ViewModelProviders.of(this, loginViewModelFactory)
-            .get(LoginViewModel::class.java)
+        loginViewModel =
+            ViewModelProvider(this, loginViewModelFactory).get(LoginViewModel::class.java)
     }
 
     private fun injectViewModel() {
         DaggerLoginComponent.builder()
             .appComponent(App().appComponent)
-            .roomModule(RoomModule(requireContext()))
+            .roomModule(RoomDbModule(requireContext()))
             .build()
             .inject(this)
     }
