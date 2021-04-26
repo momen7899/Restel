@@ -75,7 +75,7 @@
                 android:id="@+id/customerHint"
                 style="@style/EditTextHint"
                 android:layout_marginTop="16dp"
-                android:text="@string/clientHint" />
+                android:text="@string/userHint" />
 
             <EditText
                 android:id="@+id/reserveCustomer"

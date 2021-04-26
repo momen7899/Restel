@@ -6,12 +6,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/roomHint"
-        style="@style/EditTextHint"
-        android:text="@string/roomHint" />
+        android:id="@+id/inputHint"
+        style="@style/EditTextHint" />
 
     <EditText
-        android:id="@+id/reserveRoom"
+        android:id="@+id/inputEt"
         style="@style/LoginEditText"
         android:layout_width="match_parent"
         android:layout_marginTop="4dp"

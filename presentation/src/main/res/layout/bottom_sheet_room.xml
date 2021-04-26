@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottomSheetReserve"
+    android:id="@+id/bottomSheetRoom"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -16,7 +16,7 @@
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:contentDescription="@string/bottomSheetSecription"
+            android:contentDescription="@string/bottomSheetDecription"
             android:gravity="center"
             app:srcCompat="@drawable/ic_line" />
 

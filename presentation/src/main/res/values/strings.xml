@@ -24,7 +24,8 @@
     <string name="underConstruction">در حال ساخت</string>
     <string name="newReserve">رزرو جدید</string>
     <string name="roomHint">شماره ی اتاق</string>
-    <string name="clientHint">نام مشتری</string>
+    <string name="userHint">نام مشتری</string>
+    <string name="customerHint">نام مشتری</string>
     <string name="firstDateHint">تاریخ شروع</string>
     <string name="lastDateHint">تاریخ پایان</string>
     <string name="priceHint">قیمت اتاق</string>
@@ -38,5 +39,5 @@
     <string name="capacity">ظرفیت:</string>
     <string name="gender">جنسیت:</string>
     <string name="married">وضعیت تاهل:</string>
-    <string name="bottomSheetSecription">show Bottom Sheet</string>
+    <string name="bottomSheetDecription">show Bottom Sheet</string>
 </resources>

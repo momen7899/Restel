@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheetReserve"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:orientation="vertical">
 
 
@@ -17,49 +19,88 @@
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
+            android:contentDescription="@string/bottomSheetDecription"
             android:gravity="center"
             app:srcCompat="@drawable/ic_line" />
 
-        <include
-            layout="@layout/card_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+        <TextView
+            android:id="@+id/roomHint"
+            style="@style/EditTextHint"
+            android:text="@string/roomHint" />
 
-        <include
-            layout="@layout/card_input"
+        <EditText
+            android:id="@+id/reserveRoom"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
 
-        <include
-            layout="@layout/card_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+        <TextView
+            android:id="@+id/customerHint"
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/userHint" />
 
-        <include
-            layout="@layout/card_input"
+        <EditText
+            android:id="@+id/reserveCustomer"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
 
-        <include
-            layout="@layout/card_input"
+        <TextView
+            android:id="@+id/firstDateHint"
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/firstDateHint" />
+
+        <Button
+            android:id="@+id/reserveFirstDate"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:importantForAutofill="no"
+            android:text="@string/firstDateHint"
+            tools:ignore="LabelFor,TextFields" />
+
+        <TextView
+            android:id="@+id/lastDateHint"
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/lastDateHint" />
+
+        <EditText
+            android:id="@+id/reserveLastDate"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor,TextFields" />
+
+        <TextView
+            android:id="@+id/priceHint"
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/priceHint" />
+
+        <EditText
+            android:id="@+id/reservePrice"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            tools:ignore="LabelFor,TextFields" />
 
         <Button
             android:id="@+id/submitBtn"
             style="@style/CustomButton"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="32dp"
             android:padding="0dp"
             android:text="@string/submit" />

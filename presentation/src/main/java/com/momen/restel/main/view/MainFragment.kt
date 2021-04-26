@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
+import android.widget.Button
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -20,6 +21,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aminography.primecalendar.persian.PersianCalendar
+import com.aminography.primedatepicker.picker.PrimeDatePicker
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.MainActivity
@@ -30,8 +33,12 @@ import com.momen.restel.comm.Toasty
 import com.momen.restel.main.di.DaggerMainComponent
 import com.momen.restel.main.viewmodel.MainReserveViewModel
 import com.momen.restel.main.viewmodel.MainReserveViewModelFactory
+import kotlinx.android.synthetic.main.bottom_sheet_reserve.*
+import kotlinx.android.synthetic.main.bottom_sheet_reserve.view.*
+import kotlinx.android.synthetic.main.card_input.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_reserve.*
+import java.util.*
 import javax.inject.Inject
 
 @Suppress("DEPRECATION")
@@ -46,7 +53,8 @@ class MainFragment : Fragment() {
 
     private val reserveAdapter = ReserveAdapter()
     private var bottomSheetDialog: BottomSheetDialog? = null
-    private var update = false;
+    private var update = false
+    private var date: Button? = null
 
     // activity component
     private lateinit var toolbar: Toolbar
@@ -118,8 +126,36 @@ class MainFragment : Fragment() {
         setUpFab()
         reserveRecycleSetUp()
         setUpBottomSheet()
+        setUpBottomSheetComponent()
         setUpBottomSheetSubmit()
     }
+
+    private fun setUpBottomSheetComponent() {
+        date = bottomSheetDialog?.findViewById(R.id.reserveFirstDate)
+
+        date?.setOnClickListener {
+            setUpDatePicker()
+
+        }
+    }
+
+    private fun setUpDatePicker() {
+        val calendar = PersianCalendar(TimeZone.getDefault()).also {
+            it.year = 1400                     // determines starting year
+            it.month = Calendar.MONTH - 1          // determines starting month
+            it.firstDayOfWeek =
+                PersianCalendar.DEFAULT_FIRST_DAY_OF_WEEK  // sets first day of week to Monday
+        }
+
+        val datePicker = PrimeDatePicker.dialogWith(calendar)
+            .pickRangeDays { startDay, endDay ->
+                println("${startDay.longDateString}  :  ${endDay.longDateString}")
+            }
+            .build()
+
+        datePicker.show(parentFragmentManager, "انتخاب تاریخ")
+    }
+
 
     private fun setUpBottomSheetSubmit() {
 
@@ -141,7 +177,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun showBottomSheet(update: Boolean) {
+    private fun showBottomSheet(update: Boolean = true) {
         this.update = update
         bottomSheetDialog?.show()
     }
