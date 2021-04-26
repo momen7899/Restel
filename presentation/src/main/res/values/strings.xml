@@ -26,7 +26,7 @@
     <string name="roomHint">شماره ی اتاق</string>
     <string name="userHint">نام مشتری</string>
     <string name="customerHint">نام مشتری</string>
-    <string name="firstDateHint">تاریخ شروع</string>
+    <string name="dateHint">انتخاب تاریخ</string>
     <string name="lastDateHint">تاریخ پایان</string>
     <string name="priceHint">قیمت اتاق</string>
     <string name="submit">ثبت</string>

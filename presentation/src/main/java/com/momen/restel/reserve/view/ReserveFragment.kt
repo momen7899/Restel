@@ -101,13 +101,13 @@ class ReserveFragment : Fragment() {
             hideKeyboardFrom()
             val room = reserveRoom.text.toString().trim()
             val customer = reserveCustomer.text.toString().trim()
-            val first = reserveFirstDate.text.toString().trim()
+            val first = reserveDate.text.toString().trim()
             val end = reserveLastDate.text.toString().trim()
             val priceRoom = reservePrice.text.toString().trim().toInt()
 
             if (validateInput(room, reserveRoom)) return@setOnClickListener
             if (validateInput(customer, reserveCustomer)) return@setOnClickListener
-            if (validateInput(first, reserveFirstDate)) return@setOnClickListener
+            if (validateInput(first, reserveDate)) return@setOnClickListener
             if (validateInput(end, reserveLastDate)) return@setOnClickListener
             if (validateInput(priceRoom.toString(), reservePrice)) return@setOnClickListener
 

@@ -2,20 +2,26 @@ package com.momen.restel.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.momen.domain.interactor.AddReserveUseCase
 import com.momen.domain.interactor.GetReservesUseCase
+import com.momen.domain.interactor.UpdateReserveUseCase
 import com.momen.restel.reserve.model.ReserveModelDataMapper
 import javax.inject.Inject
 
-class MainReserveViewModelFactory @Inject constructor(
+class ReserveViewModelFactory @Inject constructor(
     private val reservesUseCase: GetReservesUseCase,
+    private val addReserveUseCase: AddReserveUseCase,
+    private val updateUseCase: UpdateReserveUseCase,
     private val reserveModelDataMapper: ReserveModelDataMapper
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainReserveViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(ReserveViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainReserveViewModel(
+            return ReserveViewModel(
                 reservesUseCase,
+                addReserveUseCase,
+                updateUseCase,
                 reserveModelDataMapper
             ) as T
         } else {

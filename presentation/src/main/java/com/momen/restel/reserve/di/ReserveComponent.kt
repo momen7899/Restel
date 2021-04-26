@@ -1,7 +1,7 @@
 package com.momen.restel.reserve.di
 
 import com.momen.restel.app.AppComponent
-import com.momen.restel.app.ReserveModule
+import com.momen.restel.main.di.ReserveModule
 import com.momen.restel.app.RoomDbModule
 import com.momen.restel.reserve.view.ReserveFragment
 import dagger.Component

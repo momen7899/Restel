@@ -90,10 +90,10 @@
                 android:id="@+id/firstDateHint"
                 style="@style/EditTextHint"
                 android:layout_marginTop="16dp"
-                android:text="@string/firstDateHint" />
+                android:text="@string/dateHint" />
 
             <EditText
-                android:id="@+id/reserveFirstDate"
+                android:id="@+id/reserveDate"
                 style="@style/LoginEditText"
                 android:layout_width="match_parent"
                 android:layout_marginTop="4dp"

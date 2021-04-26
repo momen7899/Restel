@@ -1,35 +1,27 @@
-package com.momen.restel.app
+package com.momen.restel.main.di
 
 import com.momen.data.mapper.ReserveEntityDataMapper
-import com.momen.data.repository.impl.ReserveRepositoryImpl
 import com.momen.data.repository.datasource.reserve.ReserveDataSourceFactory
+import com.momen.data.repository.impl.ReserveRepositoryImpl
 import com.momen.domain.interactor.AddReserveUseCase
 import com.momen.domain.interactor.GetReservesUseCase
 import com.momen.domain.interactor.UpdateReserveUseCase
 import com.momen.domain.repository.ReserveRepository
-import com.momen.restel.main.viewmodel.MainReserveViewModelFactory
+import com.momen.restel.main.viewmodel.ReserveViewModelFactory
 import com.momen.restel.reserve.model.ReserveModelDataMapper
-import com.momen.restel.reserve.viewmodel.ReserveViewModelFactory
 import dagger.Module
 import dagger.Provides
 
 @Module
 class ReserveModule {
     @Provides
-    internal fun provideMainReserveViewModelFactory(
-        getReservesUseCase: GetReservesUseCase,
-        reserveModelDataMapper: ReserveModelDataMapper
-    ) = MainReserveViewModelFactory(
-        getReservesUseCase,
-        reserveModelDataMapper
-    )
-
-    @Provides
     internal fun provideReserveViewModelFactory(
+        getReservesUseCase: GetReservesUseCase,
         addUserUseCase: AddReserveUseCase,
         updateUseCase: UpdateReserveUseCase,
         reserveModelDataMapper: ReserveModelDataMapper
     ) = ReserveViewModelFactory(
+        getReservesUseCase,
         addUserUseCase,
         updateUseCase,
         reserveModelDataMapper

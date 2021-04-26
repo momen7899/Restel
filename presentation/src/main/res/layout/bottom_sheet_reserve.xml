@@ -56,30 +56,16 @@
             android:id="@+id/firstDateHint"
             style="@style/EditTextHint"
             android:layout_marginTop="16dp"
-            android:text="@string/firstDateHint" />
-
-        <Button
-            android:id="@+id/reserveFirstDate"
-            style="@style/LoginEditText"
-            android:layout_width="match_parent"
-            android:layout_marginTop="4dp"
-            android:importantForAutofill="no"
-            android:text="@string/firstDateHint"
-            tools:ignore="LabelFor,TextFields" />
+            android:text="@string/dateHint" />
 
         <TextView
-            android:id="@+id/lastDateHint"
-            style="@style/EditTextHint"
-            android:layout_marginTop="16dp"
-            android:text="@string/lastDateHint" />
-
-        <EditText
-            android:id="@+id/reserveLastDate"
+            android:id="@+id/reserveDate"
             style="@style/LoginEditText"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:maxLines="2"
             tools:ignore="LabelFor,TextFields" />
 
         <TextView
@@ -98,7 +84,7 @@
             tools:ignore="LabelFor,TextFields" />
 
         <Button
-            android:id="@+id/submitBtn"
+            android:id="@+id/reserveSubmit"
             style="@style/CustomButton"
             android:layout_width="match_parent"
             android:layout_marginVertical="32dp"

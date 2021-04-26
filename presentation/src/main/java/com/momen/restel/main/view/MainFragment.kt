@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -31,8 +32,9 @@ import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
 import com.momen.restel.main.di.DaggerMainComponent
-import com.momen.restel.main.viewmodel.MainReserveViewModel
-import com.momen.restel.main.viewmodel.MainReserveViewModelFactory
+import com.momen.restel.main.viewmodel.ReserveViewModel
+import com.momen.restel.main.viewmodel.ReserveViewModelFactory
+import com.momen.restel.reserve.model.ReserveModel
 import kotlinx.android.synthetic.main.bottom_sheet_reserve.*
 import kotlinx.android.synthetic.main.bottom_sheet_reserve.view.*
 import kotlinx.android.synthetic.main.card_input.view.*
@@ -44,17 +46,21 @@ import javax.inject.Inject
 @Suppress("DEPRECATION")
 class MainFragment : Fragment() {
 
-    val rtl = true
+    private val rtl = true
 
     @Inject
-    lateinit var reserveViewModelFactory: MainReserveViewModelFactory
+    lateinit var reserveViewModelFactory: ReserveViewModelFactory
 
-    private lateinit var reserveViewModel: MainReserveViewModel
+    private lateinit var reserveViewModel: ReserveViewModel
 
     private val reserveAdapter = ReserveAdapter()
     private var bottomSheetDialog: BottomSheetDialog? = null
     private var update = false
-    private var date: Button? = null
+    private var date: TextView? = null
+    private var submit: Button? = null
+    private var reserveRoom: EditText? = null
+    private var reserveCustomer: EditText? = null
+    private var reservePrice: EditText? = null
 
     // activity component
     private lateinit var toolbar: Toolbar
@@ -88,7 +94,7 @@ class MainFragment : Fragment() {
 
     private fun setUpViewModel() {
         reserveViewModel = ViewModelProviders.of(this, reserveViewModelFactory)
-            .get(MainReserveViewModel::class.java)
+            .get(ReserveViewModel::class.java)
     }
 
     override fun onResume() {
@@ -102,16 +108,23 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeViewModel() {
+        subscribeGetReserves()
+        subscribeAddReserve()
+        subscribeUpdateReserve()
+        subscribeRemoveReserve()
+    }
+
+    private fun subscribeGetReserves() {
         reserveViewModel.reserveLiveData.observe(
             viewLifecycleOwner, { result ->
                 when (result.state) {
-                    MainReserveViewModel.State.DATA_LOADED -> {
+                    ReserveViewModel.State.DATA_LOADED -> {
                         println(result.reserves)
                         reserveAdapter.setItems(result.reserves!!)
                     }
-                    MainReserveViewModel.State.LOADING_DATA -> {
+                    ReserveViewModel.State.LOADING_DATA -> {
                     }
-                    MainReserveViewModel.State.LOAD_ERROR -> {
+                    ReserveViewModel.State.LOAD_ERROR -> {
                         Toasty.showErrorToasty(
                             requireContext(), getString(R.string.DatabaseError)
                         )
@@ -122,21 +135,111 @@ class MainFragment : Fragment() {
         )
     }
 
+    private fun subscribeAddReserve() {
+        reserveViewModel.addReserveLiveData.observe(
+            viewLifecycleOwner, { result ->
+                when (result.state) {
+                    ReserveViewModel.State.DATA_LOADED -> {
+                        reserveViewModel.getReserves()
+                    }
+                    ReserveViewModel.State.LOADING_DATA -> {
+                    }
+                    ReserveViewModel.State.LOAD_ERROR -> {
+                        Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
+                        println(result.error)
+                    }
+                }
+            }
+        )
+    }
+
+    private fun subscribeUpdateReserve() {
+        reserveViewModel.updateReserveLiveData.observe(
+            viewLifecycleOwner, { result ->
+                when (result.state) {
+                    ReserveViewModel.State.DATA_LOADED -> {
+                        reserveViewModel.getReserves()
+                    }
+                    ReserveViewModel.State.LOADING_DATA -> {
+                    }
+                    ReserveViewModel.State.LOAD_ERROR -> {
+                        Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
+                        println(result.error)
+                    }
+                }
+            }
+        )
+    }
+
+    private fun subscribeRemoveReserve() {
+
+    }
+
     private fun setUpComponents() {
         setUpFab()
         reserveRecycleSetUp()
         setUpBottomSheet()
         setUpBottomSheetComponent()
         setUpBottomSheetSubmit()
+        initBottomSheet()
+    }
+
+    private fun initBottomSheet() {
+        date?.text = ""
+        reserveRoom?.setText("")
+        reserveCustomer?.setText("")
+        reservePrice?.setText("")
     }
 
     private fun setUpBottomSheetComponent() {
-        date = bottomSheetDialog?.findViewById(R.id.reserveFirstDate)
+        date = bottomSheetDialog?.findViewById(R.id.reserveDate)
+        submit = bottomSheetDialog?.findViewById(R.id.reserveSubmit)
+        reserveRoom = bottomSheetDialog?.findViewById(R.id.reserveRoom)
+        reserveCustomer = bottomSheetDialog?.findViewById(R.id.reserveCustomer)
+        reservePrice = bottomSheetDialog?.findViewById(R.id.reservePrice)
+    }
 
-        date?.setOnClickListener {
-            setUpDatePicker()
+    private var start: String? = null
+    private var finish: String? = null
 
+    private fun validateData(): ReserveModel? {
+        val room =
+            bottomSheetDialog?.findViewById<EditText>(R.id.reserveRoom)?.text.toString().trim()
+        val customer =
+            bottomSheetDialog?.findViewById<EditText>(R.id.reserveCustomer)?.text.toString().trim()
+
+        val priceRoom =
+            bottomSheetDialog?.findViewById<EditText>(R.id.reservePrice)?.text.toString().trim()
+
+        if (validateInput(room, reserveRoom)) return null
+        if (validateInput(customer, reserveCustomer)) return null
+        if (validateInput(start, date)) return null
+        if (validateInput(finish, date)) return null
+        if (validateInput(priceRoom, reservePrice!!)) return null
+
+        return ReserveModel(0, room, "مؤمن", customer, start!!, finish!!, priceRoom.toInt())
+    }
+
+    private fun validateInput(room: String?, et: EditText?): Boolean {
+        room?.let {
+            if (room.isEmpty()) {
+                Toasty.showErrorToasty(requireContext(), getString(R.string.roomNumberError))
+                et?.requestFocus()
+                return true
+            }
         }
+        return false
+    }
+
+    private fun validateInput(room: String?, tv: TextView?): Boolean {
+        room?.let {
+            if (room.isEmpty()) {
+                Toasty.showErrorToasty(requireContext(), getString(R.string.roomNumberError))
+                tv?.requestFocus()
+                return true
+            }
+        }
+        return false
     }
 
     private fun setUpDatePicker() {
@@ -149,16 +252,27 @@ class MainFragment : Fragment() {
 
         val datePicker = PrimeDatePicker.dialogWith(calendar)
             .pickRangeDays { startDay, endDay ->
-                println("${startDay.longDateString}  :  ${endDay.longDateString}")
-            }
-            .build()
-
+                date?.text =
+                    "از:  ".plus(startDay.longDateString.plus("\nتا:  ".plus(endDay.longDateString)))
+                start = startDay.longDateString
+                finish = endDay.longDateString
+            }.build()
         datePicker.show(parentFragmentManager, "انتخاب تاریخ")
+        start = ""
+        finish = ""
+        date?.text = ""
     }
 
-
     private fun setUpBottomSheetSubmit() {
-
+        submit?.setOnClickListener {
+            validateData()?.let { reserve ->
+                reserveViewModel.addReserve(reserve)
+                bottomSheetDialog?.dismiss()
+            }
+        }
+        date?.setOnClickListener {
+            setUpDatePicker()
+        }
     }
 
     @SuppressLint("WrongConstant")
