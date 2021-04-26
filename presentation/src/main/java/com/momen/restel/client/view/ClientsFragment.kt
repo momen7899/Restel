@@ -42,7 +42,7 @@ class ClientsFragment : Fragment() {
     private fun injectViewModel() {
         DaggerClientComponent.builder()
             .appComponent(App().appComponent)
-            .roomModule(RoomDbModule(requireContext()))
+            .roomDbModule(RoomDbModule(requireContext()))
             .build()
             .inject(this)
     }

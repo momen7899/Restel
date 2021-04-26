@@ -38,7 +38,7 @@ class CustomerFragment : Fragment() {
     private fun injectViewModels() {
         DaggerCustomerComponent.builder()
             .appComponent(App().appComponent)
-            .roomModule(RoomDbModule(requireContext()))
+            .roomDbModule(RoomDbModule(requireContext()))
             .build()
             .inject(this)
     }

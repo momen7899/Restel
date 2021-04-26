@@ -143,7 +143,7 @@ class LoginFragment : Fragment() {
     private fun injectViewModel() {
         DaggerLoginComponent.builder()
             .appComponent(App().appComponent)
-            .roomModule(RoomDbModule(requireContext()))
+            .roomDbModule(RoomDbModule(requireContext()))
             .build()
             .inject(this)
     }

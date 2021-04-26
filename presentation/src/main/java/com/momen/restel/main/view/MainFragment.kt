@@ -2,12 +2,14 @@
 
 package com.momen.restel.main.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -18,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.MainActivity
 import com.momen.restel.R
@@ -34,12 +37,16 @@ import javax.inject.Inject
 @Suppress("DEPRECATION")
 class MainFragment : Fragment() {
 
+    val rtl = true
+
     @Inject
     lateinit var reserveViewModelFactory: MainReserveViewModelFactory
 
     private lateinit var reserveViewModel: MainReserveViewModel
 
     private val reserveAdapter = ReserveAdapter()
+    private var bottomSheetDialog: BottomSheetDialog? = null
+    private var update = false;
 
     // activity component
     private lateinit var toolbar: Toolbar
@@ -66,7 +73,7 @@ class MainFragment : Fragment() {
     private fun injectViewModel() {
         DaggerMainComponent.builder()
             .appComponent(App().appComponent)
-            .roomModule(RoomDbModule(requireContext()))
+            .roomDbModule(RoomDbModule(requireContext()))
             .build()
             .inject(this)
     }
@@ -110,13 +117,33 @@ class MainFragment : Fragment() {
     private fun setUpComponents() {
         setUpFab()
         reserveRecycleSetUp()
+        setUpBottomSheet()
+        setUpBottomSheetSubmit()
+    }
+
+    private fun setUpBottomSheetSubmit() {
+
+    }
+
+    @SuppressLint("WrongConstant")
+    private fun setUpBottomSheet() {
+        bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog?.setContentView(R.layout.bottom_sheet_reserve)
+
+        val layout =
+            bottomSheetDialog?.findViewById<ScrollView>(R.id.bottomSheetReserve)
+        layout?.layoutDirection = if (rtl) 1 else 0
     }
 
     private fun setUpFab() {
         mainFab.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToReserveFragment()
-            it.findNavController().navigate(action)
+            showBottomSheet(false)
         }
+    }
+
+    private fun showBottomSheet(update: Boolean) {
+        this.update = update
+        bottomSheetDialog?.show()
     }
 
     private fun reserveRecycleSetUp() {

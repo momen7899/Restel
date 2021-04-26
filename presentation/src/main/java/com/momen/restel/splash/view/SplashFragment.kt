@@ -65,7 +65,7 @@ class SplashFragment : Fragment() {
     private fun injectViewModel() {
         DaggerSplashComponent.builder()
             .appComponent((App()).appComponent)
-            .roomModule(RoomDbModule(requireContext()))
+            .roomDbModule(RoomDbModule(requireContext()))
             .build()
             .inject(this)
     }

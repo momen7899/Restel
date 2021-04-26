@@ -73,7 +73,7 @@ class ReserveFragment : Fragment() {
     private fun injectViewModel() {
         DaggerReserveComponent.builder()
             .appComponent(App().appComponent)
-            .roomModule(RoomDbModule(requireContext()))
+            .roomDbModule(RoomDbModule(requireContext()))
             .build()
             .inject(this)
     }
