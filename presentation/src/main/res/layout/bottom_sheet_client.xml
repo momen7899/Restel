@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheetClient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:orientation="vertical">
 
 
@@ -17,49 +19,122 @@
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
+            android:contentDescription="@string/bottomSheetDescription"
             android:gravity="center"
             app:srcCompat="@drawable/ic_line" />
 
-        <include
-            layout="@layout/card_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/firstNameHint" />
 
-        <include
-            layout="@layout/card_input"
+        <EditText
+            android:id="@+id/userFirstName"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
 
-        <include
-            layout="@layout/card_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/lastNameHint" />
 
-        <include
-            layout="@layout/card_input"
+        <EditText
+            android:id="@+id/userLastName"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
 
-        <include
-            layout="@layout/card_input"
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/userPhoneHint" />
+
+        <EditText
+            android:id="@+id/userPhoneNumber"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            tools:ignore="LabelFor" />
+
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/userName" />
+
+        <EditText
+            android:id="@+id/userName"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/userPassHint" />
+
+        <EditText
+            android:id="@+id/userPass"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/userRePassHint" />
+
+        <EditText
+            android:id="@+id/userRePass"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/userAddressHint" />
+
+        <EditText
+            android:id="@+id/userAddress"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/submitBtn"
             style="@style/CustomButton"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="32dp"
             android:padding="0dp"
             android:text="@string/submit" />

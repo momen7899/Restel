@@ -16,23 +16,56 @@
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:contentDescription="@string/bottomSheetDecription"
+            android:contentDescription="@string/bottomSheetDescription"
             android:gravity="center"
             app:srcCompat="@drawable/ic_line" />
 
-        <include
-            layout="@layout/card_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <!--        <include-->
+        <!--            layout="@layout/card_input"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="16dp"-->
+        <!--            android:layout_marginVertical="8dp" />-->
+        <TextView
+            android:id="@+id/capacityHint"
+            style="@style/EditTextHint"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="8dp"
+            android:text="@string/capacityHint" />
 
-        <include
-            layout="@layout/card_input"
+        <EditText
+            android:id="@+id/capacityEt"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/priceHint"
+            style="@style/EditTextHint"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/priceHint" />
+
+        <EditText
+            android:id="@+id/priceEt"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal" />
+
+        <!--        <include-->
+        <!--            layout="@layout/card_input"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="16dp"-->
+        <!--            android:layout_marginVertical="8dp" />-->
 
         <Button
             android:id="@+id/submitBtn"

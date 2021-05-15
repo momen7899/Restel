@@ -19,7 +19,7 @@
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:contentDescription="@string/bottomSheetDecription"
+            android:contentDescription="@string/bottomSheetDescription"
             android:gravity="center"
             app:srcCompat="@drawable/ic_line" />
 

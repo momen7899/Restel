@@ -203,13 +203,9 @@ class MainFragment : Fragment() {
     private var finish: String? = null
 
     private fun validateData(): ReserveModel? {
-        val room =
-            bottomSheetDialog?.findViewById<EditText>(R.id.reserveRoom)?.text.toString().trim()
-        val customer =
-            bottomSheetDialog?.findViewById<EditText>(R.id.reserveCustomer)?.text.toString().trim()
-
-        val priceRoom =
-            bottomSheetDialog?.findViewById<EditText>(R.id.reservePrice)?.text.toString().trim()
+        val room = reserveRoom?.text.toString().trim()
+        val customer = reserveCustomer?.text.toString().trim()
+        val priceRoom = reservePrice?.text.toString().trim()
 
         if (validateInput(room, reserveRoom)) return null
         if (validateInput(customer, reserveCustomer)) return null
@@ -293,6 +289,7 @@ class MainFragment : Fragment() {
 
     private fun showBottomSheet(update: Boolean = true) {
         this.update = update
+        initBottomSheet()
         bottomSheetDialog?.show()
     }
 

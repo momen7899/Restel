@@ -39,5 +39,13 @@
     <string name="capacity">ظرفیت:</string>
     <string name="gender">جنسیت:</string>
     <string name="married">وضعیت تاهل:</string>
-    <string name="bottomSheetDecription">show Bottom Sheet</string>
+    <string name="bottomSheetDescription">show Bottom Sheet</string>
+    <string name="firstNameHint">نام</string>
+    <string name="lastNameHint">نام خانوادگی</string>
+    <string name="userPhoneHint">شماره تماس</string>
+    <string name="userName">نام کاربری</string>
+    <string name="userPassHint">رمز عبور</string>
+    <string name="userRePassHint">تکرار رمز عبور</string>
+    <string name="userAddressHint">آدرس</string>
+    <string name="capacityHint">ظرفیت اتاق</string>
 </resources>
