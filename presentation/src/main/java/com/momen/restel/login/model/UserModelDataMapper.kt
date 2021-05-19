@@ -1,9 +1,18 @@
 package com.momen.restel.login.model
 
 import com.momen.domain.model.User
+import java.util.*
 import javax.inject.Inject
 
 class UserModelDataMapper @Inject constructor() {
+    fun transformUsersToUserModels(users: ArrayList<User>?): ArrayList<UserModel>? {
+        val list = ArrayList<UserModel>()
+        users?.forEach {
+            transformUserToUserModel(it)?.let { it1 -> list.add(it1) }
+        }
+        return list
+    }
+
     fun transformUserToUserModel(user: User?): UserModel? = user?.let {
         UserModel(
             it.id,
@@ -33,5 +42,6 @@ class UserModelDataMapper @Inject constructor() {
             admin
         )
     }
+
 
 }

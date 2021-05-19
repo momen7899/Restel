@@ -1,6 +1,5 @@
 package com.momen.restel.client.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -74,6 +73,102 @@ class ClientsFragment : Fragment() {
     }
 
     private fun subscribeViewModel() {
+        subscribeGetUsers()
+        subscribeGetUser()
+        subscribeAddUser()
+        subscribeEditUser()
+        subscribeRemoveUser()
+    }
+
+    private fun subscribeGetUsers() {
+        clientViewModel?.getUsers()
+
+        clientViewModel?.getUsersLiveData?.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                ClientViewModel.State.LOADING_DATA -> {
+
+                }
+                ClientViewModel.State.DATA_LOADED -> {
+                    if (result.data is ArrayList<*>) {
+                        clientAdapter.setItems(result.data as ArrayList<UserModel>)
+                    }
+                }
+
+                ClientViewModel.State.LOAD_ERROR -> {
+
+                }
+            }
+        })
+    }
+
+    private fun subscribeGetUser() {
+        clientViewModel?.getUserLiveData?.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                ClientViewModel.State.LOADING_DATA -> {
+
+                }
+                ClientViewModel.State.DATA_LOADED -> {
+
+                }
+
+                ClientViewModel.State.LOAD_ERROR -> {
+
+                }
+            }
+        })
+    }
+
+    private fun subscribeAddUser() {
+
+        clientViewModel?.addUserLiveData?.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                ClientViewModel.State.LOADING_DATA -> {
+
+                }
+                ClientViewModel.State.DATA_LOADED -> {
+
+                }
+
+                ClientViewModel.State.LOAD_ERROR -> {
+
+                }
+            }
+        })
+
+    }
+
+    private fun subscribeEditUser() {
+        clientViewModel?.editUserLiveData?.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                ClientViewModel.State.LOADING_DATA -> {
+
+                }
+                ClientViewModel.State.DATA_LOADED -> {
+
+                }
+
+                ClientViewModel.State.LOAD_ERROR -> {
+
+                }
+            }
+        })
+    }
+
+    private fun subscribeRemoveUser() {
+        clientViewModel?.removeUserLiveData?.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                ClientViewModel.State.LOADING_DATA -> {
+
+                }
+                ClientViewModel.State.DATA_LOADED -> {
+
+                }
+
+                ClientViewModel.State.LOAD_ERROR -> {
+
+                }
+            }
+        })
     }
 
     private fun setUpComponents() {
@@ -90,14 +185,13 @@ class ClientsFragment : Fragment() {
         }
     }
 
-    @SuppressLint("WrongConstant")
     private fun setUpBottomSheet() {
         bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog?.setContentView(R.layout.bottom_sheet_client)
         val rtl = true
         val layout =
             bottomSheetDialog?.findViewById<ScrollView>(R.id.bottomSheetClient)
-        layout?.layoutDirection = if (rtl) 1 else 0
+        layout?.layoutDirection = if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     private fun setUpBottomSheetComponent() {
@@ -114,6 +208,7 @@ class ClientsFragment : Fragment() {
     private fun setUpBottomSheetSubmit() {
         submit?.setOnClickListener {
             val user = validateData()
+            user?.let { clientViewModel?.addUser(it) }
             println(user)
         }
     }

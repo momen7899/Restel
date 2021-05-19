@@ -4,7 +4,7 @@ import com.momen.domain.executor.PostExecutionThread
 import com.momen.domain.executor.ThreadExecutor
 import com.momen.domain.interactor.type.UseCase
 import com.momen.domain.model.User
-    import com.momen.domain.repository.UserRepository
+import com.momen.domain.repository.UserRepository
 import io.reactivex.Single
 import javax.inject.Inject
 
