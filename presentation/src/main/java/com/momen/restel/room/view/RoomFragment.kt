@@ -14,8 +14,7 @@ import com.momen.restel.R
 import com.momen.restel.room.model.RoomModel
 import kotlinx.android.synthetic.main.fragment_room.*
 
-class
-RoomFragment : Fragment() {
+class RoomFragment : Fragment() {
 
     private var update: Boolean = false
     private val roomAdapter = RoomAdapter()

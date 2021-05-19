@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.momen.restel.reserve.view
 
 import android.app.Activity
@@ -12,7 +10,7 @@ import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.R
 import com.momen.restel.app.App
@@ -25,7 +23,6 @@ import com.momen.restel.reserve.viewmodel.ReserveViewModelFactory
 import kotlinx.android.synthetic.main.fragment_reserve.*
 import javax.inject.Inject
 
-@Suppress("DEPRECATION")
 class ReserveFragment : Fragment() {
 
     @Inject
@@ -79,7 +76,7 @@ class ReserveFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        reserveViewModel = ViewModelProviders.of(this, reserveViewModelFactory)
+        reserveViewModel = ViewModelProvider(this, reserveViewModelFactory)
             .get(ReserveViewModel::class.java)
     }
 

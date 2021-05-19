@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.momen.restel.main.view
 
 import android.annotation.SuppressLint
@@ -19,7 +17,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aminography.primecalendar.persian.PersianCalendar
@@ -43,7 +41,6 @@ import kotlinx.android.synthetic.main.fragment_reserve.*
 import java.util.*
 import javax.inject.Inject
 
-@Suppress("DEPRECATION")
 class MainFragment : Fragment() {
 
     private val rtl = true
@@ -93,7 +90,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        reserveViewModel = ViewModelProviders.of(this, reserveViewModelFactory)
+        reserveViewModel = ViewModelProvider(this, reserveViewModelFactory)
             .get(ReserveViewModel::class.java)
     }
 

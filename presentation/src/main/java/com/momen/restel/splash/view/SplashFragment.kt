@@ -1,16 +1,15 @@
-@file:Suppress("DEPRECATION")
-
 package com.momen.restel.splash.view
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.momen.restel.R
 import com.momen.restel.app.App
@@ -41,11 +40,10 @@ class SplashFragment : Fragment() {
         setupViewModel()
         splashViewModel.createUser()
 
-        Handler().postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
             requireView().findNavController().navigate(action)
         }, 2000)
-
     }
 
     private fun hideActivityComponent() {
@@ -55,7 +53,7 @@ class SplashFragment : Fragment() {
 
     private fun hideNavMenu() {
         requireActivity().findViewById<DrawerLayout>(R.id.mainDrawer)
-            .setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            .setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
     private fun hideToolbar() {
@@ -71,7 +69,7 @@ class SplashFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        splashViewModel = ViewModelProviders.of(this, splashViewModelFactory)
+        splashViewModel = ViewModelProvider(this, splashViewModelFactory)
             .get(SplashViewModel::class.java)
     }
 
