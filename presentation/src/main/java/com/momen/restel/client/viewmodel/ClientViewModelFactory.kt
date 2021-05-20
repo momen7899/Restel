@@ -10,7 +10,6 @@ class ClientViewModelFactory @Inject constructor(
     private val addUserUseCase: AddUser1UseCase,
     private val editUserUseCase: EditUserUseCase,
     private val usersUseCase: GetUsers1UseCase,
-    private val userUseCase: GetUserUseCase,
     private val removeUserUseCase: RemoveUserUseCase,
     private val userModelDataMapper: UserModelDataMapper
 ) : ViewModelProvider.Factory {
@@ -21,7 +20,6 @@ class ClientViewModelFactory @Inject constructor(
                 addUserUseCase,
                 editUserUseCase,
                 usersUseCase,
-                userUseCase,
                 removeUserUseCase,
                 userModelDataMapper
             ) as T

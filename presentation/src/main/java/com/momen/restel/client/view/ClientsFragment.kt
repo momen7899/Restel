@@ -94,10 +94,7 @@ class ClientsFragment : Fragment() {
 
                 }
                 ClientViewModel.State.DATA_LOADED -> {
-                    if (result.data is ArrayList<*>) {
-                        @Suppress("UNCHECKED_CAST")
-                        clientAdapter?.setItems(result.data as ArrayList<UserModel>)
-                    }
+                    result.users?.let { clientAdapter?.setItems(it) }
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {
@@ -114,7 +111,11 @@ class ClientsFragment : Fragment() {
 
                 }
                 ClientViewModel.State.DATA_LOADED -> {
-
+                    result.response?.let {
+                        if (it > 0) {
+                            clientViewModel?.getUsers()
+                        }
+                    }
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {
@@ -132,7 +133,11 @@ class ClientsFragment : Fragment() {
 
                 }
                 ClientViewModel.State.DATA_LOADED -> {
-
+                    result.response?.let {
+                        if (it > 0) {
+                            clientViewModel?.getUsers()
+                        }
+                    }
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {
@@ -150,7 +155,11 @@ class ClientsFragment : Fragment() {
 
                 }
                 ClientViewModel.State.DATA_LOADED -> {
-
+                    result.response?.let {
+                        if (it > 0) {
+                            clientViewModel?.getUsers()
+                        }
+                    }
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {

@@ -2,7 +2,10 @@ package com.momen.restel.client.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.momen.domain.interactor.*
+import com.momen.domain.interactor.AddUser1UseCase
+import com.momen.domain.interactor.EditUserUseCase
+import com.momen.domain.interactor.GetUsers1UseCase
+import com.momen.domain.interactor.RemoveUserUseCase
 import com.momen.restel.login.model.UserModel
 import com.momen.restel.login.model.UserModelDataMapper
 import io.reactivex.disposables.CompositeDisposable
@@ -12,7 +15,6 @@ class ClientViewModel(
     private val addUserUseCase: AddUser1UseCase,
     private val editUserUseCase: EditUserUseCase,
     private val usersUseCase: GetUsers1UseCase,
-    private val userUseCase: GetUserUseCase,
     private val removeUserUseCase: RemoveUserUseCase,
     private val mapper: UserModelDataMapper
 ) : ViewModel() {
@@ -26,17 +28,16 @@ class ClientViewModel(
     private val disposables = CompositeDisposable()
 
     fun addUser(user: UserModel) {
-        var result: Result? = null
-        result = Result(null, State.LOADING_DATA, null)
+        var result: Result?
+        result = Result(null, null, State.LOADING_DATA, null)
         addUserLiveData.value = result
 
         val params = AddUser1UseCase.Params.forAddUser(mapper.transformUserModelToUser(user))
         val d: Disposable? = addUserUseCase.execute(params)?.subscribe({ res ->
-            result = Result(null, State.DATA_LOADED, null)
-            println(res)
+            result = Result(res, null, State.DATA_LOADED, null)
             addUserLiveData.value = result
         }, { throwable ->
-            result = Result(null, State.LOAD_ERROR, throwable.message)
+            result = Result(null, null, State.LOAD_ERROR, throwable.message)
             println("Login Error View Model $throwable.message")
             addUserLiveData.value = result
         }
@@ -47,17 +48,15 @@ class ClientViewModel(
 
     fun editUser(user: UserModel) {
         var result: Result?
-        result = Result(null, State.LOADING_DATA, null)
+        result = Result(null, null, State.LOADING_DATA, null)
         editUserLiveData.value = result
 
         val params = EditUserUseCase.Params.forEditUser(mapper.transformUserModelToUser(user))
         val d: Disposable? = editUserUseCase.execute(params)?.subscribe({ res ->
-            result = Result(null, State.DATA_LOADED, null)
-            println(res)
+            result = Result(res, null, State.DATA_LOADED, null)
             editUserLiveData.value = result
         }, { throwable ->
             result = Result(null, State.LOAD_ERROR, throwable.message)
-            println("Login Error View Model $throwable.message")
             editUserLiveData.value = result
         }
         )
@@ -66,54 +65,35 @@ class ClientViewModel(
     }
 
     fun getUsers() {
-        var result: Result? = null
-        result = Result(null, State.LOADING_DATA, null)
+        var result: Result?
+        result = Result(null, null, State.LOADING_DATA, null)
         getUsersLiveData.value = result
 
         val params = GetUsers1UseCase.Params.forGetUsers()
         val d: Disposable? = usersUseCase.execute(params)?.subscribe({ res ->
-            result = Result(mapper.transformUsersToUserModels(res), State.DATA_LOADED, null)
+            result = Result(null, mapper.transformUsersToUserModels(res), State.DATA_LOADED, null)
             getUsersLiveData.value = result
         }, { throwable ->
-            result = Result(null, State.LOAD_ERROR, throwable.message)
+            result = Result(null, null, State.LOAD_ERROR, throwable.message)
             getUsersLiveData.value = result
         }
         )
         d?.let { disposables.add(it) }
 
-    }
-
-    fun getUser(id: Int) {
-        var result: Result? = null
-        result = Result(null, State.LOADING_DATA, null)
-        getUserLiveData.value = result
-
-        val params = GetUserUseCase.Params.forGetUser(id)
-        val d: Disposable? = userUseCase.execute(params)?.subscribe({ res ->
-            result = Result(null, State.DATA_LOADED, null)
-            println(res)
-            getUsersLiveData.value = result
-        }, { throwable ->
-            result = Result(null, State.LOAD_ERROR, throwable.message)
-            println("Login Error View Model $throwable.message")
-            getUserLiveData.value = result
-        }
-        )
-        d?.let { disposables.add(it) }
     }
 
     fun removeUser(user: UserModel) {
-        var result: Result? = null
-        result = Result(null, State.LOADING_DATA, null)
+        var result: Result?
+        result = Result(null, null, State.LOADING_DATA, null)
         removeUserLiveData.postValue(result)
 
         val params = RemoveUserUseCase.Params.forRemoveUsers(mapper.transformUserModelToUser(user))
         val d: Disposable? = removeUserUseCase.execute(params)?.subscribe({ res ->
-            result = Result(null, State.DATA_LOADED, null)
+            result = Result(res.toLong(), null, State.DATA_LOADED, null)
             println(res)
             removeUserLiveData.value = result
         }, { throwable ->
-            result = Result(null, State.LOAD_ERROR, throwable.message)
+            result = Result(null, null, State.LOAD_ERROR, throwable.message)
             println("Login Error View Model $throwable.message")
             removeUserLiveData.value = result
         }
@@ -122,7 +102,8 @@ class ClientViewModel(
     }
 
     class Result(
-        var data: Any?,
+        var response: Long?,
+        var users: ArrayList<UserModel>?,
         var state: State,
         var error: String?
     )

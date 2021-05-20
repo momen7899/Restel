@@ -17,14 +17,12 @@ class ClientModule {
         addUserUseCase: AddUser1UseCase,
         editUserUseCase: EditUserUseCase,
         getUsersUseCase: GetUsers1UseCase,
-        getUserUseCase: GetUserUseCase,
         removeUserUseCase: RemoveUserUseCase,
         userModelDataMapper: UserModelDataMapper
     ) = ClientViewModelFactory(
         addUserUseCase,
         editUserUseCase,
         getUsersUseCase,
-        getUserUseCase,
         removeUserUseCase,
         userModelDataMapper
     )

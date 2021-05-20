@@ -45,7 +45,6 @@ class CustomerFragment : Fragment() {
 
     private fun setUpComponents() {
         setUpRecycler()
-
     }
 
     private fun setUpRecycler() {
