@@ -31,7 +31,6 @@ class RoomViewModel(
         result = Result(null, null, State.LOADING_DATA, null)
         addRoomLiveData.value = result
 
-        println("AddRoom")
 
         val params = AddRoomUseCase.Params.forAddRoom(mapper.transformRoomModelToRoom(room))
         val d: Disposable? = addRoomUseCase.execute(params)?.subscribe({ res ->
@@ -51,7 +50,6 @@ class RoomViewModel(
         result = Result(null, null, State.LOADING_DATA, null)
         editRoomLiveData.value = result
 
-        println("editRoom")
 
         val params = EditRoomUseCase.Params.forEditRoom(mapper.transformRoomModelToRoom(room))
         val d: Disposable? = editRoomUseCase.execute(params)?.subscribe({ res ->
