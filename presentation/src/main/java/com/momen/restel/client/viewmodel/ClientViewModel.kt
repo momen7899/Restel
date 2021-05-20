@@ -23,10 +23,10 @@ class ClientViewModel(
     val removeUserLiveData = MutableLiveData<Result>()
 
 
-    private var result: Result? = null
     private val disposables = CompositeDisposable()
 
     fun addUser(user: UserModel) {
+        var result: Result? = null
         result = Result(null, State.LOADING_DATA, null)
         addUserLiveData.value = result
 
@@ -46,6 +46,7 @@ class ClientViewModel(
     }
 
     fun editUser(user: UserModel) {
+        var result: Result? = null
         result = Result(null, State.LOADING_DATA, null)
         editUserLiveData.value = result
 
@@ -65,6 +66,7 @@ class ClientViewModel(
     }
 
     fun getUsers() {
+        var result: Result? = null
         result = Result(null, State.LOADING_DATA, null)
         getUsersLiveData.value = result
 
@@ -82,6 +84,7 @@ class ClientViewModel(
     }
 
     fun getUser(id: Int) {
+        var result: Result? = null
         result = Result(null, State.LOADING_DATA, null)
         getUserLiveData.value = result
 
@@ -97,12 +100,12 @@ class ClientViewModel(
         }
         )
         d?.let { disposables.add(it) }
-
     }
 
     fun removeUser(user: UserModel) {
+        var result: Result? = null
         result = Result(null, State.LOADING_DATA, null)
-        removeUserLiveData.value = result
+        removeUserLiveData.postValue(result)
 
         val params = RemoveUserUseCase.Params.forRemoveUsers(mapper.transformUserModelToUser(user))
         val d: Disposable? = removeUserUseCase.execute(params)?.subscribe({ res ->

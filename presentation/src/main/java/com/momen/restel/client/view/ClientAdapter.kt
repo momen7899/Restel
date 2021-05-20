@@ -2,17 +2,22 @@ package com.momen.restel.client.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.momen.restel.R
 import com.momen.restel.databinding.ClientItemBinding
 import com.momen.restel.login.model.UserModel
 
-class ClientAdapter : RecyclerView.Adapter<ClientAdapter.ClientViewHolder>() {
+class ClientAdapter(private val fragment: ClientsFragment) :
+    RecyclerView.Adapter<ClientAdapter.ClientViewHolder>() {
 
     private val items = ArrayList<UserModel>()
 
-    class ClientViewHolder(val client: ClientItemBinding) : RecyclerView.ViewHolder(client.root)
+    class ClientViewHolder(val client: ClientItemBinding) : RecyclerView.ViewHolder(client.root) {
+        val edit: ImageView = client.root.findViewById(R.id.clientItemEdit)
+        val remove: ImageView = client.root.findViewById(R.id.clientItemRemove)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientViewHolder =
         ClientViewHolder(
@@ -24,7 +29,24 @@ class ClientAdapter : RecyclerView.Adapter<ClientAdapter.ClientViewHolder>() {
 
     override fun onBindViewHolder(holder: ClientViewHolder, position: Int) {
         val currentUser: UserModel = items[position]
-        holder.client.user = currentUser
+
+        with(holder) {
+            client.user = currentUser
+
+            edit.setOnClickListener {
+                fragment.showBottomSheet(true, currentUser)
+            }
+
+            remove.setOnClickListener {
+                removeItem(currentUser)
+                fragment.showDelMsg(currentUser, position)
+            }
+        }
+    }
+
+    private fun removeItem(user: UserModel) {
+        items.remove(user)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = items.size
@@ -34,4 +56,10 @@ class ClientAdapter : RecyclerView.Adapter<ClientAdapter.ClientViewHolder>() {
         this.items.addAll(items)
         notifyDataSetChanged()
     }
+
+    fun addItem(user: UserModel, position: Int) {
+        items.add(position, user)
+        notifyDataSetChanged()
+    }
+
 }

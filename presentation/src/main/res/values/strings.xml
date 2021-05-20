@@ -48,4 +48,8 @@
     <string name="userRePassHint">تکرار رمز عبور</string>
     <string name="userAddressHint">آدرس</string>
     <string name="capacityHint">ظرفیت اتاق</string>
+    <string name="userNationalHint">شماره ی ملی</string>
+    <string name="edit">ویرایش</string>
+    <string name="cancel">بازگشت</string>
+    <string name="delete">حذف شد</string>
 </resources>

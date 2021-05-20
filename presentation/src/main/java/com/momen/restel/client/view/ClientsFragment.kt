@@ -19,7 +19,11 @@ import com.momen.restel.client.viewmodel.ClientViewModel
 import com.momen.restel.client.viewmodel.ClientViewModelFactory
 import com.momen.restel.comm.Toasty
 import com.momen.restel.login.model.UserModel
+import kotlinx.android.synthetic.main.card_delete.*
 import kotlinx.android.synthetic.main.fragment_client.*
+import java.math.BigInteger
+import java.security.MessageDigest
+import java.util.*
 import javax.inject.Inject
 
 class ClientsFragment : Fragment() {
@@ -28,13 +32,14 @@ class ClientsFragment : Fragment() {
     lateinit var clientViewModelFactory: ClientViewModelFactory
 
     private var clientViewModel: ClientViewModel? = null
-    private val clientAdapter = ClientAdapter()
+    private var clientAdapter: ClientAdapter? = null
     private var bottomSheetDialog: BottomSheetDialog? = null
     private var update = false
 
     // bottom sheet components
     private var userFirstName: EditText? = null
     private var userLastName: EditText? = null
+    private var userNationalCode: EditText? = null
     private var userPhoneNumber: EditText? = null
     private var userName: EditText? = null
     private var userPass: EditText? = null
@@ -90,7 +95,7 @@ class ClientsFragment : Fragment() {
                 }
                 ClientViewModel.State.DATA_LOADED -> {
                     if (result.data is ArrayList<*>) {
-                        clientAdapter.setItems(result.data as ArrayList<UserModel>)
+                        clientAdapter?.setItems(result.data as ArrayList<UserModel>)
                     }
                 }
 
@@ -181,7 +186,7 @@ class ClientsFragment : Fragment() {
 
     private fun setUpFab() {
         clientFab.setOnClickListener {
-            showBottomSheet(false)
+            showBottomSheet(false, null)
         }
     }
 
@@ -189,14 +194,14 @@ class ClientsFragment : Fragment() {
         bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog?.setContentView(R.layout.bottom_sheet_client)
         val rtl = true
-        val layout =
-            bottomSheetDialog?.findViewById<ScrollView>(R.id.bottomSheetClient)
+        val layout = bottomSheetDialog?.findViewById<ScrollView>(R.id.bottomSheetClient)
         layout?.layoutDirection = if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     private fun setUpBottomSheetComponent() {
         userFirstName = bottomSheetDialog?.findViewById(R.id.userFirstName)
         userLastName = bottomSheetDialog?.findViewById(R.id.userLastName)
+        userNationalCode = bottomSheetDialog?.findViewById(R.id.userNationalCode)
         userPhoneNumber = bottomSheetDialog?.findViewById(R.id.userPhoneNumber)
         userName = bottomSheetDialog?.findViewById(R.id.userName)
         userPass = bottomSheetDialog?.findViewById(R.id.userPass)
@@ -209,13 +214,13 @@ class ClientsFragment : Fragment() {
         submit?.setOnClickListener {
             val user = validateData()
             user?.let { clientViewModel?.addUser(it) }
-            println(user)
         }
     }
 
     private fun validateData(): UserModel? {
         val firstName = userFirstName?.text.toString().trim()
         val lastName = userLastName?.text.toString().trim()
+        val nationalCode = userNationalCode?.text.toString().trim()
         val phone = userPhoneNumber?.text.toString().trim()
         val name = userName?.text.toString().trim()
         val pass = userPass?.text.toString().trim()
@@ -224,14 +229,26 @@ class ClientsFragment : Fragment() {
 
         if (validateInput(firstName, userFirstName)) return null
         if (validateInput(lastName, userLastName)) return null
+        if (validateInput(nationalCode, userNationalCode)) return null
         if (validateInput(phone, userPhoneNumber)) return null
         if (validateInput(name, userName)) return null
         if (validateInput(pass, userPass)) return null
         if (validateInput(rePass, userRePass)) return null
         if (validateInput(address, userAddress)) return null
-
-        return UserModel(0, firstName, lastName, phone, name, pass, rePass, pass, address, 0)
+        if (validPassword(pass, rePass)) {
+            return null
+        }
+        return UserModel(
+            0, firstName, lastName, nationalCode, phone, name, pass, md5(pass), address, 0
+        )
     }
+
+    fun md5(input: String): String {
+        val md = MessageDigest.getInstance("MD5")
+        return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
+    }
+
+    private fun validPassword(pass: String, rePass: String): Boolean = pass == rePass
 
     private fun validateInput(str: String?, et: EditText?): Boolean {
         str?.let {
@@ -244,15 +261,90 @@ class ClientsFragment : Fragment() {
         return false
     }
 
-    private fun showBottomSheet(update: Boolean) {
+    fun showBottomSheet(update: Boolean, user: UserModel?) {
         this.update = update
+        setBottomSheetData(user)
         bottomSheetDialog?.show()
     }
 
+    private fun setBottomSheetData(user: UserModel?) {
+        if (update)
+            user?.let { fillBottomSheetData(it) }
+        else
+            clearBottomSheetData()
+    }
+
+    private fun fillBottomSheetData(user: UserModel) {
+        userFirstName?.setText(user.firstName)
+        userLastName?.setText(user.lastName)
+        userNationalCode?.setText(user.nationalCode)
+        userPhoneNumber?.setText(user.phoneNumber)
+        userName?.setText(user.userName)
+        userPass?.setText(user.password)
+        userRePass?.setText(user.password)
+        userAddress?.setText(user.address)
+        submit?.text = getString(R.string.edit)
+    }
+
+    private fun clearBottomSheetData() {
+        userFirstName?.setText("")
+        userLastName?.setText("")
+        userNationalCode?.setText("")
+        userPhoneNumber?.setText("")
+        userName?.setText("")
+        userPass?.setText("")
+        userRePass?.setText("")
+        userAddress?.setText("")
+        submit?.text = getString(R.string.submit)
+    }
+
     private fun setUpUpRecycler() {
+        clientAdapter = ClientAdapter(this)
         clientRecycle.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         clientRecycle.adapter = clientAdapter
     }
 
+    fun showDelMsg(user: UserModel, position: Int) {
+        showDelete()
+        setUpDelete(user, position)
+    }
+
+    private fun setUpDelete(user: UserModel, position: Int) {
+        var sec = 60
+        val timer = Timer()
+        var delete = true
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                sec--
+                timerCounter?.text = ((sec + 21) / 20).toString()
+                timerProgressBar?.progress = sec
+                if (sec == 0) {
+                    this.cancel()
+                    if (delete) {
+                        clientViewModel?.removeUser(user)
+                        delete = false
+                    }
+                }
+            }
+        }, 0, 50)
+
+        undoRemove.setOnClickListener {
+            delete = false
+            clientAdapter?.addItem(user, position)
+            hideDelete()
+        }
+        timerProgressBar?.progress = sec
+        timerCounter?.text = sec.toString()
+    }
+
+    private fun showDelete() {
+        clientDelete.visibility = View.VISIBLE
+        clientFab.visibility = View.GONE
+    }
+
+    private fun hideDelete() {
+        clientDelete.visibility = View.GONE
+        clientFab.visibility = View.VISIBLE
+    }
 }
