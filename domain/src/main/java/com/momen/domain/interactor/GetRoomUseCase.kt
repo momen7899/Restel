@@ -12,15 +12,14 @@ class GetRoomUseCase @Inject constructor(
     private val roomRepository: RoomRepository,
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
-) : UseCase<ArrayList<Room>, GetRoomUseCase.Params>(threadExecutor, postExecutionThread) {
+) : UseCase<Room, GetRoomUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<ArrayList<Room>>? =
-        roomRepository.getRooms()
+    override fun buildUseCaseObservable(inputs: Params): Single<Room>? =
+        roomRepository.getRoom(inputs.id)
 
-
-    class Params() {
+    class Params(val id: Int) {
         companion object {
-            fun forGetRooms() = Params()
+            fun forGetRoom(id: Int) = Params(id)
         }
     }
 
