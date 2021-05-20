@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.momen.restel.R
+import com.momen.restel.comm.Toasty
 import com.momen.restel.room.model.RoomModel
 import kotlinx.android.synthetic.main.fragment_room.*
 
@@ -21,6 +22,7 @@ class RoomFragment : Fragment() {
     private var bottomSheetDialog: BottomSheetDialog? = null
 
     // bottom sheet components
+    private var roomNameEt: EditText? = null
     private var capacityEt: EditText? = null
     private var priceEt: EditText? = null
     private var submit: Button? = null
@@ -66,19 +68,40 @@ class RoomFragment : Fragment() {
     }
 
     private fun setUpBottomSheetComponent() {
-        capacityEt = bottomSheetDialog?.findViewById(R.id.userFirstName)
-        priceEt = bottomSheetDialog?.findViewById(R.id.userLastName)
+        roomNameEt = bottomSheetDialog?.findViewById(R.id.roomNameEt)
+        capacityEt = bottomSheetDialog?.findViewById(R.id.capacityEt)
+        priceEt = bottomSheetDialog?.findViewById(R.id.priceEt)
         submit = bottomSheetDialog?.findViewById(R.id.submitBtn)
     }
 
     private fun setUpBottomSheetSubmit() {
         submit?.setOnClickListener {
             val room = validateData()
+
         }
     }
 
     private fun validateData(): RoomModel? {
-        return null
+        val name = roomNameEt?.text.toString().trim()
+        val capacity = capacityEt?.text.toString().trim()
+        val price = priceEt?.text.toString().trim()
+
+        if (validateInput(name, roomNameEt)) return null
+        if (validateInput(capacity, capacityEt)) return null
+        if (validateInput(price, priceEt)) return null
+
+        return RoomModel(0, name, capacity, price)
+    }
+
+    private fun validateInput(str: String?, et: EditText?): Boolean {
+        str?.let {
+            if (str.isEmpty()) {
+                Toasty.showErrorToasty(requireContext(), getString(R.string.roomNumberError))
+                et?.requestFocus()
+                return true
+            }
+        }
+        return false
     }
 
     private fun showBottomSheet(update: Boolean) {
