@@ -12,8 +12,7 @@ class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.PassengerViewHolder
 
     private val items = ArrayList<CustomerModel>()
 
-    class PassengerViewHolder(val passenger: CustomerItemBinding) :
-        RecyclerView.ViewHolder(passenger.root)
+    class PassengerViewHolder(val passenger: CustomerItemBinding) : RecyclerView.ViewHolder(passenger.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PassengerViewHolder =
         PassengerViewHolder(
