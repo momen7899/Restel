@@ -37,8 +37,8 @@ class RoomAdapter(private val fragment: RoomFragment) :
             }
 
             remove.setOnClickListener {
-                removeItem(items[position])
                 fragment.showDelMsg(items[position], position)
+                removeItem(items[position])
             }
         }
 
@@ -60,6 +60,7 @@ class RoomAdapter(private val fragment: RoomFragment) :
 
     fun addItem(room: RoomModel, position: Int) {
         items.add(position, room)
+        notifyDataSetChanged()
     }
 
 }
