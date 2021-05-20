@@ -33,7 +33,7 @@
                 app:layout_constraintGuide_percent="0.5" />
 
             <TextView
-                android:id="@+id/reservationItemCustomer"
+                android:id="@+id/roomNumber"
                 style="@style/ReserveItemTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/reservationItemClient"
+                android:id="@+id/roomCapacity"
                 style="@style/ReserveItemTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -52,10 +52,10 @@
                 android:text="@{room.capacity}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/reservationItemCustomer" />
+                app:layout_constraintTop_toBottomOf="@id/roomNumber" />
 
             <TextView
-                android:id="@+id/reservationItemRoomName"
+                android:id="@+id/roomPrice"
                 style="@style/ReserveItemTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -63,14 +63,14 @@
                 android:text="@{room.price}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/reservationItemClient" />
+                app:layout_constraintTop_toBottomOf="@id/roomCapacity" />
 
             <TextView
                 style="@style/ReserveItemTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:text="@string/firstName"
+                android:text="@string/roomNumber"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +83,7 @@
                 android:text="@string/capacity"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/reservationItemCustomer" />
+                app:layout_constraintTop_toBottomOf="@id/roomCapacity" />
 
             <TextView
                 style="@style/ReserveItemTextView"
@@ -91,10 +91,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:text="@string/price"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/roomNumber" />
+
+
+            <ImageView
+                android:id="@+id/roomItemEdit"
+                android:layout_width="@dimen/standardIconSize"
+                android:layout_height="@dimen/standardIconSize"
+                android:layout_marginVertical="8dp"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/roomPrice" />
+
+            <ImageView
+                android:id="@+id/roomItemRemove"
+                android:layout_width="@dimen/standardIconSize"
+                android:layout_height="@dimen/standardIconSize"
+                android:layout_marginVertical="8dp"
+                android:src="@drawable/ic_remove"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/reservationItemClient" />
+                app:layout_constraintTop_toBottomOf="@id/roomPrice" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

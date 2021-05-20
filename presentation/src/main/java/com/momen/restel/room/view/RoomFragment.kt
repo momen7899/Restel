@@ -1,6 +1,7 @@
 package com.momen.restel.room.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,17 +9,30 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.momen.restel.R
+import com.momen.restel.app.App
+import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
+import com.momen.restel.room.di.DaggerRoomComponent
 import com.momen.restel.room.model.RoomModel
+import com.momen.restel.room.viewmodel.RoomViewModel
+import com.momen.restel.room.viewmodel.RoomViewModelFactory
+import kotlinx.android.synthetic.main.card_delete.*
 import kotlinx.android.synthetic.main.fragment_room.*
+import java.util.*
+import javax.inject.Inject
 
 class RoomFragment : Fragment() {
 
+    @Inject
+    lateinit var roomViewModelFactory: RoomViewModelFactory
+
+    private var roomViewModel: RoomViewModel? = null
     private var update: Boolean = false
-    private val roomAdapter = RoomAdapter()
+    private var roomAdapter: RoomAdapter? = null
     private var bottomSheetDialog: BottomSheetDialog? = null
 
     // bottom sheet components
@@ -36,7 +50,24 @@ class RoomFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        injectViewModel()
+        setUpViewModel()
         setUpComponents()
+        subscribeViewModel()
+    }
+
+    private fun injectViewModel() {
+        @Suppress("DEPRECATION")
+        DaggerRoomComponent.builder()
+            .appComponent(App().appComponent)
+            .roomDbModule(RoomDbModule(requireContext()))
+            .build()
+            .inject(this)
+    }
+
+    private fun setUpViewModel() {
+        roomViewModel =
+            ViewModelProvider(this, roomViewModelFactory).get(RoomViewModel::class.java)
     }
 
     private fun setUpComponents() {
@@ -47,13 +78,98 @@ class RoomFragment : Fragment() {
         setUpBottomSheetSubmit()
     }
 
+    private fun subscribeViewModel() {
+        subscribeGetRooms()
+        subscribeAddRoom()
+        subscribeEditRoom()
+        subscribeRemoveRoom()
+    }
+
+    private fun subscribeGetRooms() {
+        roomViewModel?.getRooms()
+
+        roomViewModel?.getRoomsLiveData?.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                RoomViewModel.State.LOADING_DATA -> {
+
+                }
+                RoomViewModel.State.DATA_LOADED -> {
+                    result.rooms?.let { roomAdapter?.setItems(it) }
+                }
+
+                RoomViewModel.State.LOAD_ERROR -> {
+
+                }
+            }
+        })
+    }
+
+    private fun subscribeAddRoom() {
+        roomViewModel?.addRoomLiveData?.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                RoomViewModel.State.LOADING_DATA -> {
+
+                }
+                RoomViewModel.State.DATA_LOADED -> {
+                    result.response?.let {
+                        if (it > 0) {
+                            roomViewModel?.getRooms()
+                        }
+                    }
+                }
+                RoomViewModel.State.LOAD_ERROR -> {
+                    Log.i("AddRoom", result.error.toString())
+                }
+            }
+        })
+    }
+
+    private fun subscribeEditRoom() {
+        roomViewModel?.editRoomLiveData?.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                RoomViewModel.State.LOADING_DATA -> {
+
+                }
+                RoomViewModel.State.DATA_LOADED -> {
+                    result.response?.let {
+                        if (it > 0) {
+                            roomViewModel?.getRooms()
+                        }
+                    }
+                }
+
+                RoomViewModel.State.LOAD_ERROR -> {
+
+                }
+            }
+        })
+    }
+
+    private fun subscribeRemoveRoom() {
+        roomViewModel?.removeRoomLiveData?.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                RoomViewModel.State.LOADING_DATA -> {
+
+                }
+                RoomViewModel.State.DATA_LOADED -> {
+
+                }
+
+                RoomViewModel.State.LOAD_ERROR -> {
+
+                }
+            }
+        })
+    }
+
     private fun setUpFab() {
         roomFab.setOnClickListener {
-            showBottomSheet(false)
+            showBottomSheet(false, null)
         }
     }
 
     private fun setUpRecycler() {
+        roomAdapter = RoomAdapter(this)
         roomRecycle.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         roomRecycle.adapter = roomAdapter
@@ -77,7 +193,12 @@ class RoomFragment : Fragment() {
     private fun setUpBottomSheetSubmit() {
         submit?.setOnClickListener {
             val room = validateData()
-
+            if (update) {
+                room?.let { it1 -> roomViewModel?.editRoom(it1) }
+            } else {
+                room?.let { it1 -> roomViewModel?.addRoom(it1) }
+            }
+            bottomSheetDialog?.dismiss()
         }
     }
 
@@ -90,7 +211,7 @@ class RoomFragment : Fragment() {
         if (validateInput(capacity, capacityEt)) return null
         if (validateInput(price, priceEt)) return null
 
-        return RoomModel(0, name, capacity, price)
+        return RoomModel(roomAdapter?.itemCount?.plus(1), name, capacity, price)
     }
 
     private fun validateInput(str: String?, et: EditText?): Boolean {
@@ -104,9 +225,73 @@ class RoomFragment : Fragment() {
         return false
     }
 
-    private fun showBottomSheet(update: Boolean) {
+    fun showBottomSheet(update: Boolean, room: RoomModel?) {
         this.update = update
+        setBottomSheetData(room)
         bottomSheetDialog?.show()
     }
 
+    private fun setBottomSheetData(room: RoomModel?) {
+        if (update)
+            room?.let { fillBottomSheetData(it) }
+        else
+            clearBottomSheetData()
+    }
+
+    private fun fillBottomSheetData(room: RoomModel) {
+        roomNameEt?.setText(room.name)
+        capacityEt?.setText(room.capacity)
+        priceEt?.setText(room.price)
+        submit?.text = getString(R.string.edit)
+    }
+
+    private fun clearBottomSheetData() {
+        roomNameEt?.setText("")
+        capacityEt?.setText("")
+        priceEt?.setText("")
+        submit?.text = getString(R.string.submit)
+    }
+
+    fun showDelMsg(room: RoomModel, position: Int) {
+        showDelete()
+        setUpDelete(room, position)
+    }
+
+    private fun setUpDelete(room: RoomModel, position: Int) {
+        var sec = 60
+        val timer = Timer()
+        var delete = true
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                sec--
+                timerCounter?.text = ((sec + 21) / 20).toString()
+                timerProgressBar?.progress = sec
+                if (sec == 0) {
+                    this.cancel()
+                    if (delete) {
+                        roomViewModel?.removeRoom(room)
+                        delete = false
+                    }
+                }
+            }
+        }, 0, 50)
+
+        undoRemove.setOnClickListener {
+            delete = false
+            roomAdapter?.addItem(room, position)
+            hideDelete()
+        }
+        timerProgressBar?.progress = sec
+        timerCounter?.text = sec.toString()
+    }
+
+    private fun showDelete() {
+        roomDelete.visibility = View.VISIBLE
+        roomFab.visibility = View.GONE
+    }
+
+    private fun hideDelete() {
+        roomDelete.visibility = View.GONE
+        roomFab.visibility = View.VISIBLE
+    }
 }

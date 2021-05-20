@@ -16,11 +16,11 @@ class RoomModelDataMapper @Inject constructor() {
     }
 
     private fun transformRoomToRoomModel(room: Room): RoomModel =
-        with(room) { RoomModel(0, roomName.toString(), capacity.toString(), price.toString()) }
+        with(room) { RoomModel(id, roomName.toString(), capacity.toString(), price.toString()) }
 
 
     fun transformRoomModelToRoom(room: RoomModel): Room =
-        with(room) { Room(0, name, capacity.toInt(), price.toInt()) }
+        with(room) { Room(id, name, capacity.toInt(), price.toInt()) }
 
 
 }

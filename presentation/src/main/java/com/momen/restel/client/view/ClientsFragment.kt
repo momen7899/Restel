@@ -95,6 +95,7 @@ class ClientsFragment : Fragment() {
                 }
                 ClientViewModel.State.DATA_LOADED -> {
                     if (result.data is ArrayList<*>) {
+                        @Suppress("UNCHECKED_CAST")
                         clientAdapter?.setItems(result.data as ArrayList<UserModel>)
                     }
                 }
@@ -213,7 +214,9 @@ class ClientsFragment : Fragment() {
     private fun setUpBottomSheetSubmit() {
         submit?.setOnClickListener {
             val user = validateData()
-            user?.let { clientViewModel?.addUser(it) }
+
+            if (update) user?.let { clientViewModel?.editUser(it) }
+            else user?.let { clientViewModel?.addUser(it) }
         }
     }
 
@@ -239,7 +242,8 @@ class ClientsFragment : Fragment() {
             return null
         }
         return UserModel(
-            0, firstName, lastName, nationalCode, phone, name, pass, md5(pass), address, 0
+            clientAdapter?.itemCount?.plus(1),
+            firstName, lastName, nationalCode, phone, name, pass, md5(pass), address, 0
         )
     }
 

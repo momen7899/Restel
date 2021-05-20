@@ -2,7 +2,10 @@ package com.momen.restel.room.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.momen.domain.interactor.*
+import com.momen.domain.interactor.AddRoomUseCase
+import com.momen.domain.interactor.EditRoomUseCase
+import com.momen.domain.interactor.GetRoomsUseCase
+import com.momen.domain.interactor.RemoveRoomUseCase
 import com.momen.restel.room.model.RoomModel
 import com.momen.restel.room.model.RoomModelDataMapper
 import io.reactivex.disposables.CompositeDisposable
@@ -12,7 +15,6 @@ class RoomViewModel(
     private val addRoomUseCase: AddRoomUseCase,
     private val editRoomUseCase: EditRoomUseCase,
     private val getRoomsUseCase: GetRoomsUseCase,
-    private val getRoomUseCase: GetRoomUseCase,
     private val removeRoomUseCase: RemoveRoomUseCase,
     private val mapper: RoomModelDataMapper
 ) : ViewModel() {
@@ -29,9 +31,12 @@ class RoomViewModel(
         result = Result(null, null, State.LOADING_DATA, null)
         addRoomLiveData.value = result
 
+        println("AddRoom")
+
         val params = AddRoomUseCase.Params.forAddRoom(mapper.transformRoomModelToRoom(room))
         val d: Disposable? = addRoomUseCase.execute(params)?.subscribe({ res ->
             result = Result(res, null, State.DATA_LOADED, null)
+            println(res)
             addRoomLiveData.value = result
         }, { throwable ->
             result = Result(null, null, State.LOAD_ERROR, throwable.message)
@@ -41,15 +46,18 @@ class RoomViewModel(
         d?.let { disposables.add(it) }
     }
 
-    fun editUser(room: RoomModel) {
+    fun editRoom(room: RoomModel) {
         var result: Result?
         result = Result(null, null, State.LOADING_DATA, null)
         editRoomLiveData.value = result
+
+        println("editRoom")
 
         val params = EditRoomUseCase.Params.forEditRoom(mapper.transformRoomModelToRoom(room))
         val d: Disposable? = editRoomUseCase.execute(params)?.subscribe({ res ->
             result = Result(res.toLong(), null, State.DATA_LOADED, null)
             editRoomLiveData.value = result
+            println(res)
         }, { throwable ->
             result = Result(null, null, State.LOAD_ERROR, throwable.message)
             editRoomLiveData.value = result
@@ -59,7 +67,7 @@ class RoomViewModel(
 
     }
 
-    fun getUsers() {
+    fun getRooms() {
         var result: Result?
         result = Result(null, null, State.LOADING_DATA, null)
         getRoomsLiveData.value = result
@@ -79,7 +87,7 @@ class RoomViewModel(
 
     }
 
-    fun removeUser(room: RoomModel) {
+    fun removeRoom(room: RoomModel) {
         var result: Result?
         result = Result(null, null, State.LOADING_DATA, null)
         removeRoomLiveData.postValue(result)

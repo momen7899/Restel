@@ -10,7 +10,7 @@ import com.momen.data.entity.UserEntity
 
 @Database(
     entities = [UserEntity::class, CustomerEntity::class, RoomEntity::class, ReserveEntity::class],
-    version = 1
+    version = 1, exportSchema = false
 )
 public abstract class RestelAppDatabase : RoomDatabase() {
 

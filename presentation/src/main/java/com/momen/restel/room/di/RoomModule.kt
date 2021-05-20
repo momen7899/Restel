@@ -5,7 +5,7 @@ import com.momen.data.repository.datasource.room.RoomDataSourceFactory
 import com.momen.data.repository.impl.RoomRepositoryImpl
 import com.momen.domain.interactor.AddRoomUseCase
 import com.momen.domain.interactor.EditRoomUseCase
-import com.momen.domain.interactor.GetRoomUseCase
+import com.momen.domain.interactor.GetRoomsUseCase
 import com.momen.domain.interactor.RemoveRoomUseCase
 import com.momen.domain.repository.RoomRepository
 import com.momen.restel.room.model.RoomModelDataMapper
@@ -19,15 +19,13 @@ class RoomModule {
     internal fun provideRoomViewModelFactory(
         addRoomUseCase: AddRoomUseCase,
         editRoomUseCase: EditRoomUseCase,
-        getRoomsUseCase: GetRoomUseCase,
-        getRoomUseCase: GetRoomUseCase,
+        getRoomsUseCase: GetRoomsUseCase,
         removeRoomUseCase: RemoveRoomUseCase,
         roomModelDataMapper: RoomModelDataMapper
     ) = RoomViewModelFactory(
         addRoomUseCase,
         editRoomUseCase,
         getRoomsUseCase,
-        getRoomUseCase,
         removeRoomUseCase,
         roomModelDataMapper
     )

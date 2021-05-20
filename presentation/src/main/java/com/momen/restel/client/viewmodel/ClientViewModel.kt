@@ -46,7 +46,7 @@ class ClientViewModel(
     }
 
     fun editUser(user: UserModel) {
-        var result: Result? = null
+        var result: Result?
         result = Result(null, State.LOADING_DATA, null)
         editUserLiveData.value = result
 
