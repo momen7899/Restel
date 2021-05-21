@@ -9,8 +9,7 @@ import com.momen.restel.R
 import com.momen.restel.databinding.RoomItemBinding
 import com.momen.restel.room.model.RoomModel
 
-class RoomAdapter(private val fragment: RoomFragment) :
-    RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
+class RoomAdapter(private val fragment: RoomFragment) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
 
     private val items = ArrayList<RoomModel>()
 

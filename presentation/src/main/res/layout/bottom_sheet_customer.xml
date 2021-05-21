@@ -21,35 +21,56 @@
             android:gravity="center"
             app:srcCompat="@drawable/ic_line" />
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/customerHint" />
+
         <include
+            android:id="@+id/customerNameEt"
             layout="@layout/card_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="8dp" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phoneNumber" />
+
         <include
+            android:id="@+id/phoneNumberEt"
             layout="@layout/card_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="8dp" />
 
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gender" />
+
         <include
+            android:id="@+id/genderEt"
             layout="@layout/card_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="8dp" />
 
-        <include
-            layout="@layout/card_input"
+        <TextView
+            android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:text="@string/married" />
 
         <include
+            android:id="@+id/marriedEt"
             layout="@layout/card_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
