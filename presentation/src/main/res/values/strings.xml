@@ -52,4 +52,8 @@
     <string name="edit">ویرایش</string>
     <string name="cancel">بازگشت</string>
     <string name="delete">حذف شد</string>
+    <string name="single">مجرد</string>
+    <string name="marry">متاهل</string>
+    <string name="male">مرد</string>
+    <string name="female">زن</string>
 </resources>

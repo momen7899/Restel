@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheetCustomer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:orientation="vertical">
 
 
@@ -22,60 +24,90 @@
             app:srcCompat="@drawable/ic_line" />
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/customerHint" />
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/firstNameHint" />
 
-        <include
+        <EditText
             android:id="@+id/customerNameEt"
-            layout="@layout/card_input"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
 
         <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/phoneNumber" />
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/userPhoneHint" />
 
-        <include
+        <EditText
             android:id="@+id/phoneNumberEt"
-            layout="@layout/card_input"
+            style="@style/LoginEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            tools:ignore="LabelFor" />
 
         <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/gender" />
-
-        <include
-            android:id="@+id/genderEt"
-            layout="@layout/card_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
             android:text="@string/married" />
 
-        <include
-            android:id="@+id/marriedEt"
-            layout="@layout/card_input"
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/customerSingle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/single" />
+
+            <RadioButton
+                android:id="@+id/customerMarried"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/marry" />
+
+        </RadioGroup>
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="8dp"
+            android:text="@string/gender" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/customerMale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/male" />
+
+            <RadioButton
+                android:id="@+id/customerFemale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/female" />
+
+        </RadioGroup>
 
         <Button
             android:id="@+id/submitBtn"

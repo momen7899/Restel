@@ -53,10 +53,10 @@ class ClientViewModel(
 
         val params = EditUserUseCase.Params.forEditUser(mapper.transformUserModelToUser(user))
         val d: Disposable? = editUserUseCase.execute(params)?.subscribe({ res ->
-            result = Result(res, null, State.DATA_LOADED, null)
+            result = Result(res.toLong(), null, State.DATA_LOADED, null)
             editUserLiveData.value = result
         }, { throwable ->
-            result = Result(null, State.LOAD_ERROR, throwable.message)
+            result = Result(null, null, State.LOAD_ERROR, throwable.message)
             editUserLiveData.value = result
         }
         )
