@@ -241,6 +241,7 @@ class CustomerFragment : Fragment() {
             customerAdapter?.itemCount?.plus(1),
             name,
             phoneNumber,
+            "123456789",
             customerGender,
             customerMarried
         )

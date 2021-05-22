@@ -1,8 +1,6 @@
 package com.momen.restel.customer.model
 
 import com.momen.domain.model.Customer
-import com.momen.domain.model.Room
-import com.momen.restel.room.model.RoomModel
 import javax.inject.Inject
 
 class CustomerModelDataMapper @Inject constructor() {
@@ -15,10 +13,49 @@ class CustomerModelDataMapper @Inject constructor() {
         }
         return list
     }
-    private fun transformCustomerToCustomerModel(customer: Customer): CustomerModel =
-        with(customer) { CustomerModel(id, name.toString(), phoneNumber.toString(), gender.toString(), married.toString()) }
 
+    private fun transformCustomerToCustomerModel(customer: Customer): CustomerModel =
+        with(customer) {
+            CustomerModel(
+                id,
+                name.toString(),
+                phoneNumber.toString(),
+                nationalCode,
+                transformGenderToString(gender),
+                transformSingleToString(single)
+            )
+        }
+
+    private fun transformSingleToString(single: Boolean?): String? {
+        single?.let {
+            return if (single) "مجرد"
+            else "متاهل"
+        }
+        return ""
+    }
+
+    private fun transformGenderToString(gender: Boolean?): String {
+        gender?.let {
+            return if (gender) "مرد"
+            else "زن"
+        }
+        return ""
+    }
 
     fun transformCustomerModelToCustomer(customer: CustomerModel): Customer =
-        with(customer) { Customer(id, name, phoneNumber, nationalCode, gender, single) }
+        with(customer) {
+            Customer(
+                id,
+                name,
+                phoneNumber,
+                nationalCode,
+                transformGenderToBoolean(gender),
+                transformSingleToBoolean(married)
+            )
+        }
+
+    private fun transformGenderToBoolean(gender: String?): Boolean = gender == "مرد"
+
+
+    private fun transformSingleToBoolean(single: String?): Boolean = single == "مجرد"
 }
