@@ -1,7 +1,6 @@
 package com.momen.restel.customer.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.ScrollView
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -116,7 +117,6 @@ class CustomerFragment : Fragment() {
                     }
                 }
                 CustomerViewModel.State.LOAD_ERROR -> {
-                    Log.i("AddRoom", result.error.toString())
                 }
             }
         })
@@ -159,12 +159,28 @@ class CustomerFragment : Fragment() {
     }
 
     private fun setUpComponents() {
+        hideActivityComponent()
         setUpFab()
         setUpRecycler()
         setUpBottomSheet()
         setUpBottomSheetComponent()
         setUpBottomSheetSubmit()
     }
+
+    private fun hideActivityComponent() {
+        hideNavMenu()
+        hideToolbar()
+    }
+
+    private fun hideNavMenu() {
+        requireActivity().findViewById<DrawerLayout>(R.id.mainDrawer)
+            .setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    private fun hideToolbar() {
+        requireActivity().findViewById<Toolbar>(R.id.toolbar).visibility = View.GONE
+    }
+
 
     private fun setUpFab() {
         customerFab.setOnClickListener {
@@ -182,7 +198,7 @@ class CustomerFragment : Fragment() {
         bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog?.setContentView(R.layout.bottom_sheet_customer)
         val rtl = true
-        val layout = bottomSheetDialog?.findViewById<ScrollView>(R.id.bottomSheetRoom)
+        val layout = bottomSheetDialog?.findViewById<ScrollView>(R.id.bottomSheetCustomer)
         layout?.layoutDirection = if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 

@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,6 +73,7 @@ class RoomFragment : Fragment() {
     }
 
     private fun setUpComponents() {
+        hideActivityComponent()
         setUpFab()
         setUpRecycler()
         setUpBottomSheet()
@@ -160,6 +163,20 @@ class RoomFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun hideActivityComponent() {
+        hideNavMenu()
+        hideToolbar()
+    }
+
+    private fun hideNavMenu() {
+        requireActivity().findViewById<DrawerLayout>(R.id.mainDrawer)
+            .setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    private fun hideToolbar() {
+        requireActivity().findViewById<Toolbar>(R.id.toolbar).visibility = View.GONE
     }
 
     private fun setUpFab() {
