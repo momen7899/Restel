@@ -40,6 +40,7 @@ class CustomerFragment : Fragment() {
     // bottom sheet components
     private var customerNameEt: EditText? = null
     private var phoneNumberEt: EditText? = null
+    private var customerNationalEt: EditText? = null
     private var maleRb: RadioButton? = null
     private var femaleRb: RadioButton? = null
     private var singleRb: RadioButton? = null
@@ -188,6 +189,7 @@ class CustomerFragment : Fragment() {
     private fun setUpBottomSheetComponent() {
         customerNameEt = bottomSheetDialog?.findViewById(R.id.customerNameEt)
         phoneNumberEt = bottomSheetDialog?.findViewById(R.id.phoneNumberEt)
+        customerNationalEt = bottomSheetDialog?.findViewById(R.id.customerNationalEt)
         maleRb = bottomSheetDialog?.findViewById(R.id.customerMale)
         femaleRb = bottomSheetDialog?.findViewById(R.id.customerFemale)
         singleRb = bottomSheetDialog?.findViewById(R.id.customerSingle)
@@ -231,9 +233,11 @@ class CustomerFragment : Fragment() {
     private fun validateData(): CustomerModel? {
         val name = customerNameEt?.text.toString().trim()
         val phoneNumber = phoneNumberEt?.text.toString().trim()
+        val nationalId = customerNationalEt?.text.toString().trim()
 
         if (validateInput(name, customerNameEt)) return null
         if (validateInput(phoneNumber, phoneNumberEt)) return null
+        if (validateInput(nationalId, customerNationalEt)) return null
         if (validateInput(customerMarried, singleRb)) return null
         if (validateInput(customerGender, maleRb)) return null
 
@@ -241,7 +245,7 @@ class CustomerFragment : Fragment() {
             customerAdapter?.itemCount?.plus(1),
             name,
             phoneNumber,
-            "123456789",
+            nationalId,
             customerGender,
             customerMarried
         )
@@ -274,6 +278,7 @@ class CustomerFragment : Fragment() {
     private fun fillBottomSheetData(customer: CustomerModel) {
         customerNameEt?.setText(customer.name)
         phoneNumberEt?.setText(customer.phoneNumber)
+        customerNationalEt?.setText(customer.nationalCode)
         maleRb?.isChecked = customer.gender == getString(R.string.male)
         femaleRb?.isChecked = customer.gender == getString(R.string.female)
         singleRb?.isChecked = customer.gender == getString(R.string.single)
@@ -284,6 +289,7 @@ class CustomerFragment : Fragment() {
     private fun clearBottomSheetData() {
         customerNameEt?.setText("")
         phoneNumberEt?.setText("")
+        customerNationalEt?.setText("")
         maleRb?.isChecked = false
         femaleRb?.isChecked = false
         singleRb?.isChecked = false
