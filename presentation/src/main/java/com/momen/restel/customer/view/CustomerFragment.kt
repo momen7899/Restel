@@ -200,11 +200,11 @@ class CustomerFragment : Fragment() {
 
     private fun setUpBottomSheetSubmit() {
         submit?.setOnClickListener {
-            val room = validateData()
+            val customer = validateData()
             if (update) {
-                room?.let { it1 -> customerViewModel?.editCustomer(it1) }
+                customer?.let { it1 -> customerViewModel?.editCustomer(it1) }
             } else {
-                room?.let { it1 -> customerViewModel?.editCustomer(it1) }
+                customer?.let { it1 -> customerViewModel?.addCustomer(it1) }
             }
             bottomSheetDialog?.dismiss()
         }
