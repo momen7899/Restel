@@ -176,6 +176,7 @@ class MainFragment : Fragment() {
         setUpFab()
         reserveRecycleSetUp()
         setUpBottomSheet()
+        setUpBackPressed()
         setUpBottomSheetComponent()
         setUpBottomSheetSubmit()
         initBottomSheet()
