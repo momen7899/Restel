@@ -9,7 +9,8 @@ import com.momen.restel.R
 import com.momen.restel.databinding.RoomItemBinding
 import com.momen.restel.room.model.RoomModel
 
-class RoomAdapter(private val fragment: RoomFragment) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
+class RoomAdapter(private val fragment: RoomFragment) :
+    RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
 
     private val items = ArrayList<RoomModel>()
 
@@ -45,6 +46,8 @@ class RoomAdapter(private val fragment: RoomFragment) : RecyclerView.Adapter<Roo
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun nextId(): Int? = items[items.size - 1].id?.plus(1)
 
     private fun removeItem(room: RoomModel) {
         items.remove(room)

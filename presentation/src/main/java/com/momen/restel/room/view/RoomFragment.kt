@@ -34,6 +34,7 @@ class RoomFragment : Fragment() {
 
     private var roomViewModel: RoomViewModel? = null
     private var update: Boolean = false
+    private var id: Int? = null
     private var roomAdapter: RoomAdapter? = null
     private var bottomSheetDialog: BottomSheetDialog? = null
 
@@ -228,7 +229,8 @@ class RoomFragment : Fragment() {
         if (validateInput(capacity, capacityEt)) return null
         if (validateInput(price, priceEt)) return null
 
-        return RoomModel(roomAdapter?.itemCount?.plus(1), name, capacity, price)
+        return if (update) RoomModel(id, name, capacity, price)
+        else RoomModel(roomAdapter?.nextId(), name, capacity, price)
     }
 
     private fun validateInput(str: String?, et: EditText?): Boolean {
@@ -244,6 +246,7 @@ class RoomFragment : Fragment() {
 
     fun showBottomSheet(update: Boolean, room: RoomModel?) {
         this.update = update
+        id = room?.id
         setBottomSheetData(room)
         bottomSheetDialog?.show()
     }

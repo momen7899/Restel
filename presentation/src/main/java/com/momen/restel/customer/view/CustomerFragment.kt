@@ -37,6 +37,7 @@ class CustomerFragment : Fragment() {
     private var customerViewModel: CustomerViewModel? = null
     private var update: Boolean = false
     private var bottomSheetDialog: BottomSheetDialog? = null
+    private var id: Int? = null
 
     // bottom sheet components
     private var customerNameEt: EditText? = null
@@ -257,13 +258,11 @@ class CustomerFragment : Fragment() {
         if (validateInput(customerMarried, singleRb)) return null
         if (validateInput(customerGender, maleRb)) return null
 
-        return CustomerModel(
-            customerAdapter?.itemCount?.plus(1),
-            name,
-            phoneNumber,
-            nationalId,
-            customerGender,
-            customerMarried
+        return if (update) CustomerModel(
+            id, name, phoneNumber, nationalId, customerGender, customerMarried
+        ) else CustomerModel(
+            customerAdapter?.nextId(), name,
+            phoneNumber, nationalId, customerGender, customerMarried
         )
     }
 
@@ -280,6 +279,7 @@ class CustomerFragment : Fragment() {
 
     fun showBottomSheet(update: Boolean, customer: CustomerModel?) {
         this.update = update
+        id = customer?.id
         setBottomSheetData(customer)
         bottomSheetDialog?.show()
     }

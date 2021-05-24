@@ -51,6 +51,8 @@ class CustomerAdapter(private val fragment: CustomerFragment) :
 
     override fun getItemCount(): Int = items.size
 
+    fun nextId(): Int? = items[items.size - 1].id?.plus(1)
+
     fun setItems(items: ArrayList<CustomerModel>) {
         this.items.clear()
         this.items.addAll(items)

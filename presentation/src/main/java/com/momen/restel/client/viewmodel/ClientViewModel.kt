@@ -31,7 +31,7 @@ class ClientViewModel(
         var result: Result?
         result = Result(null, null, State.LOADING_DATA, null)
         addUserLiveData.value = result
-
+        println(user.id)
         val params = AddUser1UseCase.Params.forAddUser(mapper.transformUserModelToUser(user))
         val d: Disposable? = addUserUseCase.execute(params)?.subscribe({ res ->
             result = Result(res, null, State.DATA_LOADED, null)
@@ -50,7 +50,7 @@ class ClientViewModel(
         var result: Result?
         result = Result(null, null, State.LOADING_DATA, null)
         editUserLiveData.value = result
-
+        println(user)
         val params = EditUserUseCase.Params.forEditUser(mapper.transformUserModelToUser(user))
         val d: Disposable? = editUserUseCase.execute(params)?.subscribe({ res ->
             result = Result(res.toLong(), null, State.DATA_LOADED, null)

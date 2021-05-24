@@ -37,6 +37,7 @@ class ClientsFragment : Fragment() {
     private var clientAdapter: ClientAdapter? = null
     private var bottomSheetDialog: BottomSheetDialog? = null
     private var update = false
+    private var id: Int? = null
 
     // bottom sheet components
     private var userFirstName: EditText? = null
@@ -135,6 +136,7 @@ class ClientsFragment : Fragment() {
 
                 }
                 ClientViewModel.State.DATA_LOADED -> {
+                    println(result.response)
                     result.response?.let {
                         if (it > 0) {
                             clientViewModel?.getUsers()
@@ -143,7 +145,7 @@ class ClientsFragment : Fragment() {
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {
-
+                    println(result.error)
                 }
             }
         })
@@ -243,6 +245,7 @@ class ClientsFragment : Fragment() {
 
             if (update) user?.let { clientViewModel?.editUser(it) }
             else user?.let { clientViewModel?.addUser(it) }
+            bottomSheetDialog?.dismiss()
         }
     }
 
@@ -267,10 +270,17 @@ class ClientsFragment : Fragment() {
         if (validPassword(pass, rePass)) {
             return null
         }
-        return UserModel(
-            clientAdapter?.itemCount?.plus(1),
-            firstName, lastName, nationalCode, phone, name, pass, md5(pass), address, 0
+
+        println(clientAdapter?.nextId())
+        return if (update) UserModel(
+            id, firstName, lastName, nationalCode,
+            phone, name, pass, md5(pass), address, 0
         )
+        else
+            UserModel(
+                clientAdapter?.nextId(), firstName, lastName, nationalCode,
+                phone, name, pass, md5(pass), address, 0
+            )
     }
 
     private fun md5(input: String): String {
@@ -278,7 +288,7 @@ class ClientsFragment : Fragment() {
         return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
     }
 
-    private fun validPassword(pass: String, rePass: String): Boolean = pass == rePass
+    private fun validPassword(pass: String, rePass: String): Boolean = pass != rePass
 
     private fun validateInput(str: String?, et: EditText?): Boolean {
         str?.let {
@@ -293,6 +303,7 @@ class ClientsFragment : Fragment() {
 
     fun showBottomSheet(update: Boolean, user: UserModel?) {
         this.update = update
+        id = user?.id
         setBottomSheetData(user)
         bottomSheetDialog?.show()
     }
