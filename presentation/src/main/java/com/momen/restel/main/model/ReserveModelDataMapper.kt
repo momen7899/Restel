@@ -1,4 +1,4 @@
-package com.momen.restel.reserve.model
+package com.momen.restel.main.model
 
 import com.momen.domain.model.Reserve
 import javax.inject.Inject

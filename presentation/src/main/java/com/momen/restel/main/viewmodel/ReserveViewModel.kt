@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.momen.domain.interactor.AddReserveUseCase
 import com.momen.domain.interactor.GetReservesUseCase
 import com.momen.domain.interactor.UpdateReserveUseCase
-import com.momen.restel.reserve.model.ReserveModel
-import com.momen.restel.reserve.model.ReserveModelDataMapper
+import com.momen.restel.main.model.ReserveModel
+import com.momen.restel.main.model.ReserveModelDataMapper
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 

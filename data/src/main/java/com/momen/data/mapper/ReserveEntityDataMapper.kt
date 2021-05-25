@@ -16,12 +16,28 @@ class ReserveEntityDataMapper @Inject constructor() {
 
     private fun transformReserveEntityToReserve(reserve: ReserveEntity): Reserve =
         with(reserve) {
-            Reserve(id, room, client, customer, startDate, finishData, price)
+            Reserve(
+                id,
+                room,
+                client,
+                customer,
+                startDate,
+                finishData,
+                price
+            )
         }
 
     fun transformReserveToReserveEntity(reserve: Reserve): ReserveEntity =
         with(reserve) {
-            ReserveEntity(id, room, client, customer, startDate, finishData, price)
+            ReserveEntity(
+                id,
+                room,
+                client,
+                customer,
+                startDate,
+                finishData,
+                price
+            )
         }
 
 

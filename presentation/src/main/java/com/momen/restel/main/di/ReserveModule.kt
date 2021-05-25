@@ -7,8 +7,8 @@ import com.momen.domain.interactor.AddReserveUseCase
 import com.momen.domain.interactor.GetReservesUseCase
 import com.momen.domain.interactor.UpdateReserveUseCase
 import com.momen.domain.repository.ReserveRepository
+import com.momen.restel.main.model.ReserveModelDataMapper
 import com.momen.restel.main.viewmodel.ReserveViewModelFactory
-import com.momen.restel.reserve.model.ReserveModelDataMapper
 import dagger.Module
 import dagger.Provides
 

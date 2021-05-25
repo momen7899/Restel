@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.momen.domain.interactor.AddReserveUseCase
 import com.momen.domain.interactor.GetReservesUseCase
 import com.momen.domain.interactor.UpdateReserveUseCase
-import com.momen.restel.reserve.model.ReserveModelDataMapper
+import com.momen.restel.main.model.ReserveModelDataMapper
 import javax.inject.Inject
 
 class ReserveViewModelFactory @Inject constructor(
