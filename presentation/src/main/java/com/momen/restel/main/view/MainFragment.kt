@@ -30,9 +30,11 @@ import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
 import com.momen.restel.main.di.DaggerMainComponent
+import com.momen.restel.main.model.ReserveModel
+import com.momen.restel.main.viewmodel.HomeFeedViewModel
+import com.momen.restel.main.viewmodel.HomeFeedViewModelFactory
 import com.momen.restel.main.viewmodel.ReserveViewModel
 import com.momen.restel.main.viewmodel.ReserveViewModelFactory
-import com.momen.restel.reserve.model.ReserveModel
 import kotlinx.android.synthetic.main.bottom_sheet_reserve.*
 import kotlinx.android.synthetic.main.bottom_sheet_reserve.view.*
 import kotlinx.android.synthetic.main.card_input.view.*
@@ -48,6 +50,10 @@ class MainFragment : Fragment() {
     @Inject
     lateinit var reserveViewModelFactory: ReserveViewModelFactory
 
+    @Inject
+    lateinit var homeFeedViewModelFactory: HomeFeedViewModelFactory
+
+    private lateinit var homeFeedViewModel: HomeFeedViewModel
     private lateinit var reserveViewModel: ReserveViewModel
 
     private val reserveAdapter = ReserveAdapter()
@@ -211,7 +217,7 @@ class MainFragment : Fragment() {
         if (validateInput(finish, date)) return null
         if (validateInput(priceRoom, reservePrice!!)) return null
 
-        return ReserveModel(0, room, "مؤمن", customer, start!!, finish!!, priceRoom.toInt())
+        return ReserveModel(0, "0", "1", "2", start!!, finish!!, priceRoom.toInt())
     }
 
     private fun validateInput(room: String?, et: EditText?): Boolean {

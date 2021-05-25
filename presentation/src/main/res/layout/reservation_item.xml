@@ -6,7 +6,7 @@
 
         <variable
             name="reserve"
-            type="com.momen.restel.reserve.model.ReserveModel" />
+            type="com.momen.restel.main.model.ReserveModel" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -15,12 +15,28 @@ class ReserveModelDataMapper @Inject constructor() {
 
     private fun transformReserveToReserveModel(reserve: Reserve): ReserveModel =
         with(reserve) {
-            ReserveModel(id, room, client, customer, startDate, finishData, price)
+            ReserveModel(
+                id,
+                room.toString(),
+                client.toString(),
+                customer.toString(),
+                startDate,
+                finishData,
+                price
+            )
         }
 
     fun transformReserveModelToReserve(reserve: ReserveModel): Reserve =
         with(reserve) {
-            Reserve(id, room, client, customer, startDate, finishData, price)
+            Reserve(
+                id,
+                room.toInt(),
+                client.toInt(),
+                customer.toInt(),
+                startDate,
+                finishData,
+                price
+            )
         }
 
 }

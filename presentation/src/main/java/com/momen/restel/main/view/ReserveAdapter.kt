@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.momen.restel.R
 import com.momen.restel.databinding.ReservationItemBinding
-import com.momen.restel.reserve.model.ReserveModel
+import com.momen.restel.main.model.ReserveModel
 
 class ReserveAdapter : RecyclerView.Adapter<ReserveAdapter.ReserveViewHolder>() {
 
@@ -30,7 +30,7 @@ class ReserveAdapter : RecyclerView.Adapter<ReserveAdapter.ReserveViewHolder>() 
 
     override fun getItemCount(): Int = items.size
 
-    fun setItems(items: ArrayList<ReserveModel>) {
+    fun setItems(items: ArrayList<com.momen.restel.main.model.ReserveModel>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()

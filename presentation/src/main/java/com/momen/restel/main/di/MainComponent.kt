@@ -8,7 +8,7 @@ import dagger.Component
 
 @Component(
     dependencies = [AppComponent::class],
-    modules = [ReserveModule::class, RoomDbModule::class]
+    modules = [ReserveModule::class, RoomDbModule::class, HomeFeedModule::class]
 )
 interface MainComponent {
     fun inject(mainFragment: MainFragment)
