@@ -24,14 +24,14 @@ class CustomerViewModel(
     val removeCustomerLiveData = MutableLiveData<Result>()
     private val disposables = CompositeDisposable()
 
-    fun addCustomer(cutomer: CustomerModel) {
+    fun addCustomer(customer: CustomerModel) {
         var result: Result?
         result = Result(null, null, State.LOADING_DATA, null)
         addCustomerLiveData.value = result
 
 
         val params = AddCustomerUseCase.Params.forAddCustomer(
-            customerModelDataMapper.transformCustomerModelToCustomer(cutomer)
+            customerModelDataMapper.transformCustomerModelToCustomer(customer)
         )
         val d: Disposable? = addCustomerUseCase.execute(params)?.subscribe({ res ->
             result = Result(res, null, State.DATA_LOADED, null)
@@ -97,6 +97,7 @@ class CustomerViewModel(
                 State.DATA_LOADED,
                 null
             )
+            println(result?.customers)
             getCustomerLiveData.value = result
         }, { throwable ->
             result =

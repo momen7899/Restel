@@ -33,7 +33,7 @@ class CustomerFragment : Fragment() {
     @Inject
     lateinit var customerViewModelFactory: CustomerViewModelFactory
 
-    private val customerAdapter: CustomerAdapter? = null
+    private var customerAdapter: CustomerAdapter? = null
     private var customerViewModel: CustomerViewModel? = null
     private var update: Boolean = false
     private var bottomSheetDialog: BottomSheetDialog? = null
@@ -96,7 +96,6 @@ class CustomerFragment : Fragment() {
                 CustomerViewModel.State.DATA_LOADED -> {
                     result.customers?.let { customerAdapter?.setItems(it) }
                 }
-
                 CustomerViewModel.State.LOAD_ERROR -> {
 
                 }
@@ -190,6 +189,7 @@ class CustomerFragment : Fragment() {
     }
 
     private fun setUpRecycler() {
+        customerAdapter = CustomerAdapter(this)
         customerRecycle.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         customerRecycle.adapter = customerAdapter
