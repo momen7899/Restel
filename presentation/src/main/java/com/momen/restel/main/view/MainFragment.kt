@@ -46,6 +46,7 @@ import kotlinx.android.synthetic.main.fragment_reserve.*
 import java.util.*
 import javax.inject.Inject
 
+@SuppressLint("InflateParams")
 class MainFragment : Fragment() {
 
     private val rtl = true
@@ -197,6 +198,7 @@ class MainFragment : Fragment() {
         homeFeedViewModel.getRoomsLiveData.observe(viewLifecycleOwner, { result ->
             when (result.state) {
                 HomeFeedViewModel.State.DATA_LOADED -> {
+                    result.rooms?.let { roomAdapter?.setItems(it) }
                 }
                 HomeFeedViewModel.State.LOADING_DATA -> {
                 }
@@ -324,14 +326,28 @@ class MainFragment : Fragment() {
             setUpDatePicker()
         }
         reserveRoom?.setOnClickListener {
-
+            setUpRoomDialog()
         }
         reserveCustomer?.setOnClickListener {
             setUpCustomerDialog()
         }
     }
 
-    @SuppressLint("InflateParams")
+    private fun setUpRoomDialog() {
+        homeFeedViewModel.getRooms()
+        roomView = requireActivity().layoutInflater
+            .inflate(R.layout.dialog_main_reserve_room, null)
+        roomDialog = AlertDialog.Builder(requireContext())
+            .setView(roomView).create()
+        roomDialog?.show()
+
+        roomAdapter = HomeRoomAdapter(this)
+        roomRecycler = roomView?.findViewById(R.id.mainCustomerRecycler)
+        roomRecycler?.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        roomRecycler?.adapter = roomAdapter
+    }
+
     private fun setUpCustomerDialog() {
         homeFeedViewModel.getCustomers()
         customerView = requireActivity().layoutInflater
