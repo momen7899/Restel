@@ -1,6 +1,7 @@
 package com.momen.restel.main.view
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -20,6 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.aminography.primecalendar.persian.PersianCalendar
 import com.aminography.primedatepicker.picker.PrimeDatePicker
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -56,13 +59,21 @@ class MainFragment : Fragment() {
     private lateinit var homeFeedViewModel: HomeFeedViewModel
     private lateinit var reserveViewModel: ReserveViewModel
 
+    private var customerView: View? = null
+    private var customerRecycler: RecyclerView? = null
+    private var customerDialog: Dialog? = null
+    private var customerAdapter: HomeCustomerAdapter? = null
+    private var roomView: View? = null
+    private var roomRecycler: RecyclerView? = null
+    private var roomDialog: Dialog? = null
+    private var roomAdapter: HomeRoomAdapter? = null
     private val reserveAdapter = ReserveAdapter()
     private var bottomSheetDialog: BottomSheetDialog? = null
     private var update = false
     private var date: TextView? = null
     private var submit: Button? = null
-    private var reserveRoom: EditText? = null
-    private var reserveCustomer: EditText? = null
+    private var reserveRoom: TextView? = null
+    private var reserveCustomer: TextView? = null
     private var reservePrice: EditText? = null
 
     // activity component
@@ -98,6 +109,8 @@ class MainFragment : Fragment() {
     private fun setUpViewModel() {
         reserveViewModel = ViewModelProvider(this, reserveViewModelFactory)
             .get(ReserveViewModel::class.java)
+        homeFeedViewModel = ViewModelProvider(this, homeFeedViewModelFactory)
+            .get(HomeFeedViewModel::class.java)
     }
 
     override fun onResume() {
@@ -115,6 +128,8 @@ class MainFragment : Fragment() {
         subscribeAddReserve()
         subscribeUpdateReserve()
         subscribeRemoveReserve()
+        subscribeGetRooms()
+        subscribeGetCustomers()
     }
 
     private fun subscribeGetReserves() {
@@ -178,6 +193,41 @@ class MainFragment : Fragment() {
 
     }
 
+    private fun subscribeGetRooms() {
+        homeFeedViewModel.getRoomsLiveData.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                HomeFeedViewModel.State.DATA_LOADED -> {
+                }
+                HomeFeedViewModel.State.LOADING_DATA -> {
+                }
+                HomeFeedViewModel.State.LOAD_ERROR -> {
+                    Toasty.showErrorToasty(
+                        requireContext(), getString(R.string.DatabaseError)
+                    )
+                    println(result.error)
+                }
+            }
+        })
+    }
+
+    private fun subscribeGetCustomers() {
+        homeFeedViewModel.getCustomerLiveData.observe(viewLifecycleOwner, { result ->
+            when (result.state) {
+                HomeFeedViewModel.State.DATA_LOADED -> {
+                    result?.customers?.let { customerAdapter?.setItems(it) }
+                }
+                HomeFeedViewModel.State.LOADING_DATA -> {
+                }
+                HomeFeedViewModel.State.LOAD_ERROR -> {
+                    Toasty.showErrorToasty(
+                        requireContext(), getString(R.string.DatabaseError)
+                    )
+                    println(result.error)
+                }
+            }
+        })
+    }
+
     private fun setUpComponents() {
         setUpFab()
         reserveRecycleSetUp()
@@ -190,8 +240,8 @@ class MainFragment : Fragment() {
 
     private fun initBottomSheet() {
         date?.text = ""
-        reserveRoom?.setText("")
-        reserveCustomer?.setText("")
+        reserveRoom?.text = ""
+        reserveCustomer?.text = ""
         reservePrice?.setText("")
     }
 
@@ -273,6 +323,28 @@ class MainFragment : Fragment() {
         date?.setOnClickListener {
             setUpDatePicker()
         }
+        reserveRoom?.setOnClickListener {
+
+        }
+        reserveCustomer?.setOnClickListener {
+            setUpCustomerDialog()
+        }
+    }
+
+    @SuppressLint("InflateParams")
+    private fun setUpCustomerDialog() {
+        homeFeedViewModel.getCustomers()
+        customerView = requireActivity().layoutInflater
+            .inflate(R.layout.dialog_main_reserve_customer, null)
+        customerDialog = AlertDialog.Builder(requireContext())
+            .setView(customerView).create()
+        customerDialog?.show()
+
+        customerAdapter = HomeCustomerAdapter(this)
+        customerRecycler = customerView?.findViewById(R.id.mainCustomerRecycler)
+        customerRecycler?.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        customerRecycler?.adapter = customerAdapter
     }
 
     @SuppressLint("WrongConstant")
