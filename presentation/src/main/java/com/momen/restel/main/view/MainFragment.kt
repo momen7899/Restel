@@ -214,7 +214,7 @@ class MainFragment : Fragment() {
         homeFeedViewModel.getCustomerLiveData.observe(viewLifecycleOwner, { result ->
             when (result.state) {
                 HomeFeedViewModel.State.DATA_LOADED -> {
-                    result?.customers?.let { customerAdapter?.setItems(it) }
+                    result.customers?.let { customerAdapter?.setItems(it) }
                 }
                 HomeFeedViewModel.State.LOADING_DATA -> {
                 }

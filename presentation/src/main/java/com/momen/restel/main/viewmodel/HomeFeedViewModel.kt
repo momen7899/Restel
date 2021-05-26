@@ -35,6 +35,7 @@ class HomeFeedViewModel(
                 State.DATA_LOADED,
                 null
             )
+            println(result?.customers)
             getCustomerLiveData.value = result
         }, { throwable ->
             result =

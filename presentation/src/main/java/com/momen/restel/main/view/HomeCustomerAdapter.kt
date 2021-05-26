@@ -34,6 +34,7 @@ class HomeCustomerAdapter(private val fragment: MainFragment) :
     fun setItems(items: ArrayList<HomeCustomerModel>) {
         this.items.clear()
         this.items.addAll(items)
+        println(items)
         notifyDataSetChanged()
     }
 }
