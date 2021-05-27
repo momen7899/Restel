@@ -1,15 +1,25 @@
 package com.momen.restel.login.di
 
-/*
+import com.momen.data.mapper.UserEntityDataMapper
+import com.momen.data.repository.impl.UserRepositoryImpl
+import com.momen.data.repository.datasource.user.UserDataSourceFactory
+import com.momen.domain.interactor.ValidUserUseCase
+import com.momen.domain.repository.UserRepository
+import com.momen.restel.login.model.UserModelDataMapper
+import com.momen.restel.login.viewmodel.LoginViewModelFactory
+import dagger.Module
+import dagger.Provides
+
+
 @Module
 class LoginModule {
 
     @Provides
     internal fun provideLoginViewModelFactory(
-        addUserUseCase: AddUserUseCase,
+        validUserUseCase: ValidUserUseCase,
         userModelDataMapper: UserModelDataMapper
     ) = LoginViewModelFactory(
-        addUserUseCase,
+        validUserUseCase,
         userModelDataMapper
     )
 
@@ -18,10 +28,9 @@ class LoginModule {
     internal fun provideLoginRepository(
         userDataSourceFactory: UserDataSourceFactory,
         userEntityDataMapper: UserEntityDataMapper
-    ): UserRepositoryImpl = UserRepositoryImpl(
+    ): UserRepository = UserRepositoryImpl(
         userDataSourceFactory,
         userEntityDataMapper
     )
 
 }
-*/

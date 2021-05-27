@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <group>
+        <item
+            android:id="@+id/navClients"
+            android:title="@string/clients" />
+
+        <item
+            android:id="@+id/navRoom"
+            android:title="@string/room" />
+
+        <item
+            android:id="@+id/navPassenger"
+            android:title="@string/passenger" />
+    </group>
+
+    <item tools:ignore="MenuTitle">
+        <menu>
+            <item
+                android:id="@+id/navSetting"
+                android:title="@string/settings" />
+
+            <item
+                android:id="@+id/navProfile"
+                android:title="@string/profile" />
+        </menu>
+    </item>
+
+    <group>
+        <item tools:ignore="MenuTitle">
+            <menu>
+                <item
+                    android:id="@+id/navContactUs"
+                    android:title="@string/contactUs" />
+                <item
+                    android:id="@+id/navLogOut"
+                    android:title="@string/logOut" />
+            </menu>
+        </item>
+    </group>
+
+</menu>

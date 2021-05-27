@@ -4,9 +4,15 @@ import com.momen.domain.model.User
 import io.reactivex.Single
 
 interface UserRepository {
-    fun addUser(user: User): Single<Long>
+    fun isValidUser(userName: String, password: String, md5: String): Single<User>
 
-    fun isValidUser(userName: String, password: String, md5: String): Single<Long>
+    fun addUser(user: User): Single<Long>?
 
-    fun getUser(id: Int): Single<User>
+    fun editUser(user: User): Single<Int>?
+
+    fun getUsers(): Single<ArrayList<User>>?
+
+    fun getUser(userId: Int): Single<User>?
+
+    fun removeUser(room: User): Single<Int>?
 }
