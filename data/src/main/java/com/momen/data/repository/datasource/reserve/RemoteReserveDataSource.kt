@@ -8,14 +8,14 @@ import javax.inject.Inject
 class RemoteReserveDataSource @Inject constructor(private val room: RestelAppDatabase) :
     ReserveDataSource {
 
-    override fun addReserve(reserve: ReserveEntity): Single<Long> =
-        room.getDatabaseDAO()?.addReserve(reserve)!!
+    override fun addReserve(reserve: ReserveEntity): Single<Long>? =
+        room.getDatabaseDAO()?.addReserve(reserve)
 
 
-    override fun updateReserve(reserve: ReserveEntity): Single<Int> =
-        room.getDatabaseDAO()?.updateReserve(reserve)!!
+    override fun updateReserve(reserve: ReserveEntity): Single<Int>? =
+        room.getDatabaseDAO()?.updateReserve(reserve)
 
-    override fun getReserves(): Single<List<ReserveEntity>> =
-        room.getDatabaseDAO()?.getReserves()!!
+    override fun getReserves(): Single<List<ReserveEntity>>? =
+        room.getDatabaseDAO()?.getReserves()
 
 }

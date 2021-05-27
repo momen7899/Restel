@@ -8,20 +8,16 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "reserve",
-    foreignKeys = arrayOf(
-        ForeignKey(
-            entity = RoomEntity::class, parentColumns = arrayOf("id"),
-            childColumns = arrayOf("room"), onDelete = CASCADE
-        ),
-        ForeignKey(
-            entity = UserEntity::class, parentColumns = arrayOf("id"),
-            childColumns = arrayOf("client"), onDelete = CASCADE
-        ),
-        ForeignKey(
-            entity = CustomerEntity::class, parentColumns = arrayOf("id"),
-            childColumns = arrayOf("customer"), onDelete = CASCADE
-        )
-    )
+    foreignKeys = [ForeignKey(
+        entity = RoomEntity::class, parentColumns = arrayOf("id"),
+        childColumns = arrayOf("room"), onDelete = CASCADE
+    ), ForeignKey(
+        entity = UserEntity::class, parentColumns = arrayOf("id"),
+        childColumns = arrayOf("client"), onDelete = CASCADE
+    ), ForeignKey(
+        entity = CustomerEntity::class, parentColumns = arrayOf("id"),
+        childColumns = arrayOf("customer"), onDelete = CASCADE
+    )]
 )
 data class ReserveEntity(
     @PrimaryKey(autoGenerate = true)

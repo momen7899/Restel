@@ -281,7 +281,16 @@ class MainFragment : Fragment() {
         if (validateInput(finish, date)) return null
         if (validateInput(priceRoom, reservePrice!!)) return null
 
-        return ReserveModel(0, "0", "1", "2", start!!, finish!!, priceRoom.toInt())
+
+        return ReserveModel(
+            0,
+            this.room?.id.toString(),
+            Utils.getUser()?.id.toString(),
+            this.customer?.id.toString(),
+            start!!,
+            finish!!,
+            priceRoom.toInt()
+        )
     }
 
     private fun validateInput(room: String?, et: EditText?): Boolean {
