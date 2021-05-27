@@ -15,7 +15,7 @@ class ValidUserUseCase @Inject constructor(
 ) : UseCase<User, ValidUserUseCase.Params>(threadExecutor, postExecutionThread) {
 
 
-    override fun buildUseCaseObservable(inputs: Params): Single<User> =
+    override fun buildUseCaseObservable(inputs: Params): Single<User>? =
         userRepository.isValidUser(inputs.userName, inputs.password, inputs.md5)
 
 

@@ -17,7 +17,7 @@ interface DatabaseDAO {
     @Update
     fun editUser(userEntity: UserEntity): Single<Int>?
 
-    @Query("SELECT id FROM users WHERE user_name==:userName AND password ==:password AND md5==:md5")
+    @Query("SELECT * FROM users WHERE user_name==:userName AND password ==:password AND md5==:md5")
     fun isValidUser(userName: String, password: String, md5: String): Single<UserEntity>
 
     @Query("SELECT * FROM users WHERE id==:id")

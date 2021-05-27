@@ -39,7 +39,10 @@ class SplashFragment : Fragment() {
         injectViewModel()
         setupViewModel()
         splashViewModel.createUser()
+    }
 
+    override fun onResume() {
+        super.onResume()
         Handler(Looper.getMainLooper()).postDelayed({
             val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
             requireView().findNavController().navigate(action)

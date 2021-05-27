@@ -18,6 +18,7 @@ import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
 import com.momen.restel.login.di.DaggerLoginComponent
+import com.momen.restel.login.model.UserModel
 import com.momen.restel.login.viewmodel.LoginViewModel
 import com.momen.restel.login.viewmodel.LoginViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -109,29 +110,40 @@ class LoginFragment : Fragment() {
             viewLifecycleOwner, { result ->
                 when (result.state) {
                     LoginViewModel.State.DATA_LOADED -> {
-                        if (result.user?.id!! > 0) {
-                            val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
-                            view.findNavController().navigate(action)
-                            Toasty.showSuccessToasty(
-                                requireContext(),
-                                getString(R.string.successLogin)
-                            )
-                        } else {
-                            Toasty.showErrorToasty(
-                                requireContext(),
-                                getString(R.string.unsuccessLogin)
-                            )
-                        }
+                        result.user?.let { loadMainFragment(it) }
                     }
                     LoginViewModel.State.LOADING_DATA -> {
                     }
                     LoginViewModel.State.LOAD_ERROR -> {
-                        Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
-                        println(result.error)
+                        Toasty.showErrorToasty(
+                            requireContext(),
+                            getString(R.string.unsuccessLogin)
+                        )
                     }
                 }
             }
         )
+    }
+
+    private fun loadMainFragment(user: UserModel) {
+        user.id?.let {
+            if (it >= 0) {
+                val navController = requireView().findNavController()
+                val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
+                if (navController.currentDestination?.id == R.id.loginFragment) {
+                    navController.navigate(action)
+                }
+                Toasty.showSuccessToasty(
+                    requireContext(),
+                    getString(R.string.successLogin)
+                )
+            } else {
+                Toasty.showErrorToasty(
+                    requireContext(),
+                    getString(R.string.unsuccessLogin)
+                )
+            }
+        }
     }
 
 

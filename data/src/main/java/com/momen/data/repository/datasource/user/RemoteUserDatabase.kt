@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 class RemoteUserDatabase @Inject constructor(private val room: RestelAppDatabase) : UserDataSource {
 
-    override fun isValidUser(userName: String, password: String, md5: String): Single<UserEntity> =
-        room.getDatabaseDAO()!!.isValidUser(userName, password, md5)
+    override fun isValidUser(userName: String, password: String, md5: String): Single<UserEntity>? =
+        room.getDatabaseDAO()?.isValidUser(userName, password, md5)
 
     override fun addUser(userEntity: UserEntity): Single<Long>? =
         room.getDatabaseDAO()?.addUser(userEntity)

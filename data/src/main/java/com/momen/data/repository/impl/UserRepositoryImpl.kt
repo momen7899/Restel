@@ -11,9 +11,9 @@ class UserRepositoryImpl(
     private val userEntityDataMapper: UserEntityDataMapper
 ) : UserRepository {
 
-    override fun isValidUser(userName: String, password: String, md5: String): Single<User> =
+    override fun isValidUser(userName: String, password: String, md5: String): Single<User>? =
         userDataSourceFactory.create().isValidUser(userName, password, md5)
-            ?.map(userEntityDataMapper::transformUserEntityToUser)!!
+            ?.map(userEntityDataMapper::transformUserEntityToUser)
 
     override fun addUser(user: User): Single<Long>? =
         userDataSourceFactory.create().addUser(userEntityDataMapper.transformUserToUserEntity(user))
