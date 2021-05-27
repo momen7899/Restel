@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.momen.restel.PasswordGenerator
 import com.momen.restel.R
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
@@ -23,8 +24,6 @@ import com.momen.restel.comm.Toasty
 import com.momen.restel.login.model.UserModel
 import kotlinx.android.synthetic.main.card_delete.*
 import kotlinx.android.synthetic.main.fragment_client.*
-import java.math.BigInteger
-import java.security.MessageDigest
 import java.util.*
 import javax.inject.Inject
 
@@ -274,18 +273,13 @@ class ClientsFragment : Fragment() {
         println(clientAdapter?.nextId())
         return if (update) UserModel(
             id, firstName, lastName, nationalCode,
-            phone, name, pass, md5(pass), address, 0
+            phone, name, pass, PasswordGenerator.md5(pass), address, 0
         )
         else
             UserModel(
                 clientAdapter?.nextId(), firstName, lastName, nationalCode,
-                phone, name, pass, md5(pass), address, 0
+                phone, name, pass, PasswordGenerator.md5(pass), address, 0
             )
-    }
-
-    private fun md5(input: String): String {
-        val md = MessageDigest.getInstance("MD5")
-        return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
     }
 
     private fun validPassword(pass: String, rePass: String): Boolean = pass != rePass

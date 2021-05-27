@@ -35,7 +35,7 @@ class ReserveAdapter : RecyclerView.Adapter<ReserveAdapter.ReserveViewHolder>() 
         else items[items.size - 1].id?.plus(1)
     }
 
-    fun setItems(items: ArrayList<com.momen.restel.main.model.ReserveModel>) {
+    fun setItems(items: ArrayList<ReserveModel>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
