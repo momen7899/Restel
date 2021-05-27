@@ -36,5 +36,14 @@ class HomeRoomAdapter(private val fragment: MainFragment) :
         this.items.addAll(items)
         notifyDataSetChanged()
     }
+
+    fun filterItems(items: ArrayList<HomeRoomModel>, search: String) {
+        val list = ArrayList<HomeRoomModel>()
+        items.forEach {
+            if (it.name.contains(search) || it.price.contains(search) || it.capacity.contains(search))
+                list.add(it)
+        }
+        setItems(list)
+    }
 }
 

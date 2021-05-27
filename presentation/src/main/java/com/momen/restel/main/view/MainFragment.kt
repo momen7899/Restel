@@ -17,6 +17,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -33,6 +34,8 @@ import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
 import com.momen.restel.main.di.DaggerMainComponent
+import com.momen.restel.main.model.HomeCustomerModel
+import com.momen.restel.main.model.HomeRoomModel
 import com.momen.restel.main.model.ReserveModel
 import com.momen.restel.main.viewmodel.HomeFeedViewModel
 import com.momen.restel.main.viewmodel.HomeFeedViewModelFactory
@@ -45,6 +48,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_reserve.*
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @SuppressLint("InflateParams")
 class MainFragment : Fragment() {
@@ -64,18 +68,26 @@ class MainFragment : Fragment() {
     private var customerRecycler: RecyclerView? = null
     private var customerDialog: Dialog? = null
     private var customerAdapter: HomeCustomerAdapter? = null
+    private var customerSearch: EditText? = null
+    private val customerList = ArrayList<HomeCustomerModel>()
+
     private var roomView: View? = null
     private var roomRecycler: RecyclerView? = null
     private var roomDialog: Dialog? = null
     private var roomAdapter: HomeRoomAdapter? = null
     private val reserveAdapter = ReserveAdapter()
     private var bottomSheetDialog: BottomSheetDialog? = null
+    private var roomSearch: EditText? = null
+    private val roomList = ArrayList<HomeRoomModel>()
+
     private var update = false
     private var date: TextView? = null
     private var submit: Button? = null
     private var reserveRoom: TextView? = null
     private var reserveCustomer: TextView? = null
     private var reservePrice: EditText? = null
+    private var customer: HomeCustomerModel? = null
+    private var room: HomeRoomModel? = null
 
     // activity component
     private lateinit var toolbar: Toolbar
@@ -216,6 +228,8 @@ class MainFragment : Fragment() {
         homeFeedViewModel.getCustomerLiveData.observe(viewLifecycleOwner, { result ->
             when (result.state) {
                 HomeFeedViewModel.State.DATA_LOADED -> {
+                    this.customerList.clear()
+                    result.customers?.let { this.customerList.addAll(it) }
                     result.customers?.let { customerAdapter?.setItems(it) }
                 }
                 HomeFeedViewModel.State.LOADING_DATA -> {
@@ -326,21 +340,29 @@ class MainFragment : Fragment() {
             setUpDatePicker()
         }
         reserveRoom?.setOnClickListener {
-            setUpRoomDialog()
+            setUpRoomDialogComponents()
         }
         reserveCustomer?.setOnClickListener {
-            setUpCustomerDialog()
+            setUpCustomerDialogComponents()
         }
     }
 
-    private fun setUpRoomDialog() {
+    private fun setUpRoomDialogComponents() {
         homeFeedViewModel.getRooms()
+        setUpRoomDialog()
+        setUpRoomDialogRecycle()
+        setUpRoomDialogSearch()
+    }
+
+    private fun setUpRoomDialog() {
         roomView = requireActivity().layoutInflater
             .inflate(R.layout.dialog_main_reserve_room, null)
         roomDialog = AlertDialog.Builder(requireContext())
             .setView(roomView).create()
         roomDialog?.show()
+    }
 
+    private fun setUpRoomDialogRecycle() {
         roomAdapter = HomeRoomAdapter(this)
         roomRecycler = roomView?.findViewById(R.id.mainCustomerRecycler)
         roomRecycler?.layoutManager =
@@ -348,14 +370,37 @@ class MainFragment : Fragment() {
         roomRecycler?.adapter = roomAdapter
     }
 
-    private fun setUpCustomerDialog() {
+    private fun setUpRoomDialogSearch() {
+        roomSearch = customerView?.findViewById(R.id.searchMainReserveCustomer)
+        roomSearch?.addTextChangedListener {
+            roomAdapter?.filterItems(roomList, roomSearch?.text.toString().trim())
+        }
+    }
+
+
+    private fun setUpCustomerDialogComponents() {
         homeFeedViewModel.getCustomers()
+        setUpCustomerDialog()
+        setUpCustomerDialogRecycle()
+        setUpCustomerDialogSearch()
+    }
+
+    private fun setUpCustomerDialog() {
         customerView = requireActivity().layoutInflater
             .inflate(R.layout.dialog_main_reserve_customer, null)
         customerDialog = AlertDialog.Builder(requireContext())
             .setView(customerView).create()
         customerDialog?.show()
+    }
 
+    private fun setUpCustomerDialogSearch() {
+        customerSearch = customerView?.findViewById(R.id.searchMainReserveCustomer)
+        customerSearch?.addTextChangedListener {
+            customerAdapter?.filterItems(customerList, customerSearch?.text.toString().trim())
+        }
+    }
+
+    private fun setUpCustomerDialogRecycle() {
         customerAdapter = HomeCustomerAdapter(this)
         customerRecycler = customerView?.findViewById(R.id.mainCustomerRecycler)
         customerRecycler?.layoutManager =
@@ -488,5 +533,17 @@ class MainFragment : Fragment() {
                 }
             }
         )
+    }
+
+    fun setCustomerSelected(customer: HomeCustomerModel) {
+        this.customer = customer
+        customerDialog?.dismiss()
+        reserveCustomer?.text = this.customer?.name
+    }
+
+    fun setRoomSelected(room: HomeRoomModel) {
+        this.room = room
+        roomDialog?.dismiss()
+        reserveRoom?.text = this.room?.name
     }
 }
