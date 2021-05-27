@@ -30,6 +30,11 @@ class ReserveAdapter : RecyclerView.Adapter<ReserveAdapter.ReserveViewHolder>() 
 
     override fun getItemCount(): Int = items.size
 
+    fun nextId(): Int? {
+        return if (items.isEmpty()) 0
+        else items[items.size - 1].id?.plus(1)
+    }
+
     fun setItems(items: ArrayList<com.momen.restel.main.model.ReserveModel>) {
         this.items.clear()
         this.items.addAll(items)
