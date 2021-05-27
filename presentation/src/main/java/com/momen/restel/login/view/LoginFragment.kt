@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.R
+import com.momen.restel.Utils
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
@@ -133,9 +134,10 @@ class LoginFragment : Fragment() {
                 if (navController.currentDestination?.id == R.id.loginFragment) {
                     navController.navigate(action)
                 }
+                Utils.setUser(user)
                 Toasty.showSuccessToasty(
                     requireContext(),
-                    getString(R.string.successLogin)
+                    getString(R.string.successLogin).plus(" ${user.firstName}")
                 )
             } else {
                 Toasty.showErrorToasty(

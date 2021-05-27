@@ -1,10 +1,11 @@
 package com.momen.restel
 
+import com.momen.restel.login.model.UserModel
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.*
 
-class PasswordGenerator {
+class Utils {
     companion object {
         fun md5(s: String): String {
             try {
@@ -24,5 +25,13 @@ class PasswordGenerator {
             }
             return ""
         }
+
+        private var currentUser: UserModel? = null
+
+        fun setUser(userModel: UserModel) {
+            currentUser = userModel
+        }
+
+        fun getUser() = currentUser
     }
 }

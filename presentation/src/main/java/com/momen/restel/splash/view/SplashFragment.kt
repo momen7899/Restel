@@ -43,9 +43,17 @@ class SplashFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        loadLogin()
+    }
+
+    private fun loadLogin() {
+        val navController = requireView().findNavController()
+        val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+
         Handler(Looper.getMainLooper()).postDelayed({
-            val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
-            requireView().findNavController().navigate(action)
+            if (navController.currentDestination?.id == R.id.splashFragment) {
+                navController.navigate(action)
+            }
         }, 2000)
     }
 

@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.momen.restel.PasswordGenerator
+import com.momen.restel.Utils
 import com.momen.restel.R
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
@@ -273,12 +273,12 @@ class ClientsFragment : Fragment() {
         println(clientAdapter?.nextId())
         return if (update) UserModel(
             id, firstName, lastName, nationalCode,
-            phone, name, pass, PasswordGenerator.md5(pass), address, 0
+            phone, name, pass, Utils.md5(pass), address, 0
         )
         else
             UserModel(
                 clientAdapter?.nextId(), firstName, lastName, nationalCode,
-                phone, name, pass, PasswordGenerator.md5(pass), address, 0
+                phone, name, pass, Utils.md5(pass), address, 0
             )
     }
 

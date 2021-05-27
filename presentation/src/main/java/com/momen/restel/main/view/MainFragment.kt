@@ -27,6 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.MainActivity
 import com.momen.restel.R
+import com.momen.restel.Utils
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
@@ -376,7 +377,6 @@ class MainFragment : Fragment() {
         }
     }
 
-
     private fun setUpCustomerDialogComponents() {
         homeFeedViewModel.getCustomers()
         setUpCustomerDialog()
@@ -453,6 +453,9 @@ class MainFragment : Fragment() {
     }
 
     private fun setUpNavView() {
+        Utils.getUser()?.admin?.let {
+            if (it == 0) navigationView.menu.findItem(R.id.navClients).isVisible = false
+        }
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navClients -> {
