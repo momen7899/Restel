@@ -3,6 +3,7 @@ package com.momen.restel.main.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.momen.restel.R
@@ -14,19 +15,27 @@ class HomeRoomAdapter(private val fragment: MainFragment) :
     private val items = ArrayList<HomeRoomModel>()
 
     class RoomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.mainCustomerName)
-        val nationalCode: TextView = view.findViewById(R.id.mainCustomerNationalCode)
+        val card: LinearLayout = view.findViewById(R.id.mainRoom)
+        val title: TextView = view.findViewById(R.id.mainRoomName)
+        val capacity: TextView = view.findViewById(R.id.mainRoomCapacity)
+        val price: TextView = view.findViewById(R.id.mainRoomPrice)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder =
         RoomViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.main_customer_item, parent, false)
+                .inflate(R.layout.main_room_item, parent, false)
         )
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-//        holder.title.text = items[position].name
-//        holder.nationalCode.text = items[position].nationalCode
+        with(holder) {
+            card.setOnClickListener {
+                fragment.setRoomSelected(items[position])
+            }
+            title.text = fragment.getString(R.string.roomNumber).plus(items[position].name)
+            capacity.text = fragment.getString(R.string.capacity).plus(items[position].capacity)
+            price.text = fragment.getString(R.string.price).plus(items[position].price)
+        }
     }
 
     override fun getItemCount(): Int = items.size

@@ -8,10 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ScrollView
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -357,6 +354,8 @@ class MainFragment : Fragment() {
     private fun setUpRoomDialog() {
         roomView = requireActivity().layoutInflater
             .inflate(R.layout.dialog_main_reserve_room, null)
+        roomView?.findViewById<LinearLayout>(R.id.dialogMainRoom)?.layoutDirection =
+            if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
         roomDialog = AlertDialog.Builder(requireContext())
             .setView(roomView).create()
         roomDialog?.show()
@@ -388,6 +387,10 @@ class MainFragment : Fragment() {
     private fun setUpCustomerDialog() {
         customerView = requireActivity().layoutInflater
             .inflate(R.layout.dialog_main_reserve_customer, null)
+
+        customerView?.findViewById<LinearLayout>(R.id.dialogMainCustomer)?.layoutDirection =
+            if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+
         customerDialog = AlertDialog.Builder(requireContext())
             .setView(customerView).create()
         customerDialog?.show()

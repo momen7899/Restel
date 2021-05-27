@@ -41,13 +41,15 @@ class RoomAdapter(private val fragment: RoomFragment) :
                 removeItem(items[position])
             }
         }
-
-
     }
 
     override fun getItemCount(): Int = items.size
 
-    fun nextId(): Int? = items[items.size - 1].id?.plus(1)
+    fun nextId(): Int? {
+        return if (items.isEmpty())
+            0
+        else items[items.size - 1].id?.plus(1)
+    }
 
     private fun removeItem(room: RoomModel) {
         items.remove(room)

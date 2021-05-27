@@ -116,7 +116,7 @@ class RoomFragment : Fragment() {
                 }
                 RoomViewModel.State.DATA_LOADED -> {
                     result.response?.let {
-                        if (it > 0) {
+                        if (it >= 0) {
                             roomViewModel?.getRooms()
                         }
                     }
@@ -136,7 +136,7 @@ class RoomFragment : Fragment() {
                 }
                 RoomViewModel.State.DATA_LOADED -> {
                     result.response?.let {
-                        if (it > 0) {
+                        if (it >= 0) {
                             roomViewModel?.getRooms()
                         }
                     }
