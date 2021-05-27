@@ -11,16 +11,16 @@ class ReserveRepositoryImpl(
     private val reserveEntityDataMapper: ReserveEntityDataMapper
 ) : ReserveRepository {
 
-    override fun addReserve(reserve: Reserve): Single<Long> =
+    override fun addReserve(reserve: Reserve): Single<Long>? =
         reserveDataSourceFactory.create()
             .addReserve(reserveEntityDataMapper.transformReserveToReserveEntity(reserve))
 
-    override fun updateReserve(reserve: Reserve): Single<Int> =
+    override fun updateReserve(reserve: Reserve): Single<Int>? =
         reserveDataSourceFactory.create()
         .updateReserve(reserveEntityDataMapper.transformReserveToReserveEntity(reserve))
 
 
-    override fun getReserves(): Single<ArrayList<Reserve>> =
-        reserveDataSourceFactory.create().getReserves().map(reserveEntityDataMapper::transformReservesEntityToReserves)
+    override fun getReserves(): Single<ArrayList<Reserve>>? =
+        reserveDataSourceFactory.create().getReserves()?.map(reserveEntityDataMapper::transformReservesEntityToReserves)
 
 }

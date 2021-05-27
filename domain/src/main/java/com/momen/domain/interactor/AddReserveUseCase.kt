@@ -14,7 +14,7 @@ class AddReserveUseCase @Inject constructor(
     postExecutionThread: PostExecutionThread
 ) : UseCase<Long, AddReserveUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<Long> =
+    override fun buildUseCaseObservable(inputs: Params): Single<Long>? =
         reserveRepository.addReserve(inputs.reserve)
 
     class Params(val reserve: Reserve) {

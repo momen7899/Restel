@@ -14,7 +14,7 @@ class UpdateReserveUseCase @Inject constructor(
     postExecutionThread: PostExecutionThread
 ) : UseCase<Int, UpdateReserveUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<Int> =
+    override fun buildUseCaseObservable(inputs: Params): Single<Int>? =
         reserveRepository.updateReserve(inputs.reserve)
 
     class Params(val reserve: Reserve) {

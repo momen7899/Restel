@@ -4,9 +4,9 @@ import com.momen.domain.model.Reserve
 import io.reactivex.Single
 
 interface ReserveRepository {
-    fun addReserve(reserve: Reserve): Single<Long>
+    fun addReserve(reserve: Reserve): Single<Long>?
 
-    fun updateReserve(reserve: Reserve): Single<Int>
+    fun updateReserve(reserve: Reserve): Single<Int>?
 
-    fun getReserves(): Single<ArrayList<Reserve>>
+    fun getReserves(): Single<ArrayList<Reserve>>?
 }

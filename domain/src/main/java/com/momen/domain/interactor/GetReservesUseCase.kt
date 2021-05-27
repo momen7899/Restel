@@ -14,7 +14,7 @@ class GetReservesUseCase @Inject constructor(
     postExecutionThread: PostExecutionThread
 ) : UseCase<ArrayList<Reserve>, GetReservesUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<ArrayList<Reserve>> =
+    override fun buildUseCaseObservable(inputs: Params): Single<ArrayList<Reserve>>? =
         reserveRepository.getReserves()
 
     class Params {
