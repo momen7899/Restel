@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.NestedScrollView
 import androidx.core.widget.addTextChangedListener
@@ -51,7 +52,10 @@ class ClientsFragment : Fragment() {
     private var userPass: EditText? = null
     private var userRePass: EditText? = null
     private var userAddress: EditText? = null
+    private var adminRb: RadioButton? = null
+    private var userRb: RadioButton? = null
     private var submit: Button? = null
+    private var admin = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -256,6 +260,8 @@ class ClientsFragment : Fragment() {
         userPass = bottomSheetDialog?.findViewById(R.id.userPass)
         userRePass = bottomSheetDialog?.findViewById(R.id.userRePass)
         userAddress = bottomSheetDialog?.findViewById(R.id.userAddress)
+        adminRb = bottomSheetDialog?.findViewById(R.id.clientAdmin)
+        userRb = bottomSheetDialog?.findViewById(R.id.clientUser)
         submit = bottomSheetDialog?.findViewById(R.id.submitBtn)
     }
 
@@ -266,6 +272,13 @@ class ClientsFragment : Fragment() {
             if (update) user?.let { clientViewModel?.editUser(it) }
             else user?.let { clientViewModel?.addUser(it) }
             bottomSheetDialog?.dismiss()
+        }
+
+        adminRb?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) admin = true
+        }
+        userRb?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) admin = false
         }
     }
 
@@ -294,12 +307,12 @@ class ClientsFragment : Fragment() {
         println(clientAdapter?.nextId())
         return if (update) UserModel(
             id, firstName, lastName, nationalCode,
-            phone, name, pass, Utils.md5(pass), address, 0
+            phone, name, pass, Utils.md5(pass), address, admin
         )
         else
             UserModel(
                 clientAdapter?.nextId(), firstName, lastName, nationalCode,
-                phone, name, pass, Utils.md5(pass), address, 0
+                phone, name, pass, Utils.md5(pass), address, admin
             )
     }
 
@@ -339,6 +352,7 @@ class ClientsFragment : Fragment() {
         userPass?.setText(user.password)
         userRePass?.setText(user.password)
         userAddress?.setText(user.address)
+        user.admin?.let { adminRb?.isChecked = it }
         submit?.text = getString(R.string.edit)
     }
 
@@ -351,6 +365,7 @@ class ClientsFragment : Fragment() {
         userPass?.setText("")
         userRePass?.setText("")
         userAddress?.setText("")
+        userRb?.isChecked = true
         submit?.text = getString(R.string.submit)
     }
 

@@ -498,7 +498,7 @@ class MainFragment : Fragment() {
     private fun setUpNavView() {
         val user = Utils.getUser()
         user?.admin?.let {
-            if (it == 0) navigationView.menu.findItem(R.id.navClients).isVisible = false
+            if (!it) navigationView.menu.findItem(R.id.navClients).isVisible = false
         }
         navigationView.headerUserName.text = user?.firstName.plus(" ${user?.lastName}")
 

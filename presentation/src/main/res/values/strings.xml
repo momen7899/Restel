@@ -64,4 +64,7 @@
         انجام شده است.
     </string>
     <string name="callUs">call us</string>
+    <string name="admin">ادمین</string>
+    <string name="user">کارمند</string>
+    <string name="adminsRight">سطح دسترسی کاربر</string>
 </resources>

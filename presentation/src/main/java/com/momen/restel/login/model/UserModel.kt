@@ -10,5 +10,5 @@ data class UserModel(
     val password: String?,
     val md5: String?,
     val address: String?,
-    val admin: Int?
+    val admin: Boolean?
 )

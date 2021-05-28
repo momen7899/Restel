@@ -48,7 +48,7 @@ class SplashViewModel constructor(
         "admin",
         "21232F297A57A5A743894A0E4A801FC3",
         "admin",
-        1
+        true
     )
 
 }
