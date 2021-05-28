@@ -129,8 +129,13 @@ class RoomFragment : Fragment() {
                             roomViewModel?.getRooms()
                         }
                     }
+                    Toasty.showSuccessToasty(
+                        requireContext(),
+                        getString(R.string.successDbTransaction)
+                    )
                 }
                 RoomViewModel.State.LOAD_ERROR -> {
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                     Log.i("AddRoom", result.error.toString())
                 }
             }
@@ -149,10 +154,14 @@ class RoomFragment : Fragment() {
                             roomViewModel?.getRooms()
                         }
                     }
+                    Toasty.showSuccessToasty(
+                        requireContext(),
+                        getString(R.string.successDbTransaction)
+                    )
                 }
 
                 RoomViewModel.State.LOAD_ERROR -> {
-
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                 }
             }
         })
@@ -165,11 +174,19 @@ class RoomFragment : Fragment() {
 
                 }
                 RoomViewModel.State.DATA_LOADED -> {
-
+                    result.response?.let {
+                        if (it >= 0) {
+                            roomViewModel?.getRooms()
+                        }
+                    }
+                    Toasty.showSuccessToasty(
+                        requireContext(),
+                        getString(R.string.successDbTransaction)
+                    )
                 }
 
                 RoomViewModel.State.LOAD_ERROR -> {
-
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                 }
             }
         })

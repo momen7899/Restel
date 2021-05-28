@@ -89,7 +89,6 @@ class ClientsFragment : Fragment() {
 
     private fun subscribeViewModel() {
         subscribeGetUsers()
-        subscribeGetUser()
         subscribeAddUser()
         subscribeEditUser()
         subscribeRemoveUser()
@@ -108,28 +107,6 @@ class ClientsFragment : Fragment() {
                         clientAdapter?.setItems(it)
                         users.clear()
                         users.addAll(it)
-                    }
-
-                }
-
-                ClientViewModel.State.LOAD_ERROR -> {
-
-                }
-            }
-        })
-    }
-
-    private fun subscribeGetUser() {
-        clientViewModel?.getUserLiveData?.observe(viewLifecycleOwner, { result ->
-            when (result.state) {
-                ClientViewModel.State.LOADING_DATA -> {
-
-                }
-                ClientViewModel.State.DATA_LOADED -> {
-                    result.response?.let {
-                        if (it > 0) {
-                            clientViewModel?.getUsers()
-                        }
                     }
                 }
 
@@ -154,9 +131,14 @@ class ClientsFragment : Fragment() {
                             clientViewModel?.getUsers()
                         }
                     }
+                    Toasty.showSuccessToasty(
+                        requireContext(), getString(R.string.successDbTransaction)
+                    )
+
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                     println(result.error)
                 }
             }
@@ -176,10 +158,14 @@ class ClientsFragment : Fragment() {
                             clientViewModel?.getUsers()
                         }
                     }
+                    Toasty.showSuccessToasty(
+                        requireContext(), getString(R.string.successDbTransaction)
+                    )
+
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {
-
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                 }
             }
         })
@@ -197,10 +183,14 @@ class ClientsFragment : Fragment() {
                             clientViewModel?.getUsers()
                         }
                     }
+                    Toasty.showSuccessToasty(
+                        requireContext(), getString(R.string.successDbTransaction)
+                    )
+
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {
-
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                 }
             }
         })

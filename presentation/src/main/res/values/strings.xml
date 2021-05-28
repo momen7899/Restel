@@ -3,6 +3,8 @@
     <string name="welcome">خوش آمدید</string>
     <string name="hintUserName">نام کاربری</string>
     <string name="hintPassword">رمز عبور</string>
+    <string name="successDbTransaction">تغییرات با درستی اعمال شد</string>
+    <string name="unSuccessFbTransaction">خطایی رخ داده است. لطفا دوباره سعی کنید.</string>
     <string name="loginText">ورود</string>
     <string name="recoveryPassword">بازیابی رمز عبور</string>
     <string name="errorLoginUsername">"نام کاربری نباید خالی باشد"</string>

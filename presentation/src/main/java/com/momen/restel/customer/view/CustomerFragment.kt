@@ -123,8 +123,13 @@ class CustomerFragment : Fragment() {
                             customerViewModel?.getCustomers()
                         }
                     }
+                    Toasty.showSuccessToasty(
+                        requireContext(),
+                        getString(R.string.successDbTransaction)
+                    )
                 }
                 CustomerViewModel.State.LOAD_ERROR -> {
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                 }
             }
         })
@@ -141,10 +146,14 @@ class CustomerFragment : Fragment() {
                         if (it >= 0) {
                             customerViewModel?.getCustomers()
                         }
+                        Toasty.showSuccessToasty(
+                            requireContext(),
+                            getString(R.string.successDbTransaction)
+                        )
                     }
                 }
                 CustomerViewModel.State.LOAD_ERROR -> {
-
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                 }
             }
         })
@@ -158,13 +167,17 @@ class CustomerFragment : Fragment() {
                         if (it >= 0) {
                             customerViewModel?.getCustomers()
                         }
+                        Toasty.showSuccessToasty(
+                            requireContext(),
+                            getString(R.string.successDbTransaction)
+                        )
                     }
                 }
                 CustomerViewModel.State.DATA_LOADED -> {
 
                 }
                 CustomerViewModel.State.LOAD_ERROR -> {
-
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                 }
             }
         })

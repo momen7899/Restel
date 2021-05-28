@@ -177,6 +177,10 @@ class MainFragment : Fragment() {
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
                         reserveViewModel?.getReserves()
+                        Toasty.showSuccessToasty(
+                            requireContext(),
+                            getString(R.string.successDbTransaction)
+                        )
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
                     }
@@ -195,6 +199,11 @@ class MainFragment : Fragment() {
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
                         reserveViewModel?.getReserves()
+                        Toasty.showSuccessToasty(
+                            requireContext(),
+                            getString(R.string.successDbTransaction)
+                        )
+
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
                     }
@@ -208,7 +217,25 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeRemoveReserve() {
-
+        reserveViewModel?.removeReserveLiveData?.observe(
+            viewLifecycleOwner, { result ->
+                when (result.state) {
+                    ReserveViewModel.State.DATA_LOADED -> {
+                        reserveViewModel?.getReserves()
+                        Toasty.showSuccessToasty(
+                            requireContext(),
+                            getString(R.string.successDbTransaction)
+                        )
+                    }
+                    ReserveViewModel.State.LOADING_DATA -> {
+                    }
+                    ReserveViewModel.State.LOAD_ERROR -> {
+                        Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
+                        println(result.error)
+                    }
+                }
+            }
+        )
     }
 
     private fun subscribeGetRooms() {
@@ -240,9 +267,7 @@ class MainFragment : Fragment() {
                 HomeFeedViewModel.State.LOADING_DATA -> {
                 }
                 HomeFeedViewModel.State.LOAD_ERROR -> {
-                    Toasty.showErrorToasty(
-                        requireContext(), getString(R.string.DatabaseError)
-                    )
+                    Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
                     println(result.error)
                 }
             }
