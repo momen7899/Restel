@@ -63,6 +63,7 @@ class MainFragment : Fragment() {
 
     private var homeFeedViewModel: HomeFeedViewModel? = null
     private var reserveViewModel: ReserveViewModel? = null
+    private val reserves = ArrayList<ReserveModel>()
 
     private var customerView: View? = null
     private var customerRecycler: RecyclerView? = null
@@ -87,8 +88,8 @@ class MainFragment : Fragment() {
     private var reserveRoom: TextView? = null
     private var reserveCustomer: TextView? = null
     private var reservePrice: EditText? = null
-    private var customer: HomeCustomerModel? = null
-    private var room: HomeRoomModel? = null
+    private var customer: String? = null
+    private var room: String? = null
 
     // activity component
     private lateinit var toolbar: Toolbar
@@ -151,8 +152,11 @@ class MainFragment : Fragment() {
             viewLifecycleOwner, { result ->
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
-                        println(result.reserves)
-                        reserveAdapter?.setItems(result.reserves!!)
+                        result.reserves?.let {
+                            reserveAdapter?.setItems(it)
+                            reserves.clear()
+                            reserves.addAll(it)
+                        }
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
                     }
@@ -248,6 +252,7 @@ class MainFragment : Fragment() {
     private fun setUpComponents() {
         setUpFab()
         reserveRecycleSetUp()
+        setUpSearch()
         setUpBottomSheet()
         setUpBackPressed()
         setUpBottomSheetComponent()
@@ -266,7 +271,11 @@ class MainFragment : Fragment() {
         date?.text = "${reserve.startDate} \n${reserve.finishData}"
         reserveRoom?.text = reserve.room
         reserveCustomer?.text = reserve.customer
-        reserve.price?.let { reservePrice?.setText(it) }
+        reserve.price?.let { reservePrice?.setText(it.toString()) }
+        customer = reserve.customer
+        room = reserve.room
+        start = reserve.startDate
+        finish = reserve.finishData
         submit?.text = getString(R.string.edit)
     }
 
@@ -304,18 +313,18 @@ class MainFragment : Fragment() {
         return if (update)
             ReserveModel(
                 this.id,
-                this.room?.name.toString(),
+                room,
                 userName,
-                this.customer?.name.toString(),
+                customer,
                 start!!,
                 finish!!,
                 priceRoom.toInt()
             )
         else ReserveModel(
             reserveAdapter?.nextId(),
-            this.room?.name.toString(),
+            room,
             userName,
-            this.customer?.name.toString(),
+            customer,
             start!!,
             finish!!,
             priceRoom.toInt()
@@ -482,6 +491,12 @@ class MainFragment : Fragment() {
         reserveRecycle.adapter = reserveAdapter
     }
 
+    private fun setUpSearch() {
+        (search as EditText).addTextChangedListener {
+            reserveAdapter?.filterItems(reserves, (search as EditText).text.toString().trim())
+        }
+    }
+
     private fun setUpActivityComponent() {
         initComponent()
         setUpToolbar()
@@ -588,15 +603,15 @@ class MainFragment : Fragment() {
     }
 
     fun setCustomerSelected(customer: HomeCustomerModel) {
-        this.customer = customer
+        this.customer = customer.name
         customerDialog?.dismiss()
-        reserveCustomer?.text = this.customer?.name
+        reserveCustomer?.text = customer.name
     }
 
     fun setRoomSelected(room: HomeRoomModel) {
-        this.room = room
+        this.room = room.name
         roomDialog?.dismiss()
-        reserveRoom?.text = this.room?.name
+        reserveRoom?.text = room.name
     }
 
     fun showDelMsg(reserve: ReserveModel, position: Int) {

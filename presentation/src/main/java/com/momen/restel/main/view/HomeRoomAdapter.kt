@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.momen.restel.R
 import com.momen.restel.main.model.HomeRoomModel
-import com.momen.restel.main.model.ReserveModel
 
 class HomeRoomAdapter(private val fragment: MainFragment) :
     RecyclerView.Adapter<HomeRoomAdapter.RoomViewHolder>() {

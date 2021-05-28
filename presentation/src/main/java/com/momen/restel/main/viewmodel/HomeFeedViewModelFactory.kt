@@ -18,13 +18,13 @@ class HomeFeedViewModelFactory(
         if (modelClass.isAssignableFrom(HomeFeedViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return HomeFeedViewModel(
-                 customersUseCase,
-                 roomsUseCase,
-                 customerDataMapper,
-                 roomDataMapper
+                customersUseCase,
+                roomsUseCase,
+                customerDataMapper,
+                roomDataMapper
             ) as T
         } else {
-            throw IllegalArgumentException("Unknown ViewModel class");
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
 

@@ -28,7 +28,7 @@ class ReserveViewModelFactory @Inject constructor(
                 reserveModelDataMapper
             ) as T
         } else {
-            throw IllegalArgumentException("Unknown ViewModel class");
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
 

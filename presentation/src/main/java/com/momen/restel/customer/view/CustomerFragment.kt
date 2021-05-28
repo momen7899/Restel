@@ -119,7 +119,7 @@ class CustomerFragment : Fragment() {
                 }
                 CustomerViewModel.State.DATA_LOADED -> {
                     result.response?.let {
-                        if (it > 0) {
+                        if (it >= 0) {
                             customerViewModel?.getCustomers()
                         }
                     }
@@ -138,7 +138,7 @@ class CustomerFragment : Fragment() {
                 }
                 CustomerViewModel.State.DATA_LOADED -> {
                     result.response?.let {
-                        if (it > 0) {
+                        if (it >= 0) {
                             customerViewModel?.getCustomers()
                         }
                     }
@@ -154,7 +154,11 @@ class CustomerFragment : Fragment() {
         customerViewModel?.removeCustomerLiveData?.observe(viewLifecycleOwner, { result ->
             when (result.state) {
                 CustomerViewModel.State.LOADING_DATA -> {
-
+                    result.response?.let {
+                        if (it >= 0) {
+                            customerViewModel?.getCustomers()
+                        }
+                    }
                 }
                 CustomerViewModel.State.DATA_LOADED -> {
 

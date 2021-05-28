@@ -150,7 +150,7 @@ class ClientsFragment : Fragment() {
                 ClientViewModel.State.DATA_LOADED -> {
                     println(result.response)
                     result.response?.let {
-                        if (it > 0) {
+                        if (it >= 0) {
                             clientViewModel?.getUsers()
                         }
                     }
@@ -172,7 +172,7 @@ class ClientsFragment : Fragment() {
                 }
                 ClientViewModel.State.DATA_LOADED -> {
                     result.response?.let {
-                        if (it > 0) {
+                        if (it >= 0) {
                             clientViewModel?.getUsers()
                         }
                     }
@@ -192,7 +192,11 @@ class ClientsFragment : Fragment() {
 
                 }
                 ClientViewModel.State.DATA_LOADED -> {
-
+                    result.response?.let {
+                        if (it >= 0) {
+                            clientViewModel?.getUsers()
+                        }
+                    }
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {

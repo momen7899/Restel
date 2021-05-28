@@ -2,7 +2,10 @@ package com.momen.restel.client.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.momen.domain.interactor.*
+import com.momen.domain.interactor.AddUser1UseCase
+import com.momen.domain.interactor.EditUserUseCase
+import com.momen.domain.interactor.GetUsers1UseCase
+import com.momen.domain.interactor.RemoveUserUseCase
 import com.momen.restel.login.model.UserModelDataMapper
 import javax.inject.Inject
 
@@ -24,7 +27,7 @@ class ClientViewModelFactory @Inject constructor(
                 userModelDataMapper
             ) as T
         } else {
-            throw IllegalArgumentException("Unknown ViewModel class");
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
 }

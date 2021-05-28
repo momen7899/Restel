@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.momen.data.room.RestelAppDatabase
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class RoomDbModule(private val context: Context) {

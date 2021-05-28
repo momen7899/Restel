@@ -3,7 +3,10 @@ package com.momen.restel.client.di
 import com.momen.data.mapper.UserEntityDataMapper
 import com.momen.data.repository.datasource.user.UserDataSourceFactory
 import com.momen.data.repository.impl.UserRepositoryImpl
-import com.momen.domain.interactor.*
+import com.momen.domain.interactor.AddUser1UseCase
+import com.momen.domain.interactor.EditUserUseCase
+import com.momen.domain.interactor.GetUsers1UseCase
+import com.momen.domain.interactor.RemoveUserUseCase
 import com.momen.domain.repository.UserRepository
 import com.momen.restel.client.viewmodel.ClientViewModelFactory
 import com.momen.restel.login.model.UserModelDataMapper

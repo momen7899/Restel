@@ -3,7 +3,10 @@ package com.momen.restel.customer.di
 import com.momen.data.mapper.CustomerEntityDataMapper
 import com.momen.data.repository.datasource.customer.CustomerDataSourceFactory
 import com.momen.data.repository.impl.CustomerRepositoryImpl
-import com.momen.domain.interactor.*
+import com.momen.domain.interactor.AddCustomerUseCase
+import com.momen.domain.interactor.EditCustomerUseCase
+import com.momen.domain.interactor.GetCustomersUseCase
+import com.momen.domain.interactor.RemoveCustomerUseCase
 import com.momen.domain.repository.CustomerRepository
 import com.momen.restel.customer.model.CustomerModelDataMapper
 import com.momen.restel.customer.viewmodel.CustomerViewModelFactory

@@ -1,8 +1,8 @@
 package com.momen.restel.splash.di
 
 import com.momen.data.mapper.UserEntityDataMapper
-import com.momen.data.repository.impl.SplashRepositoryImpl
 import com.momen.data.repository.datasource.splash.SplashDataSourceFactory
+import com.momen.data.repository.impl.SplashRepositoryImpl
 import com.momen.domain.interactor.AddUserUseCase
 import com.momen.domain.interactor.GetUsersUseCase
 import com.momen.domain.repository.SplashRepository

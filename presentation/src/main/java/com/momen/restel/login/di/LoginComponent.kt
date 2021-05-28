@@ -6,7 +6,10 @@ import com.momen.restel.login.view.LoginFragment
 import dagger.Component
 
 
-@Component(dependencies = [AppComponent::class], modules = [LoginModule::class, RoomDbModule::class])
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [LoginModule::class, RoomDbModule::class]
+)
 interface LoginComponent {
     fun inject(loginFragment: LoginFragment)
 }

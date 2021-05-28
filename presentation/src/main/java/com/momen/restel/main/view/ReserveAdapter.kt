@@ -65,4 +65,16 @@ class ReserveAdapter(private val fragment: MainFragment) :
         items.add(position, reserve)
         notifyDataSetChanged()
     }
+
+    fun filterItems(items: ArrayList<ReserveModel>, search: String) {
+        val list = ArrayList<ReserveModel>()
+        items.forEach {
+            if (it.customer?.contains(search) == true || it.client?.contains(search) == true
+                || it.room?.contains(search) == true || it.price?.toString()
+                    ?.contains(search) == true
+            )
+                list.add(it)
+        }
+        setItems(list)
+    }
 }

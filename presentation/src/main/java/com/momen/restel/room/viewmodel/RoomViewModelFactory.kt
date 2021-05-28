@@ -2,7 +2,10 @@ package com.momen.restel.room.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.momen.domain.interactor.*
+import com.momen.domain.interactor.AddRoomUseCase
+import com.momen.domain.interactor.EditRoomUseCase
+import com.momen.domain.interactor.GetRoomsUseCase
+import com.momen.domain.interactor.RemoveRoomUseCase
 import com.momen.restel.room.model.RoomModelDataMapper
 import javax.inject.Inject
 

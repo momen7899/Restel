@@ -1,9 +1,7 @@
 package com.momen.restel.app
 
 import android.content.Context
-import androidx.room.Room
 import com.momen.data.executor.JobExecutor
-import com.momen.data.room.RestelAppDatabase
 import com.momen.domain.executor.PostExecutionThread
 import com.momen.domain.executor.ThreadExecutor
 import com.momen.restel.UiThread

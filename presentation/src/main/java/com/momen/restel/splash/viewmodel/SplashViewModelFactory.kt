@@ -21,7 +21,7 @@ class SplashViewModelFactory @Inject constructor(
                 userModelDataMapper
             ) as T
         } else {
-            throw IllegalArgumentException("Unknown ViewModel class");
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
 
