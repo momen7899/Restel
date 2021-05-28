@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/firstNameHint" />
+
+        <TextView
+            android:id="@+id/profileFirstName"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp" />
+
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/lastNameHint" />
+
+        <TextView
+            android:id="@+id/profileLastName"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp" />
+
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/userNationalHint" />
+
+        <TextView
+            android:id="@+id/profileNationalCode"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/userPhoneHint" />
+
+        <TextView
+            android:id="@+id/profilePhoneNumber"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/userName" />
+
+        <TextView
+            android:id="@+id/profileUserName"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            style="@style/EditTextHint"
+            android:layout_marginTop="16dp"
+            android:text="@string/userAddressHint" />
+
+        <TextView
+            android:id="@+id/profileAddress"
+            style="@style/LoginEditText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

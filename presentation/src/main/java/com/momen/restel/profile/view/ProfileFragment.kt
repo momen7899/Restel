@@ -8,7 +8,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.momen.restel.R
-import kotlinx.android.synthetic.main.fragment_contact.*
+import com.momen.restel.Utils
+import kotlinx.android.synthetic.main.card_scroll_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
@@ -59,6 +60,15 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setViews() {
+        val user = Utils.getUser()
+
+        profileFirstName.text = user?.firstName
+        profileLastName.text = user?.lastName
+        profileNationalCode.text = user?.nationalCode
+        profilePhoneNumber.text = user?.phoneNumber
+        profileUserName.text = user?.userName
+        profileAddress.text = user?.address
+
     }
 
 }
