@@ -4,14 +4,17 @@
     <group>
         <item
             android:id="@+id/navClients"
+            android:icon="@drawable/ic_clients"
             android:title="@string/clients" />
 
         <item
             android:id="@+id/navRoom"
+            android:icon="@drawable/ic_rooms"
             android:title="@string/room" />
 
         <item
             android:id="@+id/navPassenger"
+            android:icon="@drawable/ic_customers"
             android:title="@string/passenger" />
     </group>
 
@@ -19,10 +22,12 @@
         <menu>
             <item
                 android:id="@+id/navSetting"
+                android:icon="@drawable/ic_settings"
                 android:title="@string/settings" />
 
             <item
                 android:id="@+id/navProfile"
+                android:icon="@drawable/ic_user"
                 android:title="@string/profile" />
         </menu>
     </item>
@@ -32,9 +37,11 @@
             <menu>
                 <item
                     android:id="@+id/navContactUs"
+                    android:icon="@drawable/ic_call"
                     android:title="@string/contactUs" />
                 <item
                     android:id="@+id/navLogOut"
+                    android:icon="@drawable/ic_log_out"
                     android:title="@string/logOut" />
             </menu>
         </item>

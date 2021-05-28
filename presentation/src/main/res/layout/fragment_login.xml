@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/loginGuidBottom"
@@ -30,7 +29,18 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.07" />
 
+    <ImageView
+        android:layout_width="0dp"
+        android:padding="32dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_welcome"
+        app:layout_constraintBottom_toTopOf="@id/loginWelocomText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/loginWelocomText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
@@ -49,10 +59,8 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/bg_login_constraint"
-        app:layout_constraintBottom_toBottomOf="@id/loginGuidBottom"
-        app:layout_constraintTop_toBottomOf="@id/guidTop"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidTop">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/loginConstraintGuidTop"
@@ -78,6 +86,8 @@
         <EditText
             android:id="@+id/loginUserName"
             style="@style/LoginEditText"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="8dp"
             android:hint="@string/hintUserName"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -89,6 +99,8 @@
             android:id="@+id/loginPassword"
             style="@style/LoginEditText"
             android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="8dp"
             android:hint="@string/hintPassword"
             android:importantForAutofill="no"
             android:inputType="textPassword"

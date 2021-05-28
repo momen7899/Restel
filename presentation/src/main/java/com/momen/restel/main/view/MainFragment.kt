@@ -44,6 +44,7 @@ import kotlinx.android.synthetic.main.bottom_sheet_reserve.view.*
 import kotlinx.android.synthetic.main.card_input.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_reserve.*
+import kotlinx.android.synthetic.main.header.view.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -462,9 +463,12 @@ class MainFragment : Fragment() {
     }
 
     private fun setUpNavView() {
-        Utils.getUser()?.admin?.let {
+        val user = Utils.getUser()
+        user?.admin?.let {
             if (it == 0) navigationView.menu.findItem(R.id.navClients).isVisible = false
         }
+        navigationView.headerUserName.text = user?.firstName.plus(" ${user?.lastName}")
+
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navClients -> {
