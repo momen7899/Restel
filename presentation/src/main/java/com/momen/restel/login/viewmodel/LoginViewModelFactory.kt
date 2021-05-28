@@ -2,12 +2,14 @@ package com.momen.restel.login.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.momen.domain.interactor.RecoveryPasswordUseCase
 import com.momen.domain.interactor.ValidUserUseCase
 import com.momen.restel.login.model.UserModelDataMapper
 import javax.inject.Inject
 
 class LoginViewModelFactory @Inject constructor(
     private val validUserUseCase: ValidUserUseCase,
+    private val recoveryPassword: RecoveryPasswordUseCase,
     private val userModelDataMapper: UserModelDataMapper
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -15,6 +17,7 @@ class LoginViewModelFactory @Inject constructor(
             @Suppress("UNCHECKED_CAST")
             return LoginViewModel(
                 validUserUseCase,
+                recoveryPassword,
                 userModelDataMapper
             ) as T
         } else {

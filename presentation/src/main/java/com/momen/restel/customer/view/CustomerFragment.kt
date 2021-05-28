@@ -306,7 +306,7 @@ class CustomerFragment : Fragment() {
     private fun validateInput(str: String?, et: View?): Boolean {
         str?.let {
             if (str.isEmpty()) {
-                Toasty.showErrorToasty(requireContext(), getString(R.string.roomNumberError))
+                Toasty.showErrorToasty(requireContext(), getString(R.string.emptyEditText))
                 et?.requestFocus()
                 return true
             }

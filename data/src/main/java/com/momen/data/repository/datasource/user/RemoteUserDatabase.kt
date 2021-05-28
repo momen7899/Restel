@@ -26,4 +26,10 @@ class RemoteUserDatabase @Inject constructor(private val room: RestelAppDatabase
     override fun removeUser(userEntity: UserEntity): Single<Int>? =
         room.getDatabaseDAO()?.removeUser(userEntity)
 
+    override fun recoveryPassword(
+        userName: String, nationalCode: String, phoneNumber: String, password: String, md5: String
+    ): Single<Int>? =
+        room.getDatabaseDAO()?.recoveryPassword(userName, nationalCode, phoneNumber, password, md5)
+
+
 }

@@ -43,7 +43,7 @@ class SplashViewModel constructor(
         "Momen",
         "Hamaveisi",
         "1234567890",
-        "989184394657",
+        "09184394657",
         "admin",
         "admin",
         "21232F297A57A5A743894A0E4A801FC3",

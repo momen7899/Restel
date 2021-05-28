@@ -359,7 +359,7 @@ class MainFragment : Fragment() {
     private fun validateInput(room: String?, et: EditText?): Boolean {
         room?.let {
             if (room.isEmpty()) {
-                Toasty.showErrorToasty(requireContext(), getString(R.string.roomNumberError))
+                Toasty.showErrorToasty(requireContext(), getString(R.string.emptyEditText))
                 et?.requestFocus()
                 return true
             }
@@ -370,7 +370,7 @@ class MainFragment : Fragment() {
     private fun validateInput(room: String?, tv: TextView?): Boolean {
         room?.let {
             if (room.isEmpty()) {
-                Toasty.showErrorToasty(requireContext(), getString(R.string.roomNumberError))
+                Toasty.showErrorToasty(requireContext(), getString(R.string.emptyEditText))
                 tv?.requestFocus()
                 return true
             }

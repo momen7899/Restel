@@ -6,12 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.NestedScrollView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.R
 import com.momen.restel.Utils
@@ -32,6 +36,16 @@ class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
 
+    private var bottomSheetDialog: BottomSheetDialog? = null
+    private var userUserName: EditText? = null
+    private var userNationalCode: EditText? = null
+    private var userPhoneNumber: EditText? = null
+    private var submit: Button? = null
+
+    private var userName: String? = null
+    private var userNational: String? = null
+    private var userPhone: String? = null
+
     override
     fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +62,12 @@ class LoginFragment : Fragment() {
 
         setUpViewModel()
         setUpComponents()
+        subscribeViewModels()
+    }
 
+    private fun subscribeViewModels() {
+        loginObserver()
+        recoveryPasswordSubscribe()
     }
 
     private fun hideActivityComponent() {
@@ -67,12 +86,21 @@ class LoginFragment : Fragment() {
         requireActivity().findViewById<Toolbar>(R.id.toolbar).visibility = View.GONE
     }
 
-
     private fun setUpComponents() {
         setUpHideKeyboard()
         hideActivityComponent()
+        setUpRecoveryPassword()
         setUpLoginBtn()
         setUpBackPressed()
+        setUpBottomSheet()
+        setUpBottomSheetComponent()
+        setUpBottomSheetSubmit()
+    }
+
+    private fun setUpRecoveryPassword() {
+        recoveryPassword.setOnClickListener {
+            bottomSheetDialog?.show()
+        }
     }
 
     private fun setUpHideKeyboard() {
@@ -101,8 +129,28 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
             loginViewModel.isValidUser(userName, password)
-            loginObserver()
         }
+    }
+
+    private fun recoveryPasswordSubscribe() {
+        loginViewModel.recoveryLiveData.observe(viewLifecycleOwner, {
+            when (it.state) {
+                LoginViewModel.State.DATA_LOADED -> {
+                    Toasty.showSuccessToasty(
+                        requireContext(),
+                        getString(R.string.successRecoveryPassword)
+                    )
+                }
+                LoginViewModel.State.LOADING_DATA -> {
+                }
+                LoginViewModel.State.LOAD_ERROR -> {
+                    Toasty.showErrorToasty(
+                        requireContext(),
+                        getString(R.string.unsuccessTransaction)
+                    )
+                }
+            }
+        })
     }
 
     private fun loginObserver() {
@@ -148,7 +196,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-
     private fun setUpViewModel() {
         loginViewModel =
             ViewModelProvider(this, loginViewModelFactory).get(LoginViewModel::class.java)
@@ -177,6 +224,53 @@ class LoginFragment : Fragment() {
                 }
             }
         )
+    }
+
+    private fun setUpBottomSheet() {
+        bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog?.setContentView(R.layout.bottom_sheet_forget_pass)
+
+        val rtl = true
+        val layout = bottomSheetDialog?.findViewById<NestedScrollView>(R.id.bottomSheetForgetPass)
+        layout?.layoutDirection = if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+    }
+
+    private fun setUpBottomSheetComponent() {
+        userUserName = bottomSheetDialog?.findViewById(R.id.userName)
+        userNationalCode = bottomSheetDialog?.findViewById(R.id.userNationalCode)
+        userPhoneNumber = bottomSheetDialog?.findViewById(R.id.userPhoneNumber)
+        submit = bottomSheetDialog?.findViewById(R.id.submitBtn)
+    }
+
+    private fun setUpBottomSheetSubmit() {
+        submit?.setOnClickListener {
+            if (!validateData() || userName == null || userNational == null || userPhone == null) return@setOnClickListener
+
+            loginViewModel.recoveryPassword(userName!!, userNational!!, userPhone!!)
+            bottomSheetDialog?.dismiss()
+        }
+    }
+
+    private fun validateData(): Boolean {
+        userName = userUserName?.text.toString().trim()
+        userNational = userNationalCode?.text.toString().trim()
+        userPhone = userPhoneNumber?.text.toString().trim()
+
+        if (validateInput(userName, userNationalCode)) return false
+        if (validateInput(userNational, userNationalCode)) return false
+        if (validateInput(userPhone, userPhoneNumber)) return false
+        return true
+    }
+
+    private fun validateInput(str: String?, et: EditText?): Boolean {
+        str?.let {
+            if (str.isEmpty()) {
+                Toasty.showErrorToasty(requireContext(), getString(R.string.emptyEditText))
+                et?.requestFocus()
+                return true
+            }
+        }
+        return false
     }
 
 }

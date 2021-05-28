@@ -273,7 +273,7 @@ class RoomFragment : Fragment() {
     private fun validateInput(str: String?, et: EditText?): Boolean {
         str?.let {
             if (str.isEmpty()) {
-                Toasty.showErrorToasty(requireContext(), getString(R.string.roomNumberError))
+                Toasty.showErrorToasty(requireContext(), getString(R.string.emptyEditText))
                 et?.requestFocus()
                 return true
             }

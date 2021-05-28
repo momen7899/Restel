@@ -15,4 +15,12 @@ interface UserDataSource {
     fun getUsers(): Single<List<UserEntity>>?
 
     fun removeUser(userEntity: UserEntity): Single<Int>?
+
+    fun recoveryPassword(
+        userName: String,
+        nationalCode: String,
+        phoneNumber: String,
+        password: String,
+        md5: String
+    ): Single<Int>?
 }

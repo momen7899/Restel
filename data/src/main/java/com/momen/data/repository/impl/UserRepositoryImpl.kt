@@ -15,6 +15,13 @@ class UserRepositoryImpl(
         userDataSourceFactory.create().isValidUser(userName, password, md5)
             ?.map(userEntityDataMapper::transformUserEntityToUser)
 
+    override fun recoveryPassword(
+        userName: String, nationalCode: String, phoneNumber: String, password: String, md5: String
+    ): Single<Int>? =
+        userDataSourceFactory.create()
+            .recoveryPassword(userName, nationalCode, phoneNumber, password, md5)
+
+
     override fun addUser(user: User): Single<Long>? =
         userDataSourceFactory.create().addUser(userEntityDataMapper.transformUserToUserEntity(user))
 

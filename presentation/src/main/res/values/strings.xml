@@ -32,9 +32,9 @@
     <string name="lastDateHint">تاریخ پایان</string>
     <string name="priceHint">قیمت اتاق</string>
     <string name="submit">ثبت</string>
-    <string name="roomNumberError">شماره ی اتاق نبایدخالی باشد</string>
+    <string name="emptyEditText">مقداری این فیلد نباید خالی باشد</string>
     <string name="successTransaction">با موفقیت اضافه شد</string>
-    <string name="unsuccessTransaction">اضافه نشد دوباره تلاش کنید</string>
+    <string name="unsuccessTransaction">از صحت اطلاعات وارد شده اطمینان حاصل کنید</string>
     <string name="firstName">نام:</string>
     <string name="lastName">نام خانوادگی:</string>
     <string name="phoneNumber">شماره تلفن:</string>
@@ -69,4 +69,7 @@
     <string name="admin">ادمین</string>
     <string name="user">کارمند</string>
     <string name="adminsRight">سطح دسترسی کاربر</string>
+    <string name="passwordRecovery">بازیابی رمز عبور</string>
+    <string name="successRecoveryPassword">تغییر رمز عبور با موفقیت انجام شد\n
+    رمز عبور جدید شما:1234</string>
 </resources>

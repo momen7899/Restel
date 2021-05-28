@@ -29,6 +29,11 @@ interface DatabaseDAO {
     @Delete
     fun removeUser(userEntity: UserEntity): Single<Int>?
 
+    @Query("UPDATE users SET password =:password,md5=:md5 WHERE user_name==:userName AND national_code==:nationalCode AND phone_number==:phoneNumber")
+    fun recoveryPassword(
+        userName: String, nationalCode: String, phoneNumber: String, password: String, md5: String
+    ): Single<Int>?
+
     // customer
     @Insert
     fun addCustomer(customerEntity: CustomerEntity): Single<Long>?
