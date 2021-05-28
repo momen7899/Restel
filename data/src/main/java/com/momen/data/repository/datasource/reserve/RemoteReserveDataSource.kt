@@ -18,4 +18,7 @@ class RemoteReserveDataSource @Inject constructor(private val room: RestelAppDat
     override fun getReserves(): Single<List<ReserveEntity>>? =
         room.getDatabaseDAO()?.getReserves()
 
+    override fun removeReserve(reserveEntity: ReserveEntity): Single<Int>? =
+        room.getDatabaseDAO()?.removeReserve(reserveEntity)
+
 }

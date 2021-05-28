@@ -9,21 +9,21 @@ class ReserveEntityDataMapper @Inject constructor() {
     fun transformReservesEntityToReserves(reserveEntities: List<ReserveEntity>): ArrayList<Reserve> {
         val reserves = ArrayList<Reserve>()
         for (r in reserveEntities) {
-            reserves.add(transformReserveEntityToReserve(r))
+            transformReserveEntityToReserve(r)?.let { reserves.add(it) }
         }
         return reserves
     }
 
-    private fun transformReserveEntityToReserve(reserve: ReserveEntity): Reserve =
-        with(reserve) {
+    private fun transformReserveEntityToReserve(reserve: ReserveEntity?): Reserve? =
+        reserve?.let {
             Reserve(
-                id,
-                room,
-                client,
-                customer,
-                startDate,
-                finishData,
-                price
+                it.id,
+                it.room,
+                it.client,
+                it.customer,
+                it.startDate,
+                it.finishData,
+                it.price
             )
         }
 

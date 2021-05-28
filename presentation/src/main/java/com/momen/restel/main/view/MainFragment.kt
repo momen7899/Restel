@@ -41,9 +41,11 @@ import com.momen.restel.main.viewmodel.ReserveViewModel
 import com.momen.restel.main.viewmodel.ReserveViewModelFactory
 import kotlinx.android.synthetic.main.bottom_sheet_reserve.*
 import kotlinx.android.synthetic.main.bottom_sheet_reserve.view.*
+import kotlinx.android.synthetic.main.card_delete.*
 import kotlinx.android.synthetic.main.card_input.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_reserve.*
+import kotlinx.android.synthetic.main.fragment_room.*
 import kotlinx.android.synthetic.main.header.view.*
 import java.util.*
 import javax.inject.Inject
@@ -60,8 +62,8 @@ class MainFragment : Fragment() {
     @Inject
     lateinit var homeFeedViewModelFactory: HomeFeedViewModelFactory
 
-    private lateinit var homeFeedViewModel: HomeFeedViewModel
-    private lateinit var reserveViewModel: ReserveViewModel
+    private var homeFeedViewModel: HomeFeedViewModel? = null
+    private var reserveViewModel: ReserveViewModel? = null
 
     private var customerView: View? = null
     private var customerRecycler: RecyclerView? = null
@@ -74,10 +76,11 @@ class MainFragment : Fragment() {
     private var roomRecycler: RecyclerView? = null
     private var roomDialog: Dialog? = null
     private var roomAdapter: HomeRoomAdapter? = null
-    private val reserveAdapter = ReserveAdapter()
+    private var reserveAdapter: ReserveAdapter? = null
     private var bottomSheetDialog: BottomSheetDialog? = null
     private var roomSearch: EditText? = null
     private val roomList = ArrayList<HomeRoomModel>()
+    private var id: Int? = null
 
     private var update = false
     private var date: TextView? = null
@@ -132,7 +135,7 @@ class MainFragment : Fragment() {
     }
 
     private fun getReserves() {
-        reserveViewModel.getReserves()
+        reserveViewModel?.getReserves()
     }
 
     private fun subscribeViewModel() {
@@ -145,12 +148,12 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeGetReserves() {
-        reserveViewModel.reserveLiveData.observe(
+        reserveViewModel?.reserveLiveData?.observe(
             viewLifecycleOwner, { result ->
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
                         println(result.reserves)
-                        reserveAdapter.setItems(result.reserves!!)
+                        reserveAdapter?.setItems(result.reserves!!)
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
                     }
@@ -166,11 +169,11 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeAddReserve() {
-        reserveViewModel.addReserveLiveData.observe(
+        reserveViewModel?.addReserveLiveData?.observe(
             viewLifecycleOwner, { result ->
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
-                        reserveViewModel.getReserves()
+                        reserveViewModel?.getReserves()
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
                     }
@@ -184,11 +187,11 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeUpdateReserve() {
-        reserveViewModel.updateReserveLiveData.observe(
+        reserveViewModel?.updateReserveLiveData?.observe(
             viewLifecycleOwner, { result ->
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
-                        reserveViewModel.getReserves()
+                        reserveViewModel?.getReserves()
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
                     }
@@ -206,7 +209,7 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeGetRooms() {
-        homeFeedViewModel.getRoomsLiveData.observe(viewLifecycleOwner, { result ->
+        homeFeedViewModel?.getRoomsLiveData?.observe(viewLifecycleOwner, { result ->
             when (result.state) {
                 HomeFeedViewModel.State.DATA_LOADED -> {
                     result.rooms?.let { roomAdapter?.setItems(it) }
@@ -224,7 +227,7 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeGetCustomers() {
-        homeFeedViewModel.getCustomerLiveData.observe(viewLifecycleOwner, { result ->
+        homeFeedViewModel?.getCustomerLiveData?.observe(viewLifecycleOwner, { result ->
             when (result.state) {
                 HomeFeedViewModel.State.DATA_LOADED -> {
                     this.customerList.clear()
@@ -250,14 +253,30 @@ class MainFragment : Fragment() {
         setUpBackPressed()
         setUpBottomSheetComponent()
         setUpBottomSheetSubmit()
-        initBottomSheet()
     }
 
-    private fun initBottomSheet() {
+    private fun initBottomSheet(reserve: ReserveModel?) {
+        if (update)
+            reserve?.let { fillBottomSheetData(it) }
+        else
+            clearBottomSheetData()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun fillBottomSheetData(reserve: ReserveModel) {
+        date?.text = "${reserve.startDate} \n${reserve.finishData}"
+        reserveRoom?.text = reserve.room
+        reserveCustomer?.text = reserve.customer
+        reserve.price?.let { reservePrice?.setText(it) }
+        submit?.text = getString(R.string.edit)
+    }
+
+    private fun clearBottomSheetData() {
         date?.text = ""
         reserveRoom?.text = ""
         reserveCustomer?.text = ""
         reservePrice?.setText("")
+        submit?.text = getString(R.string.submit)
     }
 
     private fun setUpBottomSheetComponent() {
@@ -281,13 +300,23 @@ class MainFragment : Fragment() {
         if (validateInput(start, date)) return null
         if (validateInput(finish, date)) return null
         if (validateInput(priceRoom, reservePrice!!)) return null
+        val userName = "${Utils.getUser()?.firstName} ${Utils.getUser()?.lastName}"
 
-
-        return ReserveModel(
-            0,
-            this.room?.id.toString(),
-            Utils.getUser()?.id.toString(),
-            this.customer?.id.toString(),
+        return if (update)
+            ReserveModel(
+                this.id,
+                this.room?.name.toString(),
+                userName,
+                this.customer?.name.toString(),
+                start!!,
+                finish!!,
+                priceRoom.toInt()
+            )
+        else ReserveModel(
+            reserveAdapter?.nextId(),
+            this.room?.name.toString(),
+            userName,
+            this.customer?.name.toString(),
             start!!,
             finish!!,
             priceRoom.toInt()
@@ -340,7 +369,10 @@ class MainFragment : Fragment() {
     private fun setUpBottomSheetSubmit() {
         submit?.setOnClickListener {
             validateData()?.let { reserve ->
-                reserveViewModel.addReserve(reserve)
+                if (update)
+                    reserveViewModel?.updateReserve(reserve)
+                else
+                    reserveViewModel?.addReserve(reserve)
                 bottomSheetDialog?.dismiss()
             }
         }
@@ -356,7 +388,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setUpRoomDialogComponents() {
-        homeFeedViewModel.getRooms()
+        homeFeedViewModel?.getRooms()
         setUpRoomDialog()
         setUpRoomDialogRecycle()
         setUpRoomDialogSearch()
@@ -388,7 +420,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setUpCustomerDialogComponents() {
-        homeFeedViewModel.getCustomers()
+        homeFeedViewModel?.getCustomers()
         setUpCustomerDialog()
         setUpCustomerDialogRecycle()
         setUpCustomerDialogSearch()
@@ -433,17 +465,19 @@ class MainFragment : Fragment() {
 
     private fun setUpFab() {
         mainFab.setOnClickListener {
-            showBottomSheet(false)
+            showBottomSheet(false, null)
         }
     }
 
-    private fun showBottomSheet(update: Boolean = true) {
+    fun showBottomSheet(update: Boolean = true, reserve: ReserveModel?) {
         this.update = update
-        initBottomSheet()
+        id = reserve?.id
+        initBottomSheet(reserve)
         bottomSheetDialog?.show()
     }
 
     private fun reserveRecycleSetUp() {
+        reserveAdapter = ReserveAdapter(this)
         reserveRecycle.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         reserveRecycle.adapter = reserveAdapter
@@ -565,4 +599,48 @@ class MainFragment : Fragment() {
         roomDialog?.dismiss()
         reserveRoom?.text = this.room?.name
     }
+
+    fun showDelMsg(reserve: ReserveModel, position: Int) {
+        showDelete()
+        setUpDelete(reserve, position)
+    }
+
+    private fun setUpDelete(reserve: ReserveModel, position: Int) {
+        var sec = 60
+        val timer = Timer()
+        var delete = true
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                sec--
+                timerCounter?.text = ((sec + 21) / 20).toString()
+                timerProgressBar?.progress = sec
+                if (sec == 0) {
+                    this.cancel()
+                    if (delete) {
+                        reserveViewModel?.removeReserve(reserve)
+                        delete = false
+                    }
+                }
+            }
+        }, 0, 50)
+
+        undoRemove.setOnClickListener {
+            delete = false
+            reserveAdapter?.addItem(reserve, position)
+            hideDelete()
+        }
+        timerProgressBar?.progress = sec
+        timerCounter?.text = sec.toString()
+    }
+
+    private fun showDelete() {
+        mainDelete.visibility = View.VISIBLE
+        mainFab.visibility = View.GONE
+    }
+
+    private fun hideDelete() {
+        mainDelete.visibility = View.GONE
+        mainFab.visibility = View.VISIBLE
+    }
+
 }

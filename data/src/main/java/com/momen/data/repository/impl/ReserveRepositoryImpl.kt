@@ -17,10 +17,15 @@ class ReserveRepositoryImpl(
 
     override fun updateReserve(reserve: Reserve): Single<Int>? =
         reserveDataSourceFactory.create()
-        .updateReserve(reserveEntityDataMapper.transformReserveToReserveEntity(reserve))
+            .updateReserve(reserveEntityDataMapper.transformReserveToReserveEntity(reserve))
 
 
     override fun getReserves(): Single<ArrayList<Reserve>>? =
-        reserveDataSourceFactory.create().getReserves()?.map(reserveEntityDataMapper::transformReservesEntityToReserves)
+        reserveDataSourceFactory.create().getReserves()
+            ?.map(reserveEntityDataMapper::transformReservesEntityToReserves)
+
+    override fun removeReserve(reserve: Reserve): Single<Int>? =
+        reserveDataSourceFactory.create()
+            .removeReserve(reserveEntityDataMapper.transformReserveToReserveEntity(reserve))
 
 }

@@ -2,36 +2,22 @@ package com.momen.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
-@Entity(
-    tableName = "reserve",
-    foreignKeys = [ForeignKey(
-        entity = RoomEntity::class, parentColumns = arrayOf("id"),
-        childColumns = arrayOf("room"), onDelete = CASCADE
-    ), ForeignKey(
-        entity = UserEntity::class, parentColumns = arrayOf("id"),
-        childColumns = arrayOf("client"), onDelete = CASCADE
-    ), ForeignKey(
-        entity = CustomerEntity::class, parentColumns = arrayOf("id"),
-        childColumns = arrayOf("customer"), onDelete = CASCADE
-    )]
-)
+@Entity(tableName = "reserve")
 data class ReserveEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int?,
     @ColumnInfo(name = "room")
-    val room: Int,
+    val room: String?,
     @ColumnInfo(name = "client")
-    val client: Int,
+    val client: String?,
     @ColumnInfo(name = "customer")
-    val customer: Int,
+    val customer: String?,
     @ColumnInfo(name = "start_date")
-    val startDate: String,
+    val startDate: String?,
     @ColumnInfo(name = "finish_date")
-    val finishData: String,
+    val finishData: String?,
     @ColumnInfo(name = "price")
-    val price: Int
+    val price: Int?
 )

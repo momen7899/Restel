@@ -2,18 +2,23 @@ package com.momen.restel.main.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.momen.restel.R
 import com.momen.restel.databinding.ReservationItemBinding
 import com.momen.restel.main.model.ReserveModel
 
-class ReserveAdapter : RecyclerView.Adapter<ReserveAdapter.ReserveViewHolder>() {
+class ReserveAdapter(private val fragment: MainFragment) :
+    RecyclerView.Adapter<ReserveAdapter.ReserveViewHolder>() {
 
     private val items = ArrayList<ReserveModel>()
 
     class ReserveViewHolder(val reserve: ReservationItemBinding) :
-        RecyclerView.ViewHolder(reserve.root)
+        RecyclerView.ViewHolder(reserve.root) {
+        val edit: ImageView = reserve.root.findViewById(R.id.reservationItemEdit)
+        val remove: ImageView = reserve.root.findViewById(R.id.reservationItemRemove)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReserveViewHolder =
         ReserveViewHolder(
@@ -26,9 +31,24 @@ class ReserveAdapter : RecyclerView.Adapter<ReserveAdapter.ReserveViewHolder>() 
     override fun onBindViewHolder(holder: ReserveViewHolder, position: Int) {
         val currentReserve: ReserveModel = items[position]
         holder.reserve.reserve = currentReserve
+
+        holder.edit.setOnClickListener {
+            fragment.showBottomSheet(true, items[position])
+        }
+
+        holder.remove.setOnClickListener {
+            fragment.showDelMsg(items[position], position)
+            removeItem(items[position])
+        }
+
     }
 
     override fun getItemCount(): Int = items.size
+
+    private fun removeItem(reserve: ReserveModel) {
+        items.remove(reserve)
+        notifyDataSetChanged()
+    }
 
     fun nextId(): Int? {
         return if (items.isEmpty()) 0
@@ -38,6 +58,11 @@ class ReserveAdapter : RecyclerView.Adapter<ReserveAdapter.ReserveViewHolder>() 
     fun setItems(items: ArrayList<ReserveModel>) {
         this.items.clear()
         this.items.addAll(items)
+        notifyDataSetChanged()
+    }
+
+    fun addItem(reserve: ReserveModel, position: Int) {
+        items.add(position, reserve)
         notifyDataSetChanged()
     }
 }

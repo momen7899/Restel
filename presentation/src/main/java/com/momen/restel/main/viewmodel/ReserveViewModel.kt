@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.momen.domain.interactor.AddReserveUseCase
 import com.momen.domain.interactor.GetReservesUseCase
+import com.momen.domain.interactor.RemoveReserveUseCase
 import com.momen.domain.interactor.UpdateReserveUseCase
 import com.momen.restel.main.model.ReserveModel
 import com.momen.restel.main.model.ReserveModelDataMapper
@@ -14,12 +15,14 @@ class ReserveViewModel(
     private val reservesUseCase: GetReservesUseCase,
     private val addReserveUseCase: AddReserveUseCase,
     private val updateUseCase: UpdateReserveUseCase,
+    private val removeReserveUseCase: RemoveReserveUseCase,
     private val reserveModelDataMapper: ReserveModelDataMapper
 ) : ViewModel() {
 
     val reserveLiveData = MutableLiveData<Result>()
     val addReserveLiveData = MutableLiveData<Result>()
     val updateReserveLiveData = MutableLiveData<Result>()
+    val removeReserveLiveData = MutableLiveData<Result>()
 
     private var reserves: ArrayList<ReserveModel>? = null
     private var response: Long? = null
@@ -85,6 +88,27 @@ class ReserveViewModel(
         }
         )
         d?.let { disposables.add(it) }
+    }
+
+    fun removeReserve(reserve: ReserveModel) {
+        var result: Result?
+        result = Result(null, null, State.LOADING_DATA, null)
+
+        removeReserveLiveData.postValue(result)
+        val params = RemoveReserveUseCase.Params.forRemoveReserve(
+            reserveModelDataMapper.transformReserveModelToReserve(reserve)
+        )
+        val d: Disposable? = removeReserveUseCase.execute(params)?.subscribe({ res ->
+            result = Result(res.toLong(), null, State.DATA_LOADED, null)
+            removeReserveLiveData.value = result
+        }, { throwable ->
+            result =
+                Result(null, null, State.LOAD_ERROR, throwable.message)
+            removeReserveLiveData.value = result
+        }
+        )
+        d?.let { disposables.add(it) }
+
     }
 
     class Result(

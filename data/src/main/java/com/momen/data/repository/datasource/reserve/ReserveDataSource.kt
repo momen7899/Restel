@@ -9,4 +9,7 @@ interface ReserveDataSource {
     fun updateReserve(reserve: ReserveEntity): Single<Int>?
 
     fun getReserves(): Single<List<ReserveEntity>>?
+
+    fun removeReserve(reserveEntity: ReserveEntity): Single<Int>?
+
 }

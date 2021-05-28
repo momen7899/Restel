@@ -30,9 +30,9 @@ class ReserveModelDataMapper @Inject constructor() {
         with(reserve) {
             Reserve(
                 id,
-                room.toInt(),
-                client.toInt(),
-                customer.toInt(),
+                room,
+                client,
+                customer,
                 startDate,
                 finishData,
                 price

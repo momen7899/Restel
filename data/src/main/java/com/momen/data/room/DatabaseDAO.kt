@@ -70,4 +70,8 @@ interface DatabaseDAO {
 
     @Query("SELECT * FROM reserve")
     fun getReserves(): Single<List<ReserveEntity>>
+
+    @Delete
+    fun removeReserve(reserveEntity: ReserveEntity): Single<Int>?
+
 }
