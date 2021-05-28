@@ -101,11 +101,11 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
             loginViewModel.isValidUser(userName, password)
-            loginObserver(it)
+            loginObserver()
         }
     }
 
-    private fun loginObserver(view: View) {
+    private fun loginObserver() {
 
         loginViewModel.loginLiveData.observe(
             viewLifecycleOwner, { result ->

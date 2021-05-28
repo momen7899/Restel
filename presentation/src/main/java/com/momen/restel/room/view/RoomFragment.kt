@@ -24,8 +24,6 @@ import com.momen.restel.room.model.RoomModel
 import com.momen.restel.room.viewmodel.RoomViewModel
 import com.momen.restel.room.viewmodel.RoomViewModelFactory
 import kotlinx.android.synthetic.main.card_delete.*
-import kotlinx.android.synthetic.main.fragment_client.*
-import kotlinx.android.synthetic.main.fragment_customer.*
 import kotlinx.android.synthetic.main.fragment_room.*
 import kotlinx.android.synthetic.main.toolbar_sample.view.*
 import java.util.*
@@ -81,7 +79,7 @@ class RoomFragment : Fragment() {
 
     private fun setUpComponents() {
         hideActivityComponent()
-        setUpToolbar
+        setUpToolbar()
         setUpFab()
         setUpRecycler()
         setUpBottomSheet()

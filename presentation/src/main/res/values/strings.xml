@@ -57,4 +57,11 @@
     <string name="male">مرد</string>
     <string name="female">زن</string>
     <string name="search">جست و جو کنید</string>
+    <string name="aboutUs">این اپلیکیشن برای پروژه ی درس مهندسی نرم افزار توسط دانشجویان:
+        <br>1-مؤمن حمه ویسی 9717023118</br>
+        <br>2-امیر ولی محمدی 9717023166 </br>
+        <br>3- هژیر غفوری 9717023139 </br>
+        <br>انجام شده است.</br>
+    </string>
+    <string name="callUs">call us</string>
 </resources>
