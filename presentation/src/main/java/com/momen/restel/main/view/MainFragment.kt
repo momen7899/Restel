@@ -595,7 +595,7 @@ class MainFragment : Fragment() {
         setToolbarAnim()
         toolbar.title = ""
         val title: TextView = requireActivity().findViewById(R.id.toolbarTitle)
-        title.text = "رزرو"
+        title.text = getString(R.string.title)
     }
 
     private fun setToolbarAnim() {

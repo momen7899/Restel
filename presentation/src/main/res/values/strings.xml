@@ -72,4 +72,6 @@
     <string name="passwordRecovery">بازیابی رمز عبور</string>
     <string name="successRecoveryPassword">تغییر رمز عبور با موفقیت انجام شد\n
     رمز عبور جدید شما:1234</string>
+
+    <string name="title">رزرو</string>
 </resources>
