@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">Restel</string>
+    <string name="welcome">Welcome</string>
+    <string name="hintUserName">username</string>
+    <string name="hintPassword">password</string>
+    <string name="successDbTransaction">The changes were applied correctly</string>
+    <string name="unSuccessFbTransaction">An error has occurred. Please try again.</string>
+    <string name="loginText">login</string>
+    <string name="recoveryPassword">recovery password</string>
+    <string name="errorLoginUsername">"username must not be empty"</string>
+    <string name="errorLoginPassword">password must not be empty</string>
+    <string name="successLogin">Welcome</string>
+    <string name="unsuccessLogin">Make sure the password and username are correct.</string>
+    <string name="DatabaseError">An error occurred in the database</string>
+    <string name="clients">Employees</string>
+    <string name="room">Rooms</string>
+    <string name="passenger">customers</string>
+    <string name="settings">settings</string>
+    <string name="profile">profile</string>
+    <string name="contactUs">contact us</string>
+    <string name="logOut">logout</string>
+    <string name="price">Room price:</string>
+    <string name="roomNumber">Room number:</string>
+    <string name="client">Employee name:</string>
+    <string name="customer">Customer name:</string>
+    <string name="underConstruction">Under Construction</string>
+    <string name="newReserve">New booking</string>
+    <string name="roomHint">Room Number</string>
+    <string name="userHint">Employee name</string>
+    <string name="customerHint">Customer name</string>
+    <string name="dateHint">Date selection</string>
+    <string name="lastDateHint">End date</string>
+    <string name="priceHint">Room price</string>
+    <string name="submit">submit</string>
+    <string name="emptyEditText">The value of this field should not be empty</string>
+    <string name="successTransaction">Successfully added</string>
+    <string name="unsuccessTransaction">Make sure the information entered is correct</string>
+    <string name="firstName">first name:</string>
+    <string name="lastName">last name:</string>
+    <string name="phoneNumber">tell:</string>
+    <string name="capacity">capacity:</string>
+    <string name="gender">gender:</string>
+    <string name="married">marital status:</string>
+    <string name="bottomSheetDescription">show Bottom Sheet</string>
+    <string name="firstNameHint">نام</string>
+    <string name="lastNameHint">last name</string>
+    <string name="userPhoneHint">tell</string>
+    <string name="userName">user name</string>
+    <string name="userPassHint">password</string>
+    <string name="userRePassHint">repeat the password</string>
+    <string name="userAddressHint">Address</string>
+    <string name="capacityHint">Room capacity</string>
+    <string name="userNationalHint">national code</string>
+    <string name="edit">edit</string>
+    <string name="cancel">back</string>
+    <string name="delete">delete</string>
+    <string name="single">single</string>
+    <string name="marry">married</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
+    <string name="search">search</string>
+    <string name="aboutUs">این اپلیکیشن برای پروژه ی درس مهندسی نرم افزار توسط دانشجویان: \n
+        1-مؤمن حمه ویسی 9717023118 \n
+        2-امیر ولی محمدی 9717023166 \n
+        3- هژیر غفوری 9717023139 \n
+        انجام شده است.
+    </string>
+    <string name="callUs">call us</string>
+    <string name="admin">admin</string>
+    <string name="user">user</string>
+    <string name="adminsRight">User access level</string>
+    <string name="passwordRecovery">recovery password</string>
+    <string name="successRecoveryPassword">Password change completed successfully\n
+    Your new password:1234</string>
+</resources>
