@@ -11,7 +11,7 @@ java {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     // rx Java
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.11'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
     // dagger2
-    implementation 'com.google.dagger:dagger:2.33'
+    implementation 'com.google.dagger:dagger:2.36'
 }
