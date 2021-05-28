@@ -44,7 +44,6 @@ import kotlinx.android.synthetic.main.bottom_sheet_reserve.view.*
 import kotlinx.android.synthetic.main.card_delete.*
 import kotlinx.android.synthetic.main.card_input.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_reserve.*
 import kotlinx.android.synthetic.main.fragment_room.*
 import kotlinx.android.synthetic.main.header.view.*
 import java.util.*

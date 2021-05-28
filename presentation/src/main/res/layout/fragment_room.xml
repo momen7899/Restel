@@ -8,14 +8,22 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/roomRecycle"
+    <include
+        android:id="@+id/roomToolbar"
+        layout="@layout/toolbar_sample"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/roomRecycle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roomToolbar"
         tools:listitem="@layout/room_item" />
 
     <include

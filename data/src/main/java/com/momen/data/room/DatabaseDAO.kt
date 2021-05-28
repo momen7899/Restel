@@ -12,19 +12,19 @@ interface DatabaseDAO {
 
     // user
     @Insert
-    fun addUser(user: UserEntity): Single<Long>
+    fun addUser(user: UserEntity): Single<Long>?
 
     @Update
     fun editUser(userEntity: UserEntity): Single<Int>?
 
     @Query("SELECT * FROM users WHERE user_name==:userName AND password ==:password AND md5==:md5")
-    fun isValidUser(userName: String, password: String, md5: String): Single<UserEntity>
+    fun isValidUser(userName: String, password: String, md5: String): Single<UserEntity>?
 
     @Query("SELECT * FROM users WHERE id==:id")
-    fun getUser(id: Int): Single<UserEntity>
+    fun getUser(id: Int): Single<UserEntity>?
 
     @Query("SELECT * FROM users")
-    fun getUsers(): Single<List<UserEntity>>
+    fun getUsers(): Single<List<UserEntity>>?
 
     @Delete
     fun removeUser(userEntity: UserEntity): Single<Int>?
@@ -37,10 +37,10 @@ interface DatabaseDAO {
     fun editCustomer(customerEntity: CustomerEntity): Single<Int>?
 
     @Query("SELECT * FROM customers WHERE id==:id")
-    fun getCustomer(id: Int): Single<CustomerEntity>
+    fun getCustomer(id: Int): Single<CustomerEntity>?
 
     @Query("SELECT * FROM customers")
-    fun getCustomers(): Single<List<CustomerEntity>>
+    fun getCustomers(): Single<List<CustomerEntity>>?
 
     @Delete
     fun removeCustomer(customerEntity: CustomerEntity): Single<Int>?
@@ -53,23 +53,23 @@ interface DatabaseDAO {
     fun editRoom(roomEntity: RoomEntity): Single<Int>?
 
     @Query("SELECT * FROM rooms WHERE id==:id")
-    fun getRoom(id: Int): Single<RoomEntity>
+    fun getRoom(id: Int): Single<RoomEntity>?
 
     @Query("SELECT * FROM rooms")
-    fun getRooms(): Single<List<RoomEntity>>
+    fun getRooms(): Single<List<RoomEntity>>?
 
     @Delete
     fun removeRoom(roomEntity: RoomEntity): Single<Int>?
 
     // reserve
     @Insert
-    fun addReserve(reserve: ReserveEntity): Single<Long>
+    fun addReserve(reserve: ReserveEntity): Single<Long>?
 
     @Update
-    fun updateReserve(reserve: ReserveEntity): Single<Int>
+    fun updateReserve(reserve: ReserveEntity): Single<Int>?
 
     @Query("SELECT * FROM reserve")
-    fun getReserves(): Single<List<ReserveEntity>>
+    fun getReserves(): Single<List<ReserveEntity>>?
 
     @Delete
     fun removeReserve(reserveEntity: ReserveEntity): Single<Int>?

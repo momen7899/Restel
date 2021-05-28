@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.ScrollView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -25,8 +26,10 @@ import com.momen.restel.customer.viewmodel.CustomerViewModelFactory
 import kotlinx.android.synthetic.main.card_delete.*
 import kotlinx.android.synthetic.main.fragment_customer.*
 import kotlinx.android.synthetic.main.fragment_room.*
+import kotlinx.android.synthetic.main.toolbar_sample.view.*
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class CustomerFragment : Fragment() {
 
@@ -38,6 +41,7 @@ class CustomerFragment : Fragment() {
     private var update: Boolean = false
     private var bottomSheetDialog: BottomSheetDialog? = null
     private var id: Int? = null
+    private val customers = ArrayList<CustomerModel>()
 
     // bottom sheet components
     private var customerNameEt: EditText? = null
@@ -94,7 +98,11 @@ class CustomerFragment : Fragment() {
 
                 }
                 CustomerViewModel.State.DATA_LOADED -> {
-                    result.customers?.let { customerAdapter?.setItems(it) }
+                    result.customers?.let {
+                        customerAdapter?.setItems(it)
+                        customers.clear()
+                        customers.addAll(it)
+                    }
                 }
                 CustomerViewModel.State.LOAD_ERROR -> {
 
@@ -160,11 +168,23 @@ class CustomerFragment : Fragment() {
 
     private fun setUpComponents() {
         hideActivityComponent()
+        setUpToolbar()
         setUpFab()
         setUpRecycler()
         setUpBottomSheet()
         setUpBottomSheetComponent()
         setUpBottomSheetSubmit()
+    }
+
+    private fun setUpToolbar() {
+        customerToolbar.back.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+        (customerToolbar.search as EditText).addTextChangedListener {
+            customerAdapter?.filterItems(
+                customers, (customerToolbar.search as EditText).text.toString().trim()
+            )
+        }
     }
 
     private fun hideActivityComponent() {

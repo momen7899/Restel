@@ -19,7 +19,6 @@ class RoomAdapter(private val fragment: RoomFragment) :
         val remove: ImageView = room.root.findViewById(R.id.roomItemRemove)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder =
         RoomViewHolder(
             DataBindingUtil.inflate(
@@ -67,4 +66,12 @@ class RoomAdapter(private val fragment: RoomFragment) :
         notifyDataSetChanged()
     }
 
+    fun filterItems(items: ArrayList<RoomModel>, search: String) {
+        val list = ArrayList<RoomModel>()
+        items.forEach {
+            if (it.name.contains(search) || it.price.contains(search) || it.capacity.contains(search))
+                list.add(it)
+        }
+        setItems(list)
+    }
 }

@@ -67,4 +67,14 @@ class ClientAdapter(private val fragment: ClientsFragment) :
         notifyDataSetChanged()
     }
 
+    fun filterItems(items: ArrayList<UserModel>, search: String) {
+        val list = ArrayList<UserModel>()
+        items.forEach {
+            if (it.firstName?.contains(search) == true || it.lastName?.contains(search) == true ||
+                it.nationalCode?.contains(search) == true || it.phoneNumber?.contains(search) == true
+            )
+                list.add(it)
+        }
+        setItems(list)
+    }
 }

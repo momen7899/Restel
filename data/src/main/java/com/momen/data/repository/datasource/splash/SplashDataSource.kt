@@ -5,7 +5,7 @@ import io.reactivex.Single
 
 interface SplashDataSource {
 
-    fun addUser(user: UserEntity): Single<Long>
+    fun addUser(user: UserEntity): Single<Long>?
 
-    fun getUsers(): Single<List<UserEntity>>
+    fun getUsers(): Single<List<UserEntity>>?
 }

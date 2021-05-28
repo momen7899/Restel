@@ -14,7 +14,7 @@ class AddUserUseCase @Inject constructor(
     postExecutionThread: PostExecutionThread
 ) : UseCase<Long, AddUserUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<Long> =
+    override fun buildUseCaseObservable(inputs: Params): Single<Long>? =
         splashRepository.addUser(inputs.user)
 
     class Params(val user: User) {

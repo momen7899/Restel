@@ -11,11 +11,10 @@ class SplashRepositoryImpl(
     private val userEntityDataMapper: UserEntityDataMapper
 ) : SplashRepository {
 
-    override fun getUsers(): Single<ArrayList<User>> =
-        splashDataSourceFactory.create().getUsers()
-            .map(userEntityDataMapper::transformUserEntitiesToUsers)
+    override fun getUsers(): Single<ArrayList<User>>? =
+        splashDataSourceFactory.create().getUsers()?.map(userEntityDataMapper::transformUserEntitiesToUsers)
 
-    override fun addUser(user: User): Single<Long> =
+    override fun addUser(user: User): Single<Long>? =
         splashDataSourceFactory.create().addUser(userEntityDataMapper.transformUserToUserEntity(user))
 
 

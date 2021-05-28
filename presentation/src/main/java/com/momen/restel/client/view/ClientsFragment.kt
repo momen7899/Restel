@@ -8,13 +8,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ScrollView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.momen.restel.Utils
 import com.momen.restel.R
+import com.momen.restel.Utils
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
 import com.momen.restel.client.di.DaggerClientComponent
@@ -24,8 +25,10 @@ import com.momen.restel.comm.Toasty
 import com.momen.restel.login.model.UserModel
 import kotlinx.android.synthetic.main.card_delete.*
 import kotlinx.android.synthetic.main.fragment_client.*
+import kotlinx.android.synthetic.main.toolbar_sample.view.*
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class ClientsFragment : Fragment() {
 
@@ -37,6 +40,7 @@ class ClientsFragment : Fragment() {
     private var bottomSheetDialog: BottomSheetDialog? = null
     private var update = false
     private var id: Int? = null
+    private val users = ArrayList<UserModel>()
 
     // bottom sheet components
     private var userFirstName: EditText? = null
@@ -96,7 +100,12 @@ class ClientsFragment : Fragment() {
 
                 }
                 ClientViewModel.State.DATA_LOADED -> {
-                    result.users?.let { clientAdapter?.setItems(it) }
+                    result.users?.let {
+                        clientAdapter?.setItems(it)
+                        users.clear()
+                        users.addAll(it)
+                    }
+
                 }
 
                 ClientViewModel.State.LOAD_ERROR -> {
@@ -190,12 +199,24 @@ class ClientsFragment : Fragment() {
     }
 
     private fun setUpComponents() {
+        setUpToolbar()
         setUpFab()
         setUpUpRecycler()
         setUpBottomSheet()
         setUpBottomSheetComponent()
         setUpBottomSheetSubmit()
         hideActivityComponent()
+    }
+
+    private fun setUpToolbar() {
+        clientToolbar.back.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+        (clientToolbar.search as EditText).addTextChangedListener {
+            clientAdapter?.filterItems(
+                users, (clientToolbar.search as EditText).text.toString().trim()
+            )
+        }
     }
 
     private fun hideActivityComponent() {

@@ -8,10 +8,10 @@ import javax.inject.Inject
 class RemoteSplashDataSource @Inject constructor(private val room: RestelAppDatabase) :
     SplashDataSource {
 
-    override fun addUser(user: UserEntity): Single<Long> = room.getDatabaseDAO()!!.addUser(user)
+    override fun addUser(user: UserEntity): Single<Long>? = room.getDatabaseDAO()?.addUser(user)
 
-    override fun getUsers(): Single<List<UserEntity>> {
-        return room.getDatabaseDAO()?.getUsers()!!
+    override fun getUsers(): Single<List<UserEntity>>? {
+        return room.getDatabaseDAO()?.getUsers()
     }
 
 }

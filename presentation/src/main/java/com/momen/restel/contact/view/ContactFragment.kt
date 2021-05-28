@@ -20,4 +20,6 @@ class ContactFragment : Fragment() {
 
 //        setUpComponents()
     }
+
+
 }

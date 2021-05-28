@@ -14,7 +14,7 @@ class GetUsersUseCase @Inject constructor(
     postExecutionThread: PostExecutionThread
 ) : UseCase<ArrayList<User>, GetUsersUseCase.Params>(threadExecutor, postExecutionThread) {
 
-    override fun buildUseCaseObservable(inputs: Params): Single<ArrayList<User>> =
+    override fun buildUseCaseObservable(inputs: Params): Single<ArrayList<User>>? =
         splashRepository.getUsers()
 
     class Params {
