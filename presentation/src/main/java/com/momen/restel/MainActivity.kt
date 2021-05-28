@@ -1,6 +1,7 @@
 package com.momen.restel
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
@@ -18,6 +19,18 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar as Toolbar)
         act = this
         setupActionbarWithNavController()
+        setDirection()
+    }
+
+    private fun setDirection() {
+        if (getString(R.string.welcome) == "خوش آمدید")
+            Utils.setRtl(true)
+        else if (getString(R.string.welcome) == "Welcome") {
+            Utils.setRtl(false)
+        }
+        mainDrawer.layoutDirection =
+            if (Utils.getRtl()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+
     }
 
     private fun setupActionbarWithNavController() {

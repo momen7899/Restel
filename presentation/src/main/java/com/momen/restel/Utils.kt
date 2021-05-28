@@ -27,11 +27,19 @@ class Utils {
         }
 
         private var currentUser: UserModel? = null
+        private var rtl = true
 
         fun setUser(userModel: UserModel) {
             currentUser = userModel
         }
 
         fun getUser() = currentUser
+
+        fun setRtl(rtl: Boolean) {
+            this.rtl = rtl
+        }
+
+        fun getRtl() = rtl
+
     }
 }

@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.card_scroll_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
-    private val rtl = true
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,7 +49,7 @@ class ProfileFragment : Fragment() {
 
     private fun setDirection() {
         profileFragment.layoutDirection =
-            if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+            if (Utils.getRtl()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     private fun setBack() {

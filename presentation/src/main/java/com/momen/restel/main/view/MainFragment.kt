@@ -53,8 +53,6 @@ import kotlin.collections.ArrayList
 @SuppressLint("InflateParams")
 class MainFragment : Fragment() {
 
-    private val rtl = true
-
     @Inject
     lateinit var reserveViewModelFactory: ReserveViewModelFactory
 
@@ -431,7 +429,7 @@ class MainFragment : Fragment() {
         roomView = requireActivity().layoutInflater
             .inflate(R.layout.dialog_main_reserve_room, null)
         roomView?.findViewById<LinearLayout>(R.id.dialogMainRoom)?.layoutDirection =
-            if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+            if (Utils.getRtl()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
         roomDialog = AlertDialog.Builder(requireContext())
             .setView(roomView).create()
         roomDialog?.show()
@@ -464,7 +462,7 @@ class MainFragment : Fragment() {
             .inflate(R.layout.dialog_main_reserve_customer, null)
 
         customerView?.findViewById<LinearLayout>(R.id.dialogMainCustomer)?.layoutDirection =
-            if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+            if (Utils.getRtl()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
 
         customerDialog = AlertDialog.Builder(requireContext())
             .setView(customerView).create()
@@ -493,7 +491,7 @@ class MainFragment : Fragment() {
 
         val layout =
             bottomSheetDialog?.findViewById<ScrollView>(R.id.bottomSheetReserve)
-        layout?.layoutDirection = if (rtl) 1 else 0
+        layout?.layoutDirection = if (Utils.getRtl()) 1 else 0
     }
 
     private fun setUpFab() {

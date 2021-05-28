@@ -230,9 +230,8 @@ class LoginFragment : Fragment() {
         bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog?.setContentView(R.layout.bottom_sheet_forget_pass)
 
-        val rtl = true
         val layout = bottomSheetDialog?.findViewById<NestedScrollView>(R.id.bottomSheetForgetPass)
-        layout?.layoutDirection = if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+        layout?.layoutDirection = if (Utils.getRtl()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     private fun setUpBottomSheetComponent() {

@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.momen.restel.R
+import com.momen.restel.Utils
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
 import com.momen.restel.comm.Toasty
@@ -235,9 +236,8 @@ class CustomerFragment : Fragment() {
     private fun setUpBottomSheet() {
         bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog?.setContentView(R.layout.bottom_sheet_customer)
-        val rtl = true
         val layout = bottomSheetDialog?.findViewById<ScrollView>(R.id.bottomSheetCustomer)
-        layout?.layoutDirection = if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+        layout?.layoutDirection = if (Utils.getRtl()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     private fun setUpBottomSheetComponent() {
