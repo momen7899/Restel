@@ -7,7 +7,7 @@
     <string name="unSuccessFbTransaction">An error has occurred. Please try again.</string>
     <string name="loginText">login</string>
     <string name="recoveryPassword">recovery password</string>
-    <string name="errorLoginUsername">"username must not be empty"</string>
+    <string name="errorLoginUsername">username must not be empty</string>
     <string name="errorLoginPassword">password must not be empty</string>
     <string name="successLogin">Welcome</string>
     <string name="unsuccessLogin">Make sure the password and username are correct.</string>
@@ -42,7 +42,7 @@
     <string name="gender">gender:</string>
     <string name="married">marital status:</string>
     <string name="bottomSheetDescription">show Bottom Sheet</string>
-    <string name="firstNameHint">نام</string>
+    <string name="firstNameHint">first name</string>
     <string name="lastNameHint">last name</string>
     <string name="userPhoneHint">tell</string>
     <string name="userName">user name</string>

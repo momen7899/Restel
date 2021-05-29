@@ -7,7 +7,7 @@
     <string name="unSuccessFbTransaction">خطایی رخ داده است. لطفا دوباره سعی کنید.</string>
     <string name="loginText">ورود</string>
     <string name="recoveryPassword">بازیابی رمز عبور</string>
-    <string name="errorLoginUsername">"نام کاربری نباید خالی باشد"</string>
+    <string name="errorLoginUsername">نام کاربری نباید خالی باشد</string>
     <string name="errorLoginPassword">رمز عبور نباید خالی باشد</string>
     <string name="successLogin">خوش آمدید</string>
     <string name="unsuccessLogin">از درست بودن رمز و نام کاربری اطمینان حاصل فرمایید.</string>

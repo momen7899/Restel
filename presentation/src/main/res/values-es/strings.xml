@@ -1,2 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Restel</string>
+    <string name="welcome">Bienvenidos</string>
+    <string name="hintUserName">nombre de usuario</string>
+    <string name="hintPassword">contraseña</string>
+    <string name="successDbTransaction">Los cambios se aplicaron correctamente</string>
+    <string name="unSuccessFbTransaction">Se ha producido un error. Inténtalo de nuevo.</string>
+    <string name="loginText">acceso</string>
+    <string name="recoveryPassword">contraseña de recuperación</string>
+    <string name="errorLoginUsername">el nombre de usuario no debe estar vacío</string>
+    <string name="errorLoginPassword">la contraseña no debe estar vacía</string>
+    <string name="successLogin">Bienvenidos</string>
+    <string name="unsuccessLogin">Asegúrese de que la contraseña y el nombre de usuario sean correctos.</string>
+    <string name="DatabaseError">Ocurrió un error en la base de datos</string>
+    <string name="clients">Empleados</string>
+    <string name="room">Habitaciones</string>
+    <string name="passenger">Clientes</string>
+    <string name="settings">ajustes</string>
+    <string name="profile">perfil</string>
+    <string name="contactUs">Contacta con nosotros</string>
+    <string name="logOut">cerrar sesión</string>
+    <string name="price">Precio de la habitación:</string>
+    <string name="roomNumber">Número de habitación:</string>
+    <string name="client">Nombre de empleado:</string>
+    <string name="customer">Nombre del cliente:</string>
+    <string name="underConstruction">Bajo construcción</string>
+    <string name="newReserve">Nueva reserva</string>
+    <string name="roomHint">Número de habitación</string>
+    <string name="userHint">Nombre de empleado</string>
+    <string name="customerHint">Nombre del cliente</string>
+    <string name="dateHint">Selección de fecha</string>
+    <string name="lastDateHint">Fecha final</string>
+    <string name="priceHint">Precio de la habitación</string>
+    <string name="submit">enviar</string>
+    <string name="emptyEditText">El valor de este campo no debe estar vacío</string>
+    <string name="successTransaction">Añadido exitosamente</string>
+    <string name="unsuccessTransaction">Asegúrese de que la información ingresada sea correcta</string>
+    <string name="firstName">primer nombre:</string>
+    <string name="lastName">apellido:</string>
+    <string name="phoneNumber">Número de teléfono:</string>
+    <string name="capacity">capacidad:</string>
+    <string name="gender">género:</string>
+    <string name="married">estado civil:</string>
+    <string name="bottomSheetDescription">mostrar hoja inferior</string>
+    <string name="firstNameHint">primer nombre</string>
+    <string name="lastNameHint">apellido</string>
+    <string name="userPhoneHint">Número de teléfono</string>
+    <string name="userName">nombre de usuario</string>
+    <string name="userPassHint">contraseña</string>
+    <string name="userRePassHint">repite la contraseña</string>
+    <string name="userAddressHint">Habla a</string>
+    <string name="capacityHint">Capacidad de la sala</string>
+    <string name="userNationalHint">Código Nacional</string>
+    <string name="edit">editar</string>
+    <string name="cancel">espalda</string>
+    <string name="delete">Eliminar</string>
+    <string name="single">único</string>
+    <string name="marry">casado</string>
+    <string name="male">masculino</string>
+    <string name="female">mujer</string>
+    <string name="search">buscar</string>
+    <string name="aboutUs">این اپلیکیشن برای پروژه ی درس مهندسی نرم افزار توسط دانشجویان: \n
+        1-مؤمن حمه ویسی 9717023118 \n
+        2-امیر ولی محمدی 9717023166 \n
+        3- هژیر غفوری 9717023139 \n
+        انجام شده است.
+    </string>
+    <string name="callUs">llámanos</string>
+    <string name="admin">administración</string>
+    <string name="user">usuario</string>
+    <string name="adminsRight">Nivel de acceso de usuario</string>
+    <string name="passwordRecovery">contraseña de recuperación</string>
+    <string name="successRecoveryPassword">El cambio de contraseña se completó correctamente\n
+    Tu nueva contraseña:1234</string>
+    <string name="title">reserva</string>
+    <string name="chooseLanguage">Elige lengua</string>
+
+</resources>
