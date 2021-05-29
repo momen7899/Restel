@@ -76,4 +76,7 @@
     <string name="title">الاحتياطي</string>
     <string name="chooseLanguage">اختر اللغة</string>
 
+    <string name="emptyCustomer">لا يوجد زبون</string>
+    <string name="emptyRoom">لايوجد غرف شاغرة</string>
+
 </resources>

@@ -75,4 +75,7 @@
     <string name="title">réserve</string>
     <string name="chooseLanguage">Choisissez la langue</string>
 
+    <string name="emptyCustomer">Il n`y a pas de client</string>
+    <string name="emptyRoom">Il n`y a pas de place</string>
+
 </resources>

@@ -75,4 +75,7 @@
     <string name="title">reserve</string>
     <string name="chooseLanguage">Choose Language</string>
 
+    <string name="emptyCustomer">There is no customer</string>
+    <string name="emptyRoom">There is no room</string>
+
 </resources>

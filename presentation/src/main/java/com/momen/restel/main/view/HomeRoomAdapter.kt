@@ -43,6 +43,11 @@ class HomeRoomAdapter(private val fragment: MainFragment) :
     fun setItems(items: ArrayList<HomeRoomModel>) {
         this.items.clear()
         this.items.addAll(items)
+        if (items.isEmpty()){
+            fragment.showEmptyRoom()
+        }else{
+            fragment.hideEmptyRoom()
+        }
         notifyDataSetChanged()
     }
 

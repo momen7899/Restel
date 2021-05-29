@@ -75,4 +75,6 @@
     <string name="title">リザーブ</string>
     <string name="chooseLanguage">言語を選択</string>
 
+    <string name="emptyCustomer">お客さんがいない</string>
+    <string name="emptyRoom">部屋がありません</string>
 </resources>
