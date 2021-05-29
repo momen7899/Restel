@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.momen.restel.MainActivity
 import com.momen.restel.R
 import com.momen.restel.Utils
 import kotlinx.android.synthetic.main.fragment_contact.*
@@ -51,7 +52,7 @@ class ContactFragment : Fragment() {
 
     private fun setDirection() {
         fragmentContact.layoutDirection =
-            if (Utils.getRtl()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+            if (Utils.getRtl(MainActivity.instance())) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     private fun setBack() {

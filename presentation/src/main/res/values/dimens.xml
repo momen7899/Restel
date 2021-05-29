@@ -2,4 +2,5 @@
 <resources>
     <dimen name="cardCornerRadius">10dp</dimen>
     <dimen name="standardIconSize">24dp</dimen>
+    <dimen name="flagIconSize">128dp</dimen>
 </resources>

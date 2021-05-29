@@ -1,9 +1,11 @@
 package com.momen.restel.customer.model
 
+import android.content.Context
 import com.momen.domain.model.Customer
+import com.momen.restel.R
 import javax.inject.Inject
 
-class CustomerModelDataMapper @Inject constructor() {
+class CustomerModelDataMapper @Inject constructor(private val context: Context) {
     fun transformCustomerToCustomerModels(data: ArrayList<Customer>?): ArrayList<CustomerModel> {
         val list = ArrayList<CustomerModel>()
         data?.let {
@@ -28,16 +30,16 @@ class CustomerModelDataMapper @Inject constructor() {
 
     private fun transformSingleToString(single: Boolean?): String? {
         single?.let {
-            return if (single) "مجرد"
-            else "متاهل"
+            return if (single) context.getString(R.string.single)
+            else context.getString(R.string.married)
         }
         return ""
     }
 
     private fun transformGenderToString(gender: Boolean?): String {
         gender?.let {
-            return if (gender) "مرد"
-            else "زن"
+            return if (gender) context.getString(R.string.male)
+            else context.getString(R.string.female)
         }
         return ""
     }
@@ -54,8 +56,10 @@ class CustomerModelDataMapper @Inject constructor() {
             )
         }
 
-    private fun transformGenderToBoolean(gender: String?): Boolean = gender == "مرد"
+    private fun transformGenderToBoolean(gender: String?): Boolean =
+        gender == context.getString(R.string.male)
 
 
-    private fun transformSingleToBoolean(single: String?): Boolean = single == "مجرد"
+    private fun transformSingleToBoolean(single: String?): Boolean =
+        single == context.getString(R.string.female)
 }

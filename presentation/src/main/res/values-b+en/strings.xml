@@ -73,4 +73,6 @@
     <string name="successRecoveryPassword">Password change completed successfully\n
     Your new password:1234</string>
     <string name="title">reserve</string>
+    <string name="chooseLanguage">Choose Language</string>
+
 </resources>

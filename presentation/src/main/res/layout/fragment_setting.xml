@@ -6,6 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidCenterVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidCenterHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
     <ImageView
         android:id="@+id/settingBack"
         android:layout_width="wrap_content"
@@ -16,4 +30,83 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/primaryDark"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        style="@style/EditTextHint"
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="65dp"
+        android:text="@string/chooseLanguage"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/lanEng"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingBack" />
+
+    <ImageView
+        android:id="@+id/lanPersian"
+        android:layout_width="@dimen/flagIconSize"
+        android:layout_height="@dimen/flagIconSize"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/ic_iran"
+        app:layout_constraintBottom_toTopOf="@+id/lanArabic"
+        app:layout_constraintEnd_toStartOf="@+id/guidCenterVertical"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/lanEng"
+        android:layout_width="@dimen/flagIconSize"
+        android:layout_height="@dimen/flagIconSize"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/ic_english"
+        app:layout_constraintBottom_toTopOf="@+id/lanSpain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidCenterVertical"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/lanArabic"
+        android:layout_width="@dimen/flagIconSize"
+        android:layout_height="@dimen/flagIconSize"
+        android:src="@drawable/ic_saudi_arabia"
+        app:layout_constraintBottom_toTopOf="@+id/guidCenterHorizontal"
+        app:layout_constraintEnd_toStartOf="@+id/guidCenterVertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidCenterHorizontal"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/lanSpain"
+        android:layout_width="@dimen/flagIconSize"
+        android:layout_height="@dimen/flagIconSize"
+        android:src="@drawable/ic_spain"
+        app:layout_constraintBottom_toTopOf="@+id/guidCenterHorizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidCenterVertical"
+        app:layout_constraintTop_toTopOf="@+id/guidCenterHorizontal"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/lanJapan"
+        android:layout_width="@dimen/flagIconSize"
+        android:layout_height="@dimen/flagIconSize"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_japan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidCenterVertical"
+        app:layout_constraintTop_toBottomOf="@+id/lanSpain"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/lanFrance"
+        android:layout_width="@dimen/flagIconSize"
+        android:layout_height="@dimen/flagIconSize"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_france"
+        app:layout_constraintEnd_toStartOf="@+id/guidCenterVertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lanArabic"
+        tools:ignore="ContentDescription" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

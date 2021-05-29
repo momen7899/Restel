@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
+import com.momen.restel.MainActivity
 import com.momen.restel.R
 import com.momen.restel.Utils
 import com.momen.restel.app.App
@@ -231,7 +232,7 @@ class LoginFragment : Fragment() {
         bottomSheetDialog?.setContentView(R.layout.bottom_sheet_forget_pass)
 
         val layout = bottomSheetDialog?.findViewById<NestedScrollView>(R.id.bottomSheetForgetPass)
-        layout?.layoutDirection = if (Utils.getRtl()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+        layout?.layoutDirection = if (Utils.getRtl(MainActivity.instance())) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     private fun setUpBottomSheetComponent() {

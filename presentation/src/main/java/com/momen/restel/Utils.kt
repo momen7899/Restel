@@ -1,5 +1,6 @@
 package com.momen.restel
 
+import android.content.Context
 import com.momen.restel.login.model.UserModel
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -27,7 +28,6 @@ class Utils {
         }
 
         private var currentUser: UserModel? = null
-        private var rtl = true
 
         fun setUser(userModel: UserModel) {
             currentUser = userModel
@@ -35,11 +35,40 @@ class Utils {
 
         fun getUser() = currentUser
 
-        fun setRtl(rtl: Boolean) {
-            this.rtl = rtl
+        fun setRtl(rtl: Boolean, activity: MainActivity) {
+            val sharedPref = activity.getPreferences(Context.MODE_PRIVATE) ?: return
+            with(sharedPref.edit()) {
+                putBoolean("RTL", rtl)
+                apply()
+            }
         }
 
-        fun getRtl() = rtl
+        fun getRtl(activity: MainActivity): Boolean {
+            val sharedPref = activity.getPreferences(Context.MODE_PRIVATE)
+            return sharedPref.getBoolean("RTL", true)
+        }
+
+        fun setLanguage(language: String, activity: MainActivity) {
+            val sharedPref = activity.getPreferences(Context.MODE_PRIVATE) ?: return
+            with(sharedPref.edit()) {
+                putString("lan", language)
+                apply()
+            }
+        }
+
+        fun getLanguage(activity: MainActivity): String {
+            val sharedPref = activity.getPreferences(Context.MODE_PRIVATE)
+            return sharedPref.getString("lan", "fa").toString()
+        }
+
+        fun setAppLocale(context: Context, language: String) {
+            val locale = Locale(language)
+            Locale.setDefault(locale)
+            val config = context.resources.configuration
+            config.setLocale(locale)
+            context.createConfigurationContext(config)
+            context.resources.updateConfiguration(config, context.resources.displayMetrics)
+        }
 
     }
 }

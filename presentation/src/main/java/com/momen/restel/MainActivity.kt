@@ -15,22 +15,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setAppLocal()
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar as Toolbar)
         act = this
-        setupActionbarWithNavController()
         setDirection()
+
+        setupActionbarWithNavController()
+    }
+
+    private fun setAppLocal() {
+        val language = Utils.getLanguage(this)
+        Utils.setAppLocale(this, language)
     }
 
     private fun setDirection() {
-        if (getString(R.string.welcome) == "خوش آمدید")
-            Utils.setRtl(true)
-        else if (getString(R.string.welcome) == "Welcome") {
-            Utils.setRtl(false)
-        }
         mainDrawer.layoutDirection =
-            if (Utils.getRtl()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
-
+            if (Utils.getRtl(this)) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     private fun setupActionbarWithNavController() {
