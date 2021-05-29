@@ -59,11 +59,11 @@
     <string name="male">masculino</string>
     <string name="female">mujer</string>
     <string name="search">buscar</string>
-    <string name="aboutUs">این اپلیکیشن برای پروژه ی درس مهندسی نرم افزار توسط دانشجویان: \n
+    <string name="aboutUs">Esta aplicación para el proyecto del curso de ingeniería de software por parte de los estudiantes: \n
         1-مؤمن حمه ویسی 9717023118 \n
         2-امیر ولی محمدی 9717023166 \n
         3- هژیر غفوری 9717023139 \n
-        انجام شده است.
+        hecho.
     </string>
     <string name="callUs">llámanos</string>
     <string name="admin">administración</string>
