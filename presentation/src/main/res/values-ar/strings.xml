@@ -1,4 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Restel</string>
+    <string name="welcome">مرحبا</string>
+    <string name="hintUserName">اسم االمستخدم</string>
+    <string name="hintPassword">كلمه السر</string>
+    <string name="successDbTransaction">تم تطبيق التغييرات بشكل صحيح</string>
+    <string name="unSuccessFbTransaction">حدث خطأ. حاول مرة اخرى.</string>
+    <string name="loginText">تسجيل الدخول</string>
+    <string name="recoveryPassword">استعادة كلمة المرور</string>
+    <string name="errorLoginUsername">يجب ألا يكون اسم المستخدم فارغًا</string>
+    <string name="errorLoginPassword">يجب ألا تكون كلمة المرور فارغة</string>
+    <string name="successLogin">مرحبا</string>
+    <string name="unsuccessLogin">تأكد من صحة كلمة المرور واسم المستخدم.</string>
+    <string name="DatabaseError">حدث خطأ في قاعدة البيانات</string>
+    <string name="clients">الموظفين</string>
+    <string name="room">غرف</string>
+    <string name="passenger">عملاء</string>
+    <string name="settings">الإعدادات</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="contactUs">اتصل بنا</string>
+    <string name="logOut">تسجيل خروج</string>
+    <string name="price">سعر الغرفة:</string>
+    <string name="roomNumber">رقم الغرفة:</string>
+    <string name="client">اسم الموظف:</string>
+    <string name="customer">اسم الزبون:</string>
+    <string name="underConstruction">تحت التشيد</string>
+    <string name="newReserve">حجز جديد</string>
+    <string name="roomHint">رقم الغرفة</string>
+    <string name="userHint">اسم الموظف</string>
+    <string name="customerHint">اسم الزبون</string>
+    <string name="dateHint">اختيار التاريخ</string>
+    <string name="lastDateHint">تاريخ الانتهاء</string>
+    <string name="priceHint">سعر الغرفة</string>
+    <string name="submit">إرسال</string>
+    <string name="emptyEditText">يجب ألا تكون قيمة هذا الحقل فارغة</string>
+    <string name="successTransaction">أضيف بنجاح</string>
+    <string name="unsuccessTransaction">تأكد من صحة المعلومات التي تم إدخالها</string>
+    <string name="firstName">الاسم الأول:</string>
+    <string name="lastName">الكنية:</string>
+    <string name="phoneNumber">رقم الهاتف:</string>
+    <string name="capacity">الاهلية:</string>
+    <string name="gender">جنس:</string>
+    <string name="married">الحالة الاجتماعية:</string>
+    <string name="bottomSheetDescription">تظهر الورقة السفلية</string>
+    <string name="firstNameHint">الاسم الأول</string>
+    <string name="lastNameHint">الكنية</string>
+    <string name="userPhoneHint">رقم الهاتف</string>
+    <string name="userName">اسم االمستخدم</string>
+    <string name="userPassHint">كلمه السر</string>
+    <string name="userRePassHint">كرر كلمة المرور</string>
+    <string name="userAddressHint">عنوان</string>
+    <string name="capacityHint">سعة الغرفة</string>
+    <string name="userNationalHint">رمز دولي</string>
+    <string name="edit">تعديل</string>
+    <string name="cancel">عودة</string>
+    <string name="delete">حذف</string>
+    <string name="single">أعزب</string>
+    <string name="marry">متزوج</string>
+    <string name="male">الذكر</string>
+    <string name="female">أنثى</string>
+    <string name="search">بحث</string>
+    <string name="aboutUs">این اپلیکیشن برای پروژه ی درس مهندسی نرم افزار توسط دانشجویان: \n
+        1-مؤمن حمه ویسی 9717023118 \n
+        2-امیر ولی محمدی 9717023166 \n
+        3- هژیر غفوری 9717023139 \n
+        انجام شده است.
+    </string>
+    <string name="callUs">اتصل بنا</string>
+    <string name="admin">مشرف</string>
+    <string name="user">المستعمل</string>
+    <string name="adminsRight">مستوى وصول المستخدم</string>
+    <string name="passwordRecovery">استعادة كلمة المرور</string>
+    <string name="successRecoveryPassword">تم تغيير كلمة المرور بنجاح\n
+    كلمة سرك الجديدة:1234</string>
+    <string name="title">الاحتياطي</string>
+    <string name="chooseLanguage">اختر اللغة</string>
 
 </resources>
