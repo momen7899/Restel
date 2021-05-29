@@ -1,2 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Restel</string>
+    <string name="welcome">ようこそ</string>
+    <string name="hintUserName">ユーザー名</string>
+    <string name="hintPassword">パスワード</string>
+    <string name="successDbTransaction">変更は正しく適用されました</string>
+    <string name="unSuccessFbTransaction">エラーが発生しました。 もう一度やり直してください。</string>
+    <string name="loginText">ログインする</string>
+    <string name="recoveryPassword">回復パスワード</string>
+    <string name="errorLoginUsername">ユーザー名は空であってはなりません</string>
+    <string name="errorLoginPassword">パスワードは空であってはなりません</string>
+    <string name="successLogin">ようこそ</string>
+    <string name="unsuccessLogin">パスワードとユーザー名が正しいことを確認してください。</string>
+    <string name="DatabaseError">データベースでエラーが発生しました</string>
+    <string name="clients">従業員</string>
+    <string name="room">部屋</string>
+    <string name="passenger">顧客</string>
+    <string name="settings">設定</string>
+    <string name="profile">プロフィール</string>
+    <string name="contactUs">お問い合わせ</string>
+    <string name="logOut">ログアウト</string>
+    <string name="price">客室料金:</string>
+    <string name="roomNumber">部屋番号:</string>
+    <string name="client">従業員名:</string>
+    <string name="customer">顧客名:</string>
+    <string name="underConstruction">工事中</string>
+    <string name="newReserve">新規予約</string>
+    <string name="roomHint">部屋番号</string>
+    <string name="userHint">従業員名</string>
+    <string name="customerHint">顧客名</string>
+    <string name="dateHint">日付の選択</string>
+    <string name="lastDateHint">終了日</string>
+    <string name="priceHint">客室料金</string>
+    <string name="submit">参加する</string>
+    <string name="emptyEditText">このフィールドの値は空であってはなりません</string>
+    <string name="successTransaction">正常に追加されました</string>
+    <string name="unsuccessTransaction">入力した情報が正しいことを確認してください</string>
+    <string name="firstName">ファーストネーム:</string>
+    <string name="lastName">苗字:</string>
+    <string name="phoneNumber">電話番号:</string>
+    <string name="capacity">容量:</string>
+    <string name="gender">性別:</string>
+    <string name="married">配偶者の有無:</string>
+    <string name="bottomSheetDescription">ボトムシートを表示</string>
+    <string name="firstNameHint">ファーストネーム</string>
+    <string name="lastNameHint">苗字</string>
+    <string name="userPhoneHint">電話番号</string>
+    <string name="userName">ユーザー名</string>
+    <string name="userPassHint">パスワード</string>
+    <string name="userRePassHint">パスワードを繰り返す</string>
+    <string name="userAddressHint">住所</string>
+    <string name="capacityHint">部屋の容量</string>
+    <string name="userNationalHint">国のコード</string>
+    <string name="edit">編集</string>
+    <string name="cancel">バック</string>
+    <string name="delete">削除</string>
+    <string name="single">シングル</string>
+    <string name="marry">既婚</string>
+    <string name="male">男性</string>
+    <string name="female">女性</string>
+    <string name="search">探す</string>
+    <string name="aboutUs">این اپلیکیشن برای پروژه ی درس مهندسی نرم افزار توسط دانشجویان: \n
+        1-مؤمن حمه ویسی 9717023118 \n
+        2-امیر ولی محمدی 9717023166 \n
+        3- هژیر غفوری 9717023139 \n
+        انجام شده است.
+    </string>
+    <string name="callUs">お電話ください</string>
+    <string name="admin">管理者</string>
+    <string name="user">ユーザー</string>
+    <string name="adminsRight">ユーザーアクセスレベル</string>
+    <string name="passwordRecovery">回復パスワード</string>
+    <string name="successRecoveryPassword">パスワードの変更が正常に完了しました\n
+    新しいパスワード:1234</string>
+    <string name="title">リザーブ</string>
+    <string name="chooseLanguage">言語を選択</string>
+
+</resources>
