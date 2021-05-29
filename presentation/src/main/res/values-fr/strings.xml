@@ -1,2 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="StringEscaping">
+    <string name="app_name">Restel</string>
+    <string name="welcome">Adresse</string>
+    <string name="hintUserName">Nom d'utilisateur</string>
+    <string name="hintPassword">le mot de passe</string>
+    <string name="successDbTransaction">Les modifications ont été appliquées correctement</string>
+    <string name="unSuccessFbTransaction">Une erreur est survenue. Veuillez réessayer.</string>
+    <string name="loginText">connexion</string>
+    <string name="recoveryPassword">mot de passe de récupération</string>
+    <string name="errorLoginUsername">le nom d'utilisateur ne doit pas être vide</string>
+    <string name="errorLoginPassword">le mot de passe ne doit pas être vide</string>
+    <string name="successLogin">Adresse</string>
+    <string name="unsuccessLogin">Assurez-vous que le mot de passe et le nom d'utilisateur sont corrects.</string>
+    <string name="DatabaseError">Une erreur s'est produite dans la base de données</string>
+    <string name="clients">Des employés</string>
+    <string name="room">Pièces</string>
+    <string name="passenger">les clients</string>
+    <string name="settings">Les paramètres</string>
+    <string name="profile">profil</string>
+    <string name="contactUs">Nous contacter</string>
+    <string name="logOut">Se déconnecter</string>
+    <string name="price">Prix de la chambre:</string>
+    <string name="roomNumber">Numéro de chambre:</string>
+    <string name="client">Nom de l'employé:</string>
+    <string name="customer">Nom du client:</string>
+    <string name="underConstruction">En construction</string>
+    <string name="newReserve">New booking</string>
+    <string name="roomHint">Numéro de chambre</string>
+    <string name="userHint">Nom de l'employé</string>
+    <string name="customerHint">Nom du client</string>
+    <string name="dateHint">Sélection de la date</string>
+    <string name="lastDateHint">Date de fin</string>
+    <string name="priceHint">Prix de la chambre</string>
+    <string name="submit">nous faire parvenir</string>
+    <string name="emptyEditText">La valeur de ce champ ne doit pas être vide</string>
+    <string name="successTransaction">Ajouté avec succès </string>
+    <string name="unsuccessTransaction">Assurez-vous que les informations saisies sont correctes</string>
+    <string name="firstName">Prénom:</string>
+    <string name="lastName">nom de famille:</string>
+    <string name="phoneNumber">Numéro de téléphone:</string>
+    <string name="capacity">capacité:</string>
+    <string name="gender">genre:</string>
+    <string name="married">état civil:</string>
+    <string name="bottomSheetDescription">afficher la feuille inférieure</string>
+    <string name="firstNameHint">Prénom</string>
+    <string name="lastNameHint">nom de famille</string>
+    <string name="userPhoneHint">Numéro de téléphone</string>
+    <string name="userName">Nom d'utilisateur</string>
+    <string name="userPassHint">le mot de passe</string>
+    <string name="userRePassHint">répéter le mot de passe</string>
+    <string name="userAddressHint">Adresse</string>
+    <string name="capacityHint">Capacité de la salle</string>
+    <string name="userNationalHint">code national</string>
+    <string name="edit">Éditer</string>
+    <string name="cancel">dos</string>
+    <string name="delete">effacer</string>
+    <string name="single">Célibataire</string>
+    <string name="marry">marié</string>
+    <string name="male">mâle</string>
+    <string name="female">femelle</string>
+    <string name="search">rechercher</string>
+    <string name="aboutUs">این اپلیکیشن برای پروژه ی درس مهندسی نرم افزار توسط دانشجویان: \n
+        1-مؤمن حمه ویسی 9717023118 \n
+        2-امیر ولی محمدی 9717023166 \n
+        3- هژیر غفوری 9717023139 \n
+        انجام شده است.
+    </string>
+    <string name="callUs">appelez nous</string>
+    <string name="admin">admin</string>
+    <string name="user">utilisateur</string>
+    <string name="adminsRight">Niveau d'accès utilisateur</string>
+    <string name="passwordRecovery">mot de passe de récupération</string>
+    <string name="successRecoveryPassword">Changement de mot de passe terminé avec succès\n
+    Votre nouveau mot de passe:1234</string>
+    <string name="title">réserve</string>
+    <string name="chooseLanguage">Choisissez la langue</string>
+
+</resources>
