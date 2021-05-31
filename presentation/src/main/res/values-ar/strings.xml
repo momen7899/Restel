@@ -79,5 +79,6 @@
 
     <string name="emptyCustomer">لا يوجد زبون</string>
     <string name="emptyRoom">لايوجد غرف شاغرة</string>
+    <string name="disableDelete">يتم استخدام هذه البيانات في الحجز. لا يمكن حذفه</string>
 
 </resources>

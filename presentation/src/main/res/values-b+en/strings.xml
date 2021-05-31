@@ -78,5 +78,6 @@
 
     <string name="emptyCustomer">There is no customer</string>
     <string name="emptyRoom">There is no room</string>
+    <string name="disableDelete">This data is used in the reservation. It is not possible to delete it</string>
 
 </resources>

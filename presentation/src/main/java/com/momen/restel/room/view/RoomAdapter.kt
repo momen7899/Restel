@@ -6,6 +6,8 @@ import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.momen.restel.R
+import com.momen.restel.Utils
+import com.momen.restel.comm.Toasty
 import com.momen.restel.databinding.RoomItemBinding
 import com.momen.restel.room.model.RoomModel
 
@@ -35,9 +37,24 @@ class RoomAdapter(private val fragment: RoomFragment) :
                 fragment.showBottomSheet(true, items[position])
             }
 
-            remove.setOnClickListener {
-                fragment.showDelMsg(items[position], position)
-                removeItem(items[position])
+            items[position].id?.let {
+                if (Utils.isRoomInReserves(it)) {
+                    remove.setImageResource(R.drawable.ic_disable_remove)
+                    remove.setOnClickListener {
+                        fragment.context?.let { it1 ->
+                            Toasty.showWarningToasty(
+                                it1,
+                                it1.getString(R.string.disableDelete)
+                            )
+                        }
+                    }
+                } else {
+                    remove.setImageResource(R.drawable.ic_remove)
+                    remove.setOnClickListener {
+                        fragment.showDelMsg(items[position], position)
+                        removeItem(items[position])
+                    }
+                }
             }
         }
     }

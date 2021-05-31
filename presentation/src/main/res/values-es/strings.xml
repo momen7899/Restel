@@ -78,5 +78,6 @@
 
     <string name="emptyCustomer">No hay cliente</string>
     <string name="emptyRoom">No hay espacio</string>
+    <string name="disableDelete">Estos datos se utilizan en la reserva. No es posible borrarlo</string>
 
 </resources>

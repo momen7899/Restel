@@ -78,4 +78,5 @@
 
     <string name="emptyCustomer">お客さんがいない</string>
     <string name="emptyRoom">部屋がありません</string>
+    <string name="disableDelete">このデータは予約に使用されます。 それを削除することはできません</string>
 </resources>

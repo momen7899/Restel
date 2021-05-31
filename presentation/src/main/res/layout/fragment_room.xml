@@ -37,7 +37,7 @@
 
 
     <include
-        android:id="@+id/roomDelete"
+        android:id="@+id/roomCardDelete"
         layout="@layout/card_delete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

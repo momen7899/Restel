@@ -1,11 +1,11 @@
 package com.momen.restel.customer.model
 
-import android.content.Context
 import com.momen.domain.model.Customer
+import com.momen.restel.MainActivity
 import com.momen.restel.R
 import javax.inject.Inject
 
-class CustomerModelDataMapper @Inject constructor(private val context: Context) {
+class CustomerModelDataMapper @Inject constructor() {
     fun transformCustomerToCustomerModels(data: ArrayList<Customer>?): ArrayList<CustomerModel> {
         val list = ArrayList<CustomerModel>()
         data?.let {
@@ -30,16 +30,16 @@ class CustomerModelDataMapper @Inject constructor(private val context: Context) 
 
     private fun transformSingleToString(single: Boolean?): String? {
         single?.let {
-            return if (single) context.getString(R.string.single)
-            else context.getString(R.string.married)
+            return if (single) MainActivity.instance().getString(R.string.single)
+            else MainActivity.instance().getString(R.string.marry)
         }
         return ""
     }
 
     private fun transformGenderToString(gender: Boolean?): String {
         gender?.let {
-            return if (gender) context.getString(R.string.male)
-            else context.getString(R.string.female)
+            return if (gender) MainActivity.instance().getString(R.string.male)
+            else MainActivity.instance().getString(R.string.female)
         }
         return ""
     }
@@ -57,9 +57,9 @@ class CustomerModelDataMapper @Inject constructor(private val context: Context) 
         }
 
     private fun transformGenderToBoolean(gender: String?): Boolean =
-        gender == context.getString(R.string.male)
+        gender == MainActivity.instance().getString(R.string.male)
 
 
     private fun transformSingleToBoolean(single: String?): Boolean =
-        single == context.getString(R.string.female)
+        single == MainActivity.instance().getString(R.string.female)
 }

@@ -52,7 +52,7 @@
     <string name="capacityHint">ظرفیت اتاق</string>
     <string name="userNationalHint">شماره ی ملی</string>
     <string name="edit">ویرایش</string>
-    <string name="cancel">بازگشت</string>
+    <string name="cancel">انصراف</string>
     <string name="delete">حذف شد</string>
     <string name="single">مجرد</string>
     <string name="marry">متاهل</string>
@@ -78,4 +78,6 @@
     <string name="aboutApp">نرم افزار مدیریت رزرواسیون</string>
     <string name="emptyCustomer">مشتری وجود ندارد</string>
     <string name="emptyRoom">اتاقی وجود ندارد</string>
+
+    <string name="disableDelete">این داده در رزرواسیون استفاده شده است. امکان حذف آن وجود ندارد</string>
 </resources>

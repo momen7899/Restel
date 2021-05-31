@@ -66,7 +66,6 @@ class RoomFragment : Fragment() {
     }
 
     private fun injectViewModel() {
-        @Suppress("DEPRECATION")
         DaggerRoomComponent.builder()
             .appComponent(App().appComponent)
             .roomDbModule(RoomDbModule(requireContext()))
@@ -173,7 +172,7 @@ class RoomFragment : Fragment() {
         roomViewModel?.removeRoomLiveData?.observe(viewLifecycleOwner, { result ->
             when (result.state) {
                 RoomViewModel.State.LOADING_DATA -> {
-
+                    hideDelete()
                 }
                 RoomViewModel.State.DATA_LOADED -> {
                     result.response?.let {
@@ -327,6 +326,7 @@ class RoomFragment : Fragment() {
                 timerProgressBar?.progress = sec
                 if (sec == 0) {
                     this.cancel()
+                    hideDelete()
                     if (delete) {
                         roomViewModel?.removeRoom(room)
                         delete = false
@@ -345,12 +345,12 @@ class RoomFragment : Fragment() {
     }
 
     private fun showDelete() {
-        roomDelete.visibility = View.VISIBLE
+        roomCardDelete.visibility = View.VISIBLE
         roomFab.visibility = View.GONE
     }
 
     private fun hideDelete() {
-        roomDelete.visibility = View.GONE
+        roomCardDelete.visibility = View.GONE
         roomFab.visibility = View.VISIBLE
     }
 }

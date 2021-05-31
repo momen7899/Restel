@@ -101,7 +101,7 @@ class ClientsFragment : Fragment() {
         clientViewModel?.getUsersLiveData?.observe(viewLifecycleOwner, { result ->
             when (result.state) {
                 ClientViewModel.State.LOADING_DATA -> {
-
+                    hideDelete()
                 }
                 ClientViewModel.State.DATA_LOADED -> {
                     result.users?.let {

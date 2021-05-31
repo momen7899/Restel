@@ -2,9 +2,11 @@ package com.momen.restel
 
 import android.content.Context
 import com.momen.restel.login.model.UserModel
+import com.momen.restel.main.model.ReserveModel
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.*
+import kotlin.collections.ArrayList
 
 class Utils {
     companion object {
@@ -68,6 +70,37 @@ class Utils {
             config.setLocale(locale)
             context.createConfigurationContext(config)
             context.resources.updateConfiguration(config, context.resources.displayMetrics)
+        }
+
+        private val reserves = ArrayList<ReserveModel>()
+
+        fun setReserves(reserves: ArrayList<ReserveModel>) {
+            this.reserves.clear()
+            this.reserves.addAll(reserves)
+        }
+
+        fun isClientInReserves(id: Int): Boolean {
+            reserves.forEach {
+                if (it.clientId == id)
+                    return true
+            }
+            return false
+        }
+
+        fun isCustomerInReserves(id: Int): Boolean {
+            reserves.forEach {
+                if (it.customerId == id)
+                    return true
+            }
+            return false
+        }
+
+        fun isRoomInReserves(id: Int): Boolean {
+            reserves.forEach {
+                if (it.roomId == id)
+                    return true
+            }
+            return false
         }
 
     }
