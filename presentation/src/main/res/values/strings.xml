@@ -80,4 +80,5 @@
     <string name="emptyRoom">اتاقی وجود ندارد</string>
 
     <string name="disableDelete">این داده در رزرواسیون استفاده شده است. امکان حذف آن وجود ندارد</string>
+    <string name="roomFillError">اتاق برای تاریخ مورد نظر رزرو شده است.لطفا دوباره سعی کنید</string>
 </resources>

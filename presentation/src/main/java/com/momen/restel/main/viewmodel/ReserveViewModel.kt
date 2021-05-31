@@ -19,37 +19,36 @@ class ReserveViewModel(
     private val reserveModelDataMapper: ReserveModelDataMapper
 ) : ViewModel() {
 
-    val reserveLiveData = MutableLiveData<Result>()
+    val getReserveLiveData = MutableLiveData<Result>()
     val addReserveLiveData = MutableLiveData<Result>()
     val updateReserveLiveData = MutableLiveData<Result>()
     val removeReserveLiveData = MutableLiveData<Result>()
 
     private var reserves: ArrayList<ReserveModel>? = null
     private var response: Long? = null
-    private var result: Result? = null
     private val disposables = CompositeDisposable()
 
     fun getReserves() {
-        result = Result(null, null, State.LOADING_DATA, null)
-        reserveLiveData.value = result
+        var result = Result(null, null, State.LOADING_DATA, null)
+        getReserveLiveData.value = result
 
         val params = GetReservesUseCase.Params.forGetReserve()
         val d: Disposable? = reservesUseCase.execute(params)?.subscribe({ reservesList ->
             reserves = reserveModelDataMapper.transformReserveToReserveModels(reservesList)
             result = Result(null, reserves, State.DATA_LOADED, null)
-            reserveLiveData.value = result
+            getReserveLiveData.value = result
         }, { throwable ->
             reserves = null
             println("Login Error View Model $throwable.message")
             result = Result(null, reserves, State.LOAD_ERROR, throwable.message)
-            reserveLiveData.value = result
+            getReserveLiveData.value = result
         }
         )
         d?.let { disposables.add(it) }
     }
 
     fun addReserve(reserve: ReserveModel) {
-        result = Result(null, null, State.LOADING_DATA, null)
+        var result = Result(null, null, State.LOADING_DATA, null)
         addReserveLiveData.value = result
 
         val params = AddReserveUseCase.Params.forAddReserve(
@@ -70,7 +69,7 @@ class ReserveViewModel(
     }
 
     fun updateReserve(reserve: ReserveModel) {
-        result = Result(null, null, State.LOADING_DATA, null)
+        var result = Result(null, null, State.LOADING_DATA, null)
         updateReserveLiveData.value = result
 
         val params = UpdateReserveUseCase.Params.forUpdateReserve(
@@ -79,12 +78,12 @@ class ReserveViewModel(
         val d: Disposable? = updateUseCase.execute(params)?.subscribe({ response ->
             this.response = response.toLong()
             result = Result(this.response, null, State.DATA_LOADED, null)
-            addReserveLiveData.value = result
+            updateReserveLiveData.value = result
         }, { throwable ->
             response = null
             println("Login Error View Model $throwable.message")
             result = Result(response, null, State.LOAD_ERROR, throwable.message)
-            addReserveLiveData.value = result
+            updateReserveLiveData.value = result
         }
         )
         d?.let { disposables.add(it) }

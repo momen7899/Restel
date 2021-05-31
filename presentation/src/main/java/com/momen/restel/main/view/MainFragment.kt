@@ -27,7 +27,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.MainActivity
 import com.momen.restel.R
-import com.momen.restel.UiThread
 import com.momen.restel.Utils
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
@@ -114,6 +113,7 @@ class MainFragment : Fragment() {
 
         setUpComponents()
         subscribeViewModel()
+
     }
 
     private fun injectViewModel() {
@@ -134,11 +134,6 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setUpActivityComponent()
-        getReserves()
-    }
-
-    private fun getReserves() {
-        reserveViewModel?.getReserves()
     }
 
     private fun subscribeViewModel() {
@@ -151,7 +146,9 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeGetReserves() {
-        reserveViewModel?.reserveLiveData?.observe(
+        reserveViewModel?.getReserves()
+
+        reserveViewModel?.getReserveLiveData?.observe(
             viewLifecycleOwner, { result ->
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
@@ -175,18 +172,26 @@ class MainFragment : Fragment() {
         )
     }
 
+    var counter = 0
+
     private fun subscribeAddReserve() {
         reserveViewModel?.addReserveLiveData?.observe(
             viewLifecycleOwner, { result ->
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
+                        if (counter != 0) {
+                            return@observe
+                        }
                         reserveViewModel?.getReserves()
+                        counter++
+                        println("add $counter")
                         Toasty.showSuccessToasty(
                             requireContext(),
                             getString(R.string.successDbTransaction)
                         )
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
+                        counter = 0
                     }
                     ReserveViewModel.State.LOAD_ERROR -> {
                         Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
@@ -202,14 +207,19 @@ class MainFragment : Fragment() {
             viewLifecycleOwner, { result ->
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
+                        if (counter != 0) {
+                            return@observe
+                        }
                         reserveViewModel?.getReserves()
+                        counter++
+                        println("Update $counter")
                         Toasty.showSuccessToasty(
                             requireContext(),
                             getString(R.string.successDbTransaction)
                         )
-
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
+                        counter = 0
                     }
                     ReserveViewModel.State.LOAD_ERROR -> {
                         Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
@@ -225,6 +235,10 @@ class MainFragment : Fragment() {
             viewLifecycleOwner, { result ->
                 when (result.state) {
                     ReserveViewModel.State.DATA_LOADED -> {
+                        if (counter != 0) {
+                            return@observe
+                        }
+                        counter++
                         reserveViewModel?.getReserves()
                         Toasty.showSuccessToasty(
                             requireContext(),
@@ -232,6 +246,7 @@ class MainFragment : Fragment() {
                         )
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
+                        counter = 0
                         hideDelete()
                     }
                     ReserveViewModel.State.LOAD_ERROR -> {
@@ -338,6 +353,7 @@ class MainFragment : Fragment() {
         if (validateInput(start, date)) return null
         if (validateInput(finish, date)) return null
         if (validateInput(priceRoom, reservePrice!!)) return null
+        if (!update && validateDate(start, finish, roomId)) return null
         val userName = "${Utils.getUser()?.firstName} ${Utils.getUser()?.lastName}"
 
         return if (update)
@@ -365,6 +381,20 @@ class MainFragment : Fragment() {
             finish!!,
             priceRoom.toInt()
         )
+    }
+
+    private fun validateDate(start: String?, finish: String?, roomId: Int?): Boolean {
+        for (reserve in reserves) {
+            if (reserve.id == roomId) {
+                if (
+                    CustomerDate.compareDate(start, finish, reserve.startDate, reserve.finishData)
+                ) {
+                    context?.let { Toasty.showErrorToasty(it, getString(R.string.roomFillError)) }
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     private fun validateInput(room: String?, et: EditText?): Boolean {

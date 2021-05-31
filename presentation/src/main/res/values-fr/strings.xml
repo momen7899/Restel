@@ -79,5 +79,6 @@
     <string name="emptyCustomer">Il n`y a pas de client</string>
     <string name="emptyRoom">Il n`y a pas de place</string>
     <string name="disableDelete">Ces données sont utilisées dans la réservation. Il n`est pas possible de le supprimer</string>
+    <string name="roomFillError">La chambre est réservée à la date souhaitée. Veuillez réessayer</string>
 
 </resources>

@@ -51,6 +51,7 @@
             android:layout_marginBottom="8dp"
             android:importantForAutofill="no"
             android:inputType="phone"
+            android:maxLength="11"
             tools:ignore="LabelFor" />
 
         <TextView
@@ -66,6 +67,7 @@
             android:layout_marginBottom="8dp"
             android:importantForAutofill="no"
             android:inputType="numberDecimal"
+            android:maxLength="10"
             tools:ignore="LabelFor" />
 
 
