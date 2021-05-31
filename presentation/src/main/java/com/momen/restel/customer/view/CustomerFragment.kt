@@ -27,7 +27,6 @@ import com.momen.restel.customer.viewmodel.CustomerViewModel
 import com.momen.restel.customer.viewmodel.CustomerViewModelFactory
 import kotlinx.android.synthetic.main.card_delete.*
 import kotlinx.android.synthetic.main.fragment_customer.*
-import kotlinx.android.synthetic.main.fragment_room.*
 import kotlinx.android.synthetic.main.toolbar_sample.view.*
 import java.util.*
 import javax.inject.Inject
@@ -336,8 +335,8 @@ class CustomerFragment : Fragment() {
         customerNationalEt?.setText(customer.nationalCode)
         maleRb?.isChecked = customer.gender == getString(R.string.male)
         femaleRb?.isChecked = customer.gender == getString(R.string.female)
-        singleRb?.isChecked = customer.gender == getString(R.string.single)
-        marriedRb?.isChecked = customer.gender == getString(R.string.marry)
+        singleRb?.isChecked = customer.married == getString(R.string.single)
+        marriedRb?.isChecked = customer.married == getString(R.string.marry)
         submit?.text = getString(R.string.edit)
     }
 
