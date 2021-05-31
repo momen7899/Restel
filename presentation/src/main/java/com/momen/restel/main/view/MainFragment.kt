@@ -563,7 +563,7 @@ class MainFragment : Fragment() {
         user?.admin?.let {
             if (!it) navigationView.menu.findItem(R.id.navClients).isVisible = false
         }
-        navigationView.headerUserName.text = user?.firstName.plus(" ${user?.lastName}")
+        navigationView.headerUserName?.text = user?.firstName.plus(" ${user?.lastName}")
 
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {

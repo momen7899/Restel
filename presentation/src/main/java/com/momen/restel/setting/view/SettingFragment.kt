@@ -64,31 +64,37 @@ class SettingFragment : Fragment() {
             Utils.setLanguage("fa", MainActivity.instance())
             Utils.setRtl(true, MainActivity.instance())
             startActivity(Intent(requireContext(), MainActivity::class.java))
+            requireActivity().finish()
         }
         lanArabic.setOnClickListener {
             Utils.setLanguage("ar", MainActivity.instance())
             Utils.setRtl(true, MainActivity.instance())
             startActivity(Intent(requireContext(), MainActivity::class.java))
+            requireActivity().finish()
         }
         lanEng.setOnClickListener {
             Utils.setLanguage("en", MainActivity.instance())
             Utils.setRtl(false, MainActivity.instance())
             startActivity(Intent(requireContext(), MainActivity::class.java))
+            requireActivity().finish()
         }
         lanSpain.setOnClickListener {
             Utils.setLanguage("es", MainActivity.instance())
             Utils.setRtl(false, MainActivity.instance())
             startActivity(Intent(requireContext(), MainActivity::class.java))
+            requireActivity().finish()
         }
         lanJapan.setOnClickListener {
             Utils.setLanguage("ja", MainActivity.instance())
             Utils.setRtl(false, MainActivity.instance())
             startActivity(Intent(requireContext(), MainActivity::class.java))
+            requireActivity().finish()
         }
         lanFrance.setOnClickListener {
             Utils.setLanguage("fr", MainActivity.instance())
             Utils.setRtl(false, MainActivity.instance())
             startActivity(Intent(requireContext(), MainActivity::class.java))
+            requireActivity().finish()
         }
     }
 
