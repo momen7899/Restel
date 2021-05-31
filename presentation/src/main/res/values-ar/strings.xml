@@ -77,4 +77,7 @@
     <string name="chooseLanguage">اختر اللغة</string>
     <string name="aboutApp">برنامج إدارة الحجز</string>
 
+    <string name="emptyCustomer">لا يوجد زبون</string>
+    <string name="emptyRoom">لايوجد غرف شاغرة</string>
+
 </resources>

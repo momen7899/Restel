@@ -76,4 +76,6 @@
     <string name="chooseLanguage">言語を選択</string>
     <string name="aboutApp">予約管理ソフト</string>
 
+    <string name="emptyCustomer">お客さんがいない</string>
+    <string name="emptyRoom">部屋がありません</string>
 </resources>

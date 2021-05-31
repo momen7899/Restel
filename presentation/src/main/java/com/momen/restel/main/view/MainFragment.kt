@@ -69,6 +69,7 @@ class MainFragment : Fragment() {
     private var customerAdapter: HomeCustomerAdapter? = null
     private var customerSearch: EditText? = null
     private val customerList = ArrayList<HomeCustomerModel>()
+    private var emptyCustomer: TextView? = null
 
     private var roomView: View? = null
     private var roomRecycler: RecyclerView? = null
@@ -79,6 +80,7 @@ class MainFragment : Fragment() {
     private var roomSearch: EditText? = null
     private val roomList = ArrayList<HomeRoomModel>()
     private var id: Int? = null
+    private var emptyRoom: TextView? = null
 
     private var update = false
     private var date: TextView? = null
@@ -423,6 +425,17 @@ class MainFragment : Fragment() {
         setUpRoomDialog()
         setUpRoomDialogRecycle()
         setUpRoomDialogSearch()
+        emptyRoom = roomView?.findViewById(R.id.mainRoomEmptyList)
+    }
+
+    fun showEmptyRoom() {
+        emptyRoom?.visibility = View.VISIBLE
+        roomRecycler?.visibility = View.GONE
+    }
+
+    fun hideEmptyRoom() {
+        emptyRoom?.visibility = View.GONE
+        roomRecycler?.visibility = View.VISIBLE
     }
 
     private fun setUpRoomDialog() {
@@ -455,7 +468,19 @@ class MainFragment : Fragment() {
         setUpCustomerDialog()
         setUpCustomerDialogRecycle()
         setUpCustomerDialogSearch()
+        emptyCustomer = customerView?.findViewById(R.id.mainCustomerEmptyList)
     }
+
+    fun showEmptyCustomer() {
+        emptyCustomer?.visibility = View.VISIBLE
+        customerRecycler?.visibility = View.GONE
+    }
+
+    fun hideEmptyCustomer() {
+        emptyCustomer?.visibility = View.GONE
+        customerRecycler?.visibility = View.VISIBLE
+    }
+
 
     private fun setUpCustomerDialog() {
         customerView = requireActivity().layoutInflater

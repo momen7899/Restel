@@ -76,4 +76,7 @@
     <string name="chooseLanguage">Elige lengua</string>
     <string name="aboutApp">Software de gestión de reservas</string>
 
+    <string name="emptyCustomer">No hay cliente</string>
+    <string name="emptyRoom">No hay espacio</string>
+
 </resources>
