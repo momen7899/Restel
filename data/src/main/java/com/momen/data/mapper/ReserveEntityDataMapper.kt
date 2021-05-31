@@ -19,8 +19,11 @@ class ReserveEntityDataMapper @Inject constructor() {
             Reserve(
                 it.id,
                 it.room,
+                it.roomId,
                 it.client,
+                it.clientId,
                 it.customer,
+                it.customerId,
                 it.startDate,
                 it.finishData,
                 it.price
@@ -32,8 +35,11 @@ class ReserveEntityDataMapper @Inject constructor() {
             ReserveEntity(
                 id,
                 room,
+                roomId,
                 client,
+                clientId,
                 customer,
+                customerId,
                 startDate,
                 finishData,
                 price

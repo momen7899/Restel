@@ -27,6 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.momen.restel.MainActivity
 import com.momen.restel.R
+import com.momen.restel.UiThread
 import com.momen.restel.Utils
 import com.momen.restel.app.App
 import com.momen.restel.app.RoomDbModule
@@ -89,7 +90,9 @@ class MainFragment : Fragment() {
     private var reserveCustomer: TextView? = null
     private var reservePrice: EditText? = null
     private var customer: String? = null
+    private var customerId: Int? = null
     private var room: String? = null
+    private var roomId: Int? = null
 
     // activity component
     private lateinit var toolbar: Toolbar
@@ -154,6 +157,7 @@ class MainFragment : Fragment() {
                     ReserveViewModel.State.DATA_LOADED -> {
                         result.reserves?.let {
                             reserveAdapter?.setItems(it)
+                            Utils.setReserves(it)
                             reserves.clear()
                             reserves.addAll(it)
                         }
@@ -228,6 +232,7 @@ class MainFragment : Fragment() {
                         )
                     }
                     ReserveViewModel.State.LOADING_DATA -> {
+                        hideDelete()
                     }
                     ReserveViewModel.State.LOAD_ERROR -> {
                         Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
@@ -339,8 +344,11 @@ class MainFragment : Fragment() {
             ReserveModel(
                 this.id,
                 room,
+                roomId,
                 userName,
+                Utils.getUser()?.id,
                 customer,
+                customerId,
                 start!!,
                 finish!!,
                 priceRoom.toInt()
@@ -348,8 +356,11 @@ class MainFragment : Fragment() {
         else ReserveModel(
             reserveAdapter?.nextId(),
             room,
+            roomId,
             userName,
+            Utils.getUser()?.id,
             customer,
+            customerId,
             start!!,
             finish!!,
             priceRoom.toInt()
@@ -652,12 +663,14 @@ class MainFragment : Fragment() {
 
     fun setCustomerSelected(customer: HomeCustomerModel) {
         this.customer = customer.name
+        this.customerId = customer.id
         customerDialog?.dismiss()
         reserveCustomer?.text = customer.name
     }
 
     fun setRoomSelected(room: HomeRoomModel) {
         this.room = room.name
+        this.roomId = room.id
         roomDialog?.dismiss()
         reserveRoom?.text = room.name
     }

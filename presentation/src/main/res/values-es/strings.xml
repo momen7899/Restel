@@ -74,8 +74,10 @@
     Tu nueva contraseña:1234</string>
     <string name="title">reserva</string>
     <string name="chooseLanguage">Elige lengua</string>
+    <string name="aboutApp">Software de gestión de reservas</string>
 
     <string name="emptyCustomer">No hay cliente</string>
     <string name="emptyRoom">No hay espacio</string>
+    <string name="disableDelete">Estos datos se utilizan en la reserva. No es posible borrarlo</string>
 
 </resources>

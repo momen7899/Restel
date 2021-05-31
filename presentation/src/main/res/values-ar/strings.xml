@@ -75,8 +75,10 @@
     كلمة سرك الجديدة:1234</string>
     <string name="title">الاحتياطي</string>
     <string name="chooseLanguage">اختر اللغة</string>
+    <string name="aboutApp">برنامج إدارة الحجز</string>
 
     <string name="emptyCustomer">لا يوجد زبون</string>
     <string name="emptyRoom">لايوجد غرف شاغرة</string>
+    <string name="disableDelete">يتم استخدام هذه البيانات في الحجز. لا يمكن حذفه</string>
 
 </resources>

@@ -17,9 +17,12 @@ class ReserveModelDataMapper @Inject constructor() {
         with(reserve) {
             ReserveModel(
                 id,
-                room.toString(),
-                client.toString(),
-                customer.toString(),
+                room,
+                roomId,
+                client,
+                clientId,
+                customer,
+                customerId,
                 startDate,
                 finishData,
                 price
@@ -31,8 +34,11 @@ class ReserveModelDataMapper @Inject constructor() {
             Reserve(
                 id,
                 room,
+                roomId,
                 client,
+                clientId,
                 customer,
+                customerId,
                 startDate,
                 finishData,
                 price

@@ -165,6 +165,9 @@ class CustomerFragment : Fragment() {
         customerViewModel?.removeCustomerLiveData?.observe(viewLifecycleOwner, { result ->
             when (result.state) {
                 CustomerViewModel.State.LOADING_DATA -> {
+                    hideDelete()
+                }
+                CustomerViewModel.State.DATA_LOADED -> {
                     result.response?.let {
                         if (it >= 0) {
                             customerViewModel?.getCustomers()
@@ -174,9 +177,6 @@ class CustomerFragment : Fragment() {
                             getString(R.string.successDbTransaction)
                         )
                     }
-                }
-                CustomerViewModel.State.DATA_LOADED -> {
-
                 }
                 CustomerViewModel.State.LOAD_ERROR -> {
                     Toasty.showErrorToasty(requireContext(), getString(R.string.DatabaseError))
@@ -238,7 +238,8 @@ class CustomerFragment : Fragment() {
         bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog?.setContentView(R.layout.bottom_sheet_customer)
         val layout = bottomSheetDialog?.findViewById<ScrollView>(R.id.bottomSheetCustomer)
-        layout?.layoutDirection = if (Utils.getRtl(MainActivity.instance())) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+        layout?.layoutDirection =
+            if (Utils.getRtl(MainActivity.instance())) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
     private fun setUpBottomSheetComponent() {
@@ -367,6 +368,7 @@ class CustomerFragment : Fragment() {
                 timerProgressBar?.progress = sec
                 if (sec == 0) {
                     this.cancel()
+                    hideDelete()
                     if (delete) {
                         customerViewModel?.removeCustomer(customer)
                         delete = false
@@ -385,12 +387,12 @@ class CustomerFragment : Fragment() {
     }
 
     private fun showDelete() {
-        roomDelete.visibility = View.VISIBLE
-        roomFab.visibility = View.GONE
+        customerDelete.visibility = View.VISIBLE
+        customerFab.visibility = View.GONE
     }
 
     private fun hideDelete() {
-        roomDelete.visibility = View.GONE
-        roomFab.visibility = View.VISIBLE
+        customerDelete.visibility = View.GONE
+        customerFab.visibility = View.VISIBLE
     }
 }

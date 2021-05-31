@@ -6,6 +6,8 @@ import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.momen.restel.R
+import com.momen.restel.Utils
+import com.momen.restel.comm.Toasty
 import com.momen.restel.databinding.ClientItemBinding
 import com.momen.restel.login.model.UserModel
 
@@ -36,10 +38,19 @@ class ClientAdapter(private val fragment: ClientsFragment) :
             edit.setOnClickListener {
                 fragment.showBottomSheet(true, currentUser)
             }
-
-            remove.setOnClickListener {
-                removeItem(currentUser)
-                fragment.showDelMsg(currentUser, position)
+            currentUser.id?.let {
+                if (Utils.isClientInReserves(it)) {
+                    remove.setImageResource(R.drawable.ic_disable_remove)
+                    remove.setOnClickListener {
+                        fragment.context?.let { it1 -> Toasty.showWarningToasty(it1,it1.getString(R.string.disableDelete)) }
+                    }
+                } else {
+                    remove.setImageResource(R.drawable.ic_remove)
+                    remove.setOnClickListener {
+                        removeItem(currentUser)
+                        fragment.showDelMsg(currentUser, position)
+                    }
+                }
             }
         }
     }

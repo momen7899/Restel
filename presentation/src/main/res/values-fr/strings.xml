@@ -74,8 +74,10 @@
     Votre nouveau mot de passe:1234</string>
     <string name="title">réserve</string>
     <string name="chooseLanguage">Choisissez la langue</string>
+    <string name="aboutApp">Logiciel de gestion des réservations</string>
 
     <string name="emptyCustomer">Il n`y a pas de client</string>
     <string name="emptyRoom">Il n`y a pas de place</string>
+    <string name="disableDelete">Ces données sont utilisées dans la réservation. Il n`est pas possible de le supprimer</string>
 
 </resources>

@@ -14,5 +14,6 @@
     <color name="editTextColor">#1D1D1D</color>
     <color name="textViewColor">#B31D1D1D</color>
     <color name="darkBlue">#353A45</color>
+    <color name="gray">#D1C4E9</color>
 
 </resources>
