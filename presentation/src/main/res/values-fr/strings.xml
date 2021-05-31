@@ -74,5 +74,6 @@
     Votre nouveau mot de passe:1234</string>
     <string name="title">réserve</string>
     <string name="chooseLanguage">Choisissez la langue</string>
+    <string name="aboutApp">Logiciel de gestion des réservations</string>
 
 </resources>

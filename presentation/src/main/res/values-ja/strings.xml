@@ -74,5 +74,6 @@
     新しいパスワード:1234</string>
     <string name="title">リザーブ</string>
     <string name="chooseLanguage">言語を選択</string>
+    <string name="aboutApp">予約管理ソフト</string>
 
 </resources>

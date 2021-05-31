@@ -75,5 +75,6 @@
     كلمة سرك الجديدة:1234</string>
     <string name="title">الاحتياطي</string>
     <string name="chooseLanguage">اختر اللغة</string>
+    <string name="aboutApp">برنامج إدارة الحجز</string>
 
 </resources>
