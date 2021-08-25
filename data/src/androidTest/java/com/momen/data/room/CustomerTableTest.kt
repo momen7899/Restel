@@ -97,13 +97,13 @@ class CustomerTableTest {
     }
 
     private fun createCustomers(): ArrayList<CustomerEntity> {
-        val users = ArrayList<CustomerEntity>()
+        val customers = ArrayList<CustomerEntity>()
 
         for (i in 1..9) {
-            users.add(createCustomer(i))
+            customers.add(createCustomer(i))
         }
 
-        return users
+        return customers
     }
 
 
