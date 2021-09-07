@@ -14,7 +14,7 @@ class ReserveEntityDataMapper @Inject constructor() {
         return reserves
     }
 
-    private fun transformReserveEntityToReserve(reserve: ReserveEntity?): Reserve? =
+    fun transformReserveEntityToReserve(reserve: ReserveEntity?): Reserve? =
         reserve?.let {
             Reserve(
                 it.id,
